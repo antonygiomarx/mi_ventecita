@@ -22,3 +22,8 @@
     padding: 8px 0;
     background: #00a0e9;
 }
+
+.searchbar {
+    display: flex;
+    align-items: center;
+}

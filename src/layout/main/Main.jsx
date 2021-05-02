@@ -9,6 +9,7 @@ import Sidebar from "../../layout/sidebar/Sidebar";
 import FooterComponent from "../../layout/footer/Footer";
 import CardComponent from "../card/Card";
 import LoadingCard from "../card/Loading";
+import Searchbar from "../Searchbar/Searchbar";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -24,8 +25,17 @@ const Main = () => {
     <Layout>
       <HeaderComponent />
       <Sidebar />
-      <Layout className="site-layout" style={{}}>
-        <Content style={{ margin: "100px 0 0 0", overflow: "initial" }}>
+      <Layout
+        className="site-layout"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "10px 0",
+        }}
+      >
+        <Searchbar />
+        <Content style={{ margin: "10px 0", overflow: "initial" }}>
           <div
             className="site-layout-background"
             style={{
@@ -37,8 +47,10 @@ const Main = () => {
             }}
           >
             <Row gutter={[24, 24]} justify="space-between">
-              {!products ? (
-                <LoadingCard />
+              {!products.length ? (
+                <Col className="gutter-row" span={6} key={uuid()}>
+                  <LoadingCard />
+                </Col>
               ) : (
                 products.map(
                   ({ title, price, category, description, image }) => {
