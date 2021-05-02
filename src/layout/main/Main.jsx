@@ -4,12 +4,12 @@ import { Content } from "antd/lib/layout/layout";
 import { v4 as uuid } from "uuid";
 
 import "./Main.css";
-import HeaderComponent from "../../layout/header/Header";
-import Sidebar from "../../layout/sidebar/Sidebar";
-import FooterComponent from "../../layout/footer/Footer";
-import CardComponent from "../card/Card";
-import LoadingCard from "../card/Loading";
-import Searchbar from "../Searchbar/Searchbar";
+import Sidebar from "../sidebar/Sidebar";
+import FooterComponent from "../footer/Footer";
+import CardComponent from "../../components/card/Card";
+import LoadingCard from "../../components/card/Loading";
+import Searchbar from "../../components/Searchbar/Searchbar";
+import HeaderComponent from "../header/Header";
 
 const Main = () => {
   const [products, setProducts] = useState([]);

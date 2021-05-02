@@ -2,9 +2,12 @@ import React from "react";
 import { Card } from "antd";
 import Paragraph from "antd/es/typography/Paragraph";
 
+import "./card.css";
+
 const CardComponent = ({ title, img, description, price, category }) => {
   return (
     <Card
+      className="card"
       cover={
         <img
           src={img}
@@ -12,21 +15,8 @@ const CardComponent = ({ title, img, description, price, category }) => {
           style={{ maxWidth: "100%", maxHeight: "158px", width: "100%" }}
         />
       }
-      style={{
-        margin: "10px",
-        padding: "10px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        borderRadius: "30px",
-        width: "270px",
-        height: "360px",
-        maxHeight: "100%",
-        maxWidth: "100%",
-      }}
     >
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div className="card-header">
         <div
           style={{
             display: "flex",
@@ -57,7 +47,7 @@ const CardComponent = ({ title, img, description, price, category }) => {
               ? {
                   rows: 2,
                   expandable: true,
-                  symbol: "more",
+                  symbol: "Ver más",
                 }
               : false
           }
