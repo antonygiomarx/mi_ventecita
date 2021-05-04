@@ -10,14 +10,19 @@ import CardComponent from "../../components/card/Card";
 import LoadingCard from "../../components/card/Loading";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import HeaderComponent from "../header/Header";
+import store from "../../store/main/store";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products?limit=${Math.random() * 100}`)
       .then((res) => res.json())
-      .then((json) => {
-        setProducts(json);
+      .then((apiProducts) => {
+        store.dispatch({
+          type: "SET_PRODUCTS",
+          json: apiProducts,
+        });
+        setProducts(store.getState().PRODUCTS);
       });
   }, []);
 

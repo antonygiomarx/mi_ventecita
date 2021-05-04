@@ -4,7 +4,9 @@ import Search from "antd/es/input/Search";
 import "./Searchbar.css";
 
 const SearchbarComponent = () => {
-  const onSearch = (value) => console.log(value);
+  // TODO connect search to algolia
+  // eslint-disable-next-line no-unused-vars
+  const onSearch = (value) => {};
 
   return (
     <Search
