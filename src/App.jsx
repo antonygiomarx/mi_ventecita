@@ -1,10 +1,11 @@
-import './App.css';
-import React from 'react';
+import "./App.css";
+import "antd/dist/antd.css";
+import React from "react";
 
-import Main from './components/main/Main';
+import Main from "./layout/main/Main";
 
-function App() {
+const App = () => {
   return <Main />;
-}
+};
 
 export default App;
