@@ -7,6 +7,7 @@ import "./card.css";
 const CardComponent = ({ title, img, description, price, category }) => {
   return (
     <Card
+      hoverable
       className="card"
       cover={
         <img
@@ -17,17 +18,7 @@ const CardComponent = ({ title, img, description, price, category }) => {
       }
     >
       <div className="card-header">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column-reverse",
-            alignItems: "center",
-            justifyContent: "space-between",
-            maxWidth: "100%",
-            maxHeight: "100%",
-            alignSelf: "center",
-          }}
-        >
+        <div className="card-header title">
           <h1>{title}</h1>
           <span
             style={{
