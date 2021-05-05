@@ -8,7 +8,7 @@ import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import CardComponent from "../../components/card/Card";
 import LoadingCard from "../../components/card/Loading";
-import Searchbar from "../../components/Searchbar/Searchbar";
+import Searchbar from "../../components/searchbar/Searchbar";
 import HeaderComponent from "../header/Header";
 import store from "../../store/main/store";
 
@@ -51,7 +51,7 @@ const Main = () => {
               justifyContent: "start",
             }}
           >
-            <Row gutter={[24, 24]} justify="space-between">
+            <Row className="content-products">
               {!products.length ? (
                 <Col className="gutter-row" span={6} key={uuid()}>
                   <LoadingCard />
@@ -60,7 +60,7 @@ const Main = () => {
                 products.map(
                   ({ title, price, category, description, image }) => {
                     return (
-                      <Col className="gutter-row" span={6} key={uuid()}>
+                      <Col xs key={uuid()}>
                         <CardComponent
                           title={title}
                           description={description}
