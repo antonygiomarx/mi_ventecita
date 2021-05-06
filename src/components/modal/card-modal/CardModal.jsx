@@ -14,7 +14,7 @@ const CardModalComponent = ({
   cancel,
 }) => {
   return (
-    <Modal visible={visible} onCancel={cancel}>
+    <Modal centered visible={visible} onCancel={cancel}>
       <Card
         hoverable
         className="card"

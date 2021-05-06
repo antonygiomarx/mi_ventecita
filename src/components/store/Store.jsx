@@ -2,11 +2,12 @@ import { Col, Row } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import store from "../../store/main/store";
 
+import store from "../../store/main/store";
 import "./Store.css";
 import CardComponent from "../card/Card";
 import LoadingCard from "../card/Loading";
+import FloatingActionButtonComponent from "../floatingButton/FloatingActionButton";
 
 const StoreComponent = () => {
   const [products, setProducts] = useState([]);
@@ -21,6 +22,11 @@ const StoreComponent = () => {
         setProducts(store.getState().PRODUCTS);
       });
   }, []);
+
+  const filterProducts = () => {};
+
+  store.subscribe(filterProducts);
+
   return (
     <Content className="main-content">
       <div className="site-layout-background">
@@ -45,6 +51,7 @@ const StoreComponent = () => {
               );
             })
           )}
+          <FloatingActionButtonComponent />
         </Row>
       </div>
     </Content>

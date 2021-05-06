@@ -3,7 +3,7 @@ import { Card } from "antd";
 import Paragraph from "antd/es/typography/Paragraph";
 
 import "./card.css";
-import CardModalComponent from "../modal/CardModal";
+import CardModalComponent from "../modal/card-modal/CardModal";
 
 const CardComponent = ({ title, img, description, price, category }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
