@@ -1,83 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Col, Layout, Row } from "antd";
-import { Content } from "antd/lib/layout/layout";
+import React from "react";
+import { Layout } from "antd";
 import { v4 as uuid } from "uuid";
 
 import "./Main.css";
+import { Route } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
-import CardComponent from "../../components/card/Card";
-import LoadingCard from "../../components/card/Loading";
 import Searchbar from "../../components/searchbar/Searchbar";
 import HeaderComponent from "../header/Header";
-import store from "../../store/main/store";
+import routes from "../../routes/default.routes";
 
 const Main = () => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch(`https://fakestoreapi.com/products?limit=${Math.random() * 100}`)
-      .then((res) => res.json())
-      .then((apiProducts) => {
-        store.dispatch({
-          type: "SET_PRODUCTS",
-          json: apiProducts,
-        });
-        setProducts(store.getState().PRODUCTS);
-      });
-  }, []);
-
   return (
     <Layout>
       <HeaderComponent />
       <Sidebar />
-      <Layout
-        className="site-layout"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "10px 0",
-        }}
-      >
+      <Layout className="site-layout">
         <Searchbar />
-        <Content style={{ margin: "10px 0", overflow: "initial" }}>
-          <div
-            className="site-layout-background"
-            style={{
-              margin: "0 0 0 50px",
-              textAlign: "center",
-              display: "flex",
-              alignItems: "flex-start",
-              justifyContent: "start",
-            }}
-          >
-            <Row className="content-products">
-              {!products.length ? (
-                <Col className="gutter-row" span={6} key={uuid()}>
-                  <LoadingCard />
-                </Col>
-              ) : (
-                products.map(
-                  ({ id, title, price, category, description, image }) => {
-                    return (
-                      <Col xs key={uuid()}>
-                        <CardComponent
-                          title={title}
-                          description={description}
-                          img={image}
-                          price={price}
-                          category={category}
-                          key={uuid()}
-                          id={id}
-                        />
-                      </Col>
-                    );
-                  }
-                )
-              )}
-            </Row>
-          </div>
-        </Content>
+        {routes.map(({ route, component }) => {
+          return (
+            <Route exact path={`${route}`} component={component} key={uuid()} />
+          );
+        })}
         <FooterComponent />
       </Layout>
     </Layout>
