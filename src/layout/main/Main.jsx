@@ -22,7 +22,6 @@ const Main = () => {
             <Route exact path={`${route}`} component={component} key={uuid()} />
           );
         })}
-
         <FooterComponent />
       </Layout>
     </Layout>

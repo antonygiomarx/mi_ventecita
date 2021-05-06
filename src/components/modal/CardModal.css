@@ -1,0 +1,21 @@
+.card {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  border-radius: 30px;
+  width: 270px;
+  height: 360px;
+}
+
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-header .title {
+  flex-direction: column-reverse;
+  white-space: pre-line;
+}
