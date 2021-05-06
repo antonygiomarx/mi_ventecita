@@ -1,25 +1,22 @@
-import React, { useState } from "react";
-import { Card } from "antd";
-import Paragraph from "antd/es/typography/Paragraph";
+import { Card, Modal } from "antd";
+import Paragraph from "antd/lib/skeleton/Paragraph";
+import React from "react";
 
-import "./card.css";
-import CardModalComponent from "../modal/CardModal";
+import "./CardModal.css";
 
-const CardComponent = ({ title, img, description, price, category }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
+const CardModalComponent = ({
+  title,
+  img,
+  description,
+  price,
+  category,
+  visible,
+  cancel,
+}) => {
   return (
-    <>
+    <Modal visible={visible} onCancel={cancel}>
       <Card
-        onClick={showModal}
+        hoverable
         className="card"
         cover={
           <img
@@ -61,17 +58,8 @@ const CardComponent = ({ title, img, description, price, category }) => {
           <p>{category}</p>
         </div>
       </Card>
-      <CardModalComponent
-        visible={isModalVisible}
-        title={title}
-        description={description}
-        img={img}
-        price={price}
-        category={category}
-        cancel={handleCancel}
-      />
-    </>
+    </Modal>
   );
 };
 
-export default CardComponent;
+export default CardModalComponent;
