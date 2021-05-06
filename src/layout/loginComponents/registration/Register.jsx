@@ -23,44 +23,47 @@ const Register = () => {
     }
   }, [nombreCompleto]);
   return (
-    <div>
-      <Logo />
-      <form className="form">
-        <label>Nombre completo</label>
-        <Input
-          type="text"
-          value={nombreCompleto}
-          onChange={(e) => SetnombreCompleto(e.target.value)}
-          errorNombre={nombreError}
-        />
-        {nombreError && <label className="Error">Nombre inválido</label>}
-        <label>Nombre de Usuario</label>
-        <Input
-          type="text"
-          value={nombreUsuario}
-          onChange={(e) => {
-            SetnombreUsuario(e.target.value);
+    <div className="Login">
+      <div className="leftside">
+        <Logo />
+        <form className="form">
+          <label>Nombre completo</label>
+          <Input
+            type="text"
+            value={nombreCompleto}
+            onChange={(e) => SetnombreCompleto(e.target.value)}
+            errorNombre={nombreError}
+          />
+          {nombreError && <label className="Error">Nombre inválido</label>}
+          <label>Nombre de Usuario</label>
+          <Input
+            type="text"
+            value={nombreUsuario}
+            onChange={(e) => {
+              SetnombreUsuario(e.target.value);
+            }}
+          />
+          <label> Email </label>
+          <Input type="email" />
+          <InputPass />
+        </form>
+        <Button
+          type="primary"
+          onClick={() => history.push("/login")}
+          className="button"
+          style={{
+            backgroundColor: "#4781ed",
+            width: "35%",
+            left: "2%",
+            textAlign: "center",
+            top: "-40px",
           }}
-        />
-        <label> Email </label>
-        <Input type="email" />
-        <InputPass />
-      </form>
-      <Button
-        type="primary"
-        onClick={() => history.push("/login")}
-        className="button"
-        style={{
-          backgroundColor: "#4781ed",
-          width: "35%",
-          left: "2%",
-          textAlign: "center",
-          top: "-40px",
-        }}
-      >
-        {" "}
-        Go back{" "}
-      </Button>
+        >
+          {" "}
+          Go back{" "}
+        </Button>
+      </div>
+      <div className="rightside" />
     </div>
   );
 };

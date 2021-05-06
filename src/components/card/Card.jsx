@@ -7,6 +7,7 @@ import "./card.css";
 const CardComponent = ({ title, img, description, price, category }) => {
   return (
     <Card
+      hoverable
       className="card"
       cover={
         <img

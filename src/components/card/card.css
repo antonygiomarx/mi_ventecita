@@ -16,3 +16,8 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.card-header .title {
+  flex-direction: column-reverse;
+  white-space: pre-line;
+}
