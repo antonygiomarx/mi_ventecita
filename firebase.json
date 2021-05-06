@@ -11,6 +11,7 @@
   },
   "hosting": {
     "public": "build",
+    "site": "miventecita",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
