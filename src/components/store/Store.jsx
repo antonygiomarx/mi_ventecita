@@ -22,7 +22,7 @@ const StoreComponent = () => {
       });
   }, []);
   return (
-    <Content style={{ margin: "10px 0", overflow: "initial" }}>
+    <Content className="main-content">
       <div className="site-layout-background">
         <Row className="content-products">
           {!products.length ? (
