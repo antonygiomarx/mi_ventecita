@@ -1,17 +1,38 @@
 import React from "react";
-import { ShoppingTwoTone, ShopTwoTone } from "@ant-design/icons";
+import {
+  DashboardTwoTone,
+  ShoppingTwoTone,
+  ShopTwoTone,
+} from "@ant-design/icons";
+import StoreComponent from "../components/store/Store";
+import LoadingCard from "../components/card/Loading";
 // import Store from "../components/layout/store/store";
 
 const routes = [
   {
+    name: "Dashboard",
+    icon: <DashboardTwoTone />,
+    route: "/dashboard",
+    component: LoadingCard,
+  },
+  {
     name: "Tienda",
     icon: <ShoppingTwoTone />,
-    route: "/store",
+    route: "/shop",
+    component: LoadingCard,
   },
   {
     name: "Inventario",
     icon: <ShopTwoTone />,
-    route: "inventory",
+    route: "/store",
+    component: StoreComponent,
+  },
+  {
+    name: "Home",
+    icon: "",
+    route: "/",
+    component: LoadingCard,
+    hidden: true,
   },
 ];
 

@@ -32,3 +32,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.site-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}

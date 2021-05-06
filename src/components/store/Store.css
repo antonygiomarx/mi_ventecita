@@ -1,0 +1,12 @@
+.main-content {
+  margin: 10px 0;
+  overflow: initial;
+}
+
+.site-layout-background {
+  margin: 0 0 0 50px;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
