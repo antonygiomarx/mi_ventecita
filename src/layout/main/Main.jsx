@@ -58,7 +58,7 @@ const Main = () => {
                 </Col>
               ) : (
                 products.map(
-                  ({ title, price, category, description, image }) => {
+                  ({ id, title, price, category, description, image }) => {
                     return (
                       <Col xs key={uuid()}>
                         <CardComponent
@@ -68,6 +68,7 @@ const Main = () => {
                           price={price}
                           category={category}
                           key={uuid()}
+                          id={id}
                         />
                       </Col>
                     );
