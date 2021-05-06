@@ -27,3 +27,8 @@
     display: flex;
     align-items: center;
 }
+.content-products {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
