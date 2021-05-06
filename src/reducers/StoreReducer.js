@@ -10,6 +10,12 @@ const storeReducer = (state = {}, action) => {
         ...state,
         PRODUCTS: action.json,
       };
+
+    case "SEARCH_PRODUCT":
+      return {
+        ...state,
+        PRODUCT_TO_FILTER: action.word,
+      };
     default:
       return state;
   }
