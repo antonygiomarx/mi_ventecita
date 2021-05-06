@@ -64,7 +64,7 @@ const Main = () => {
                     justifyContent: "start",
                   }}
                 >
-                  <Row gutter={[24, 24]} justify="space-between">
+                  <Row className="content-products">
                     {!products.length ? (
                       <Col className="gutter-row" span={6} key={uuid()}>
                         <LoadingCard />
@@ -73,7 +73,7 @@ const Main = () => {
                       products.map(
                         ({ title, price, category, description, image }) => {
                           return (
-                            <Col className="gutter-row" span={6} key={uuid()}>
+                            <Col xs key={uuid()}>
                               <CardComponent
                                 title={title}
                                 description={description}
@@ -95,7 +95,7 @@ const Main = () => {
           </Layout>
         </Route>
       </Switch>
-      <Redirect from="/card" to="/login" />
+      <Redirect from="/login" to="/card" />
     </Router>
   );
 };
