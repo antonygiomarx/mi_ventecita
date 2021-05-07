@@ -16,6 +16,12 @@ const storeReducer = (state = {}, action) => {
         ...state,
         PRODUCT_TO_FILTER: action.word,
       };
+
+    case "TOGGLE_MODAL":
+      return {
+        ...state,
+        modalIsOpen: action.value,
+      };
     default:
       return state;
   }
