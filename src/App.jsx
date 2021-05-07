@@ -8,7 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Main from "./layout/main/Main";
-import Register from "./layout/loginComponents/registration/Register";
+import Register from "./layout/footer/loginComponents/registration/Register";
 import Login from "./view/login/Login";
 
 const App = () => {
