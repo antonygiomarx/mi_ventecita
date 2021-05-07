@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/react-in-jsx-scope */
+import React from "react";
 import { Button, Checkbox } from "antd";
 import { useHistory } from "react-router-dom";
 import "../../../view/login/Login.css";
@@ -9,13 +9,14 @@ const Form = () => {
   const history = useHistory();
   return (
     <form className="form">
-      <label>Nombre de Usuario</label>
-      <Input name="usuario" type="text" />
+      <label htmlFor="user">Nombre de Usuario</label>
+      <Input name="usuario" type="text" id="user" />
 
-      <label>Email</label>
-      <Input name="correo" type="email" />
-      <label>Contraseña</label>
-      <Input name="contraseña" type="password" />
+      <label htmlFor="email-form">Email</label>
+      <Input name="correo" type="email" id="email-form" />
+
+      <label htmlFor="pass-form">Contraseña</label>
+      <Input name="contraseña" type="password" id="pass-form" />
       <Checkbox> Recuerdame</Checkbox>
       <Button type="link" className="linkButton">
         ¿Olvidaste tu contraseña?

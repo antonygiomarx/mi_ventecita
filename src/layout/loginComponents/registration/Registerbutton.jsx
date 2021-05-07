@@ -7,8 +7,7 @@ const Registerbutton = () => {
   return (
     <div>
       <h4 style={{ fontWeight: "bold", marginTop: "-45px" }}>
-        {" "}
-        ¿Aún no te has registrado?{" "}
+        ¿Aún no te has registrado?
       </h4>
       <Button
         type="default"

@@ -59,8 +59,7 @@ const Register = () => {
             top: "-40px",
           }}
         >
-          {" "}
-          Go back{" "}
+          Go back
         </Button>
       </div>
       <div className="rightside" />

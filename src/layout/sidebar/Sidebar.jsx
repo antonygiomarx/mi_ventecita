@@ -1,20 +1,15 @@
 import React from "react";
-import { ShoppingTwoTone, ShopTwoTone } from "@ant-design/icons";
 import { Menu } from "antd";
 import Sider from "antd/lib/layout/Sider";
+import { Link } from "react-router-dom";
+import { v4 as uuid } from "uuid";
+
+import "./Sidebar.css";
+import routes from "../../routes/default.routes";
 
 const SidebarComponent = () => {
   return (
-    <Sider
-      width="50"
-      style={{
-        overflow: "auto",
-        height: "100vh",
-        position: "fixed",
-        left: 0,
-        top: 61,
-      }}
-    >
+    <Sider className="sidebar" width="50" theme="dark">
       <Menu
         style={{
           display: "flex",
@@ -27,28 +22,14 @@ const SidebarComponent = () => {
         mode="inline"
         defaultSelectedKeys={["0"]}
       >
-        <Menu.Item
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignContent: "center",
-            alignItems: "center",
-          }}
-          key="1"
-          icon={<ShoppingTwoTone />}
-        />
-        <Menu.Item
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignContent: "center",
-            alignItems: "center",
-          }}
-          key="2"
-          icon={<ShopTwoTone />}
-        />
+        {routes.map(({ icon, route, hidden }) => {
+          return (
+            <Menu.Item className="sidebar-item" key={uuid()} hidden={hidden}>
+              {icon}
+              <Link to={`${route}`} />
+            </Menu.Item>
+          );
+        })}
       </Menu>
     </Sider>
   );

@@ -1,9 +1,9 @@
 .searchbar {
-    width: 70%;
-    position: sticky;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 65px 0 0 50px;
-    text-align: center;
+  width: 70%;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 65px 0 0 50px;
+  text-align: center;
 }

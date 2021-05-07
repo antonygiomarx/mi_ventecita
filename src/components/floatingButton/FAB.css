@@ -1,0 +1,17 @@
+.fab-container {
+  width: auto;
+}
+
+.fab-button {
+  width: 56px;
+  background-color: rgb(0, 21, 41) !important;
+}
+
+.fab-icon {
+  width: 60px !important;
+  max-width: 100% !important;
+}
+
+.text-button {
+  font-size: large;
+}
