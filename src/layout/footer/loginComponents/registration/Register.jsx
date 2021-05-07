@@ -34,7 +34,7 @@ const Register = () => {
             onChange={(e) => SetnombreCompleto(e.target.value)}
             errorNombre={nombreError}
           />
-          {nombreError && <label className="Error">Nombre inválido</label>}
+          {nombreError && <label className="error">Nombre inválido</label>}
           <label>Nombre de Usuario</label>
           <Input
             type="text"

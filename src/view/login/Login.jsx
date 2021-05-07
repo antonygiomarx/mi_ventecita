@@ -6,7 +6,7 @@ import Logo from "../../layout/footer/loginComponents/logo/Logo";
 
 function Login() {
   return (
-    <div className="Login">
+    <div className="login">
       <div className="leftside">
         <Logo />
         <Form />

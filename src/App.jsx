@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
 import {
@@ -7,18 +7,40 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import Main from "./layout/main/Main";
-import Register from "./layout/footer/loginComponents/registration/Register";
-import Login from "./view/login/Login";
+import { v4 as uuid } from "uuid";
 
+import Main from "./layout/main/Main";
+import store from "./store/main/store";
+import routes from "./routes/default.routes";
+
+export const user = {
+  username: "admin",
+  pass: "admin",
+};
 const App = () => {
+  const [isLogged, setIsLogged] = useState(false);
+
+  const toggleLogged = () => {
+    const { LOGGED } = store.getState();
+    setIsLogged(LOGGED);
+  };
+
+  store.subscribe(toggleLogged);
+
   return (
     <Router>
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/card" component={Main} />
-        <Route exact path="/register" component={Register} />
-        <Redirect to="/login" />
+        {routes.map(({ route, component: Component }) => {
+          return (
+            <Route key={uuid()} exact path={`${route}`}>
+              <Main key={uuid()}>
+                <Component />
+              </Main>
+            </Route>
+          );
+        })}
+
+        {!isLogged ? <Redirect to="/login" /> : <Redirect to="/" />}
       </Switch>
     </Router>
   );
