@@ -18,7 +18,7 @@ const SearchbarComponent = () => {
 
   return (
     <Search
-      placeholder="Search Product"
+      placeholder="Buscar Producto"
       onSearch={onSearch}
       className="searchbar"
       onChange={(event) => onSearch(event.target.value)}
