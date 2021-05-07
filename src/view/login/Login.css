@@ -1,81 +1,32 @@
-@import '~antd/dist/antd.css';
-.Login
-{
-  display:grid;
+@import "~antd/dist/antd.css";
+.login {
+  display: grid;
   grid-template-columns: 1fr 1fr;
-  background: linear-gradient(90deg, #FFFFFF 50%,50%);
-  height:100vh;
+  background: linear-gradient(90deg, #ffffff 50%, 50%);
+  height: 100vh;
 }
 
-.rightside
-{
+.rightside {
   height: auto;
   width: 100%;
   background-size: cover;
-  background-image:url(https://image.freepik.com/vector-gratis/papel-tapiz-azul-clasico-estilo-abstracto_23-2148437427.jpg);
+  background-image: url(https://image.freepik.com/vector-gratis/papel-tapiz-azul-clasico-estilo-abstracto_23-2148437427.jpg);
   background-position: center;
   background-attachment: fixed;
 }
 
-.form
-{
-   vertical-align: middle;
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  margin-top:20%;
-  margin:60px;
-}
-.form label{
-  font-weight: bold;
-  margin: 5px 10px 5px 0;
-} 
-input {
-  border-radius:25px;
-  padding: 10px;
-  background-color: #fff;
-  border: 2px solid rgb(165, 163, 163);
-  outline:none;
-  width: 100%;
-  padding: 12px 20px;
-  margin: 2px;
-  display: block;
-  
-}
-.form input:focus{
-box-shadow: 0 0 1pt 0pt rgb(7, 8, 8);
-   
-}
-.button{
-width:100%;
-margin: 15px 2px;
-border-radius: 25px;
-font-weight: bold;
-height: 50px
+.Logo {
+  margin: 50px;
 }
 
-.Logo
-{
-  margin: 50px
-}
-
-html, body
-{
-  width:auto;
-  height:auto;
- 
-}
-.Error{
+.error {
   color: red;
-  font-size: 10px ;
-
+  font-size: 10px;
 }
-.errorPassword
-{
-  border-radius:25px;
+.errorPassword {
+  border-radius: 25px;
   padding: 10px;
   width: 100%;
   padding: 20px 2px;
   margin: 2px;
-  
 }
