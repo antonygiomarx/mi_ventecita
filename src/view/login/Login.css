@@ -1,0 +1,32 @@
+@import "~antd/dist/antd.css";
+.login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(90deg, #ffffff 50%, 50%);
+  height: 100vh;
+}
+
+.rightside {
+  height: auto;
+  width: 100%;
+  background-size: cover;
+  background-image: url(https://image.freepik.com/vector-gratis/papel-tapiz-azul-clasico-estilo-abstracto_23-2148437427.jpg);
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.Logo {
+  margin: 50px;
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+}
+.errorPassword {
+  border-radius: 25px;
+  padding: 10px;
+  width: 100%;
+  padding: 20px 2px;
+  margin: 2px;
+}
