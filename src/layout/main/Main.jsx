@@ -5,7 +5,6 @@ import "./Main.css";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import HeaderComponent from "../header/Header";
-import SearchbarComponent from "../../components/searchbar/Searchbar";
 
 const Main = ({ children }) => {
   return (
@@ -13,7 +12,6 @@ const Main = ({ children }) => {
       <HeaderComponent />
       <Sidebar />
       <Layout className="site-layout">
-        <SearchbarComponent />
         {children}
         <FooterComponent />
       </Layout>

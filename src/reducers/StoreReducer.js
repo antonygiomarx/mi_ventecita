@@ -8,7 +8,7 @@ const storeReducer = (state = {}, action) => {
     case "SET_PRODUCTS":
       return {
         ...state,
-        PRODUCTS: action.json,
+        PRODUCTS: action.products,
       };
 
     case "SEARCH_PRODUCT":
