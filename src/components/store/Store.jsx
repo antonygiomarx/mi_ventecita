@@ -29,7 +29,6 @@ const StoreComponent = () => {
   return (
     <>
       <SearchbarComponent />
-
       <Content className="main-content">
         <div className="site-layout-background">
           <Row className="content-products">

@@ -1,5 +1,6 @@
 .searchbar {
   width: 70%;
+  position: -webkit-sticky;
   position: sticky;
   display: flex;
   align-items: center;
