@@ -7,7 +7,7 @@ import store from "../../store/main/store";
 import "./Store.css";
 import CardComponent from "../card/Card";
 import LoadingCard from "../card/Loading";
-import FloatingActionButtonComponent from "../floatingButton/FloatingActionButton";
+import FloatingActionButtonComponent from "../floating-button/FloatingActionButton";
 
 const StoreComponent = () => {
   const [products, setProducts] = useState([]);
