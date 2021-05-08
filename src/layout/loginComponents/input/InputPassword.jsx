@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "antd";
+import "./Input.css";
 
 const InputPassword = (error) => {
   const [password, SetPassword] = useState("");
@@ -55,7 +56,7 @@ const InputPassword = (error) => {
         onChange={(e) => SetVerificacion(e.target.value)}
       />
       {VerificacionError && (
-        <label className="Error">Contraseñas no coinciden</label>
+        <label className="error">Contraseñas no coinciden</label>
       )}
       <br />
       <br />

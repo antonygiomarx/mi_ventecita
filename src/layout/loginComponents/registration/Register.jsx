@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import "./Register.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button } from "antd";
 import Input from "../input/Input";
 import Logo from "../logo/Logo";
-import InputPass from "../input/InputPassword";
+import InputPassword from "../input/InputPassword";
 
 const Register = () => {
   function hasNumbers(x) {
@@ -24,28 +25,33 @@ const Register = () => {
   }, [nombreCompleto]);
   return (
     <div className="Login">
-      <div className="leftside">
+      <div>
         <Logo />
         <form className="form">
-          <label>Nombre completo</label>
+          <label htmlFor="name">Nombre completo</label>
           <Input
             type="text"
             value={nombreCompleto}
             onChange={(e) => SetnombreCompleto(e.target.value)}
             errorNombre={nombreError}
+            id="name"
+            name="NombreCompleto"
           />
-          {nombreError && <label className="error">Nombre inválido</label>}
-          <label>Nombre de Usuario</label>
+
+          {nombreError && <label>Nombre inválido</label>}
+          <label htmlFor="username">Nombre de Usuario</label>
           <Input
+            name="username"
+            id="username"
             type="text"
             value={nombreUsuario}
             onChange={(e) => {
               SetnombreUsuario(e.target.value);
             }}
           />
-          <label> Email </label>
-          <Input type="email" />
-          <InputPass />
+          <label htmlFor="email"> Email </label>
+          <Input type="email" id="email" name="email" />
+          <InputPassword />
         </form>
         <Button
           type="primary"
@@ -62,7 +68,7 @@ const Register = () => {
           Go back
         </Button>
       </div>
-      <div className="rightside" />
+      <div />
     </div>
   );
 };

@@ -40,3 +40,11 @@ input {
   background-position: center;
   background-attachment: fixed;
 }
+
+.login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(90deg, #ffffff 50%, 50%);
+  height: 100vh;
+}
+

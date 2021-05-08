@@ -4,11 +4,10 @@ import { Layout } from "antd";
 import "./Main.css";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
-import Searchbar from "../../components/searchbar/Searchbar";
+import Searchbar from "../../components/Searchbar/Searchbar";
 import HeaderComponent from "../header/Header";
 
 const Main = ({ children }) => {
-  console.log(children);
   return (
     <Layout>
       <HeaderComponent />
