@@ -8,6 +8,7 @@ import "./Store.css";
 import CardComponent from "../card/Card";
 import LoadingCard from "../card/Loading";
 import FloatingActionButtonComponent from "../floating-button/FloatingActionButton";
+import SearchbarComponent from "../searchbar/Searchbar";
 
 const StoreComponent = () => {
   const [products, setProducts] = useState([]);
@@ -28,33 +29,37 @@ const StoreComponent = () => {
   store.subscribe(filterProducts);
 
   return (
-    <Content className="main-content">
-      <div className="site-layout-background">
-        <Row className="content-products">
-          {!products.length ? (
-            <Col xs key={uuid()}>
-              <LoadingCard />
-            </Col>
-          ) : (
-            products.map(({ title, price, category, description, image }) => {
-              return (
-                <Col xs key={uuid()}>
-                  <CardComponent
-                    title={title}
-                    description={description}
-                    img={image}
-                    price={price}
-                    category={category}
-                    key={uuid()}
-                  />
-                </Col>
-              );
-            })
-          )}
-          <FloatingActionButtonComponent />
-        </Row>
-      </div>
-    </Content>
+    <>
+      <SearchbarComponent />
+
+      <Content className="main-content">
+        <div className="site-layout-background">
+          <Row className="content-products">
+            {!products.length ? (
+              <Col xs key={uuid()}>
+                <LoadingCard />
+              </Col>
+            ) : (
+              products.map(({ title, price, category, description, image }) => {
+                return (
+                  <Col xs key={uuid()}>
+                    <CardComponent
+                      title={title}
+                      description={description}
+                      img={image}
+                      price={price}
+                      category={category}
+                      key={uuid()}
+                    />
+                  </Col>
+                );
+              })
+            )}
+            <FloatingActionButtonComponent />
+          </Row>
+        </div>
+      </Content>
+    </>
   );
 };
 
