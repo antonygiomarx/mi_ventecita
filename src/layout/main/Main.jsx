@@ -8,7 +8,6 @@ import Searchbar from "../../components/searchbar/Searchbar";
 import HeaderComponent from "../header/Header";
 
 const Main = ({ children }) => {
-  console.log(children);
   return (
     <Layout>
       <HeaderComponent />

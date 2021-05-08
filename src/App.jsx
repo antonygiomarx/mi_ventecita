@@ -21,8 +21,9 @@ const App = () => {
   const [isLogged, setIsLogged] = useState(false);
 
   const toggleLogged = () => {
-    const { LOGGED } = store.getState();
-    setIsLogged(LOGGED);
+    const { logged } = store.getState();
+    console.log(logged);
+    setIsLogged(logged);
   };
 
   store.subscribe(toggleLogged);

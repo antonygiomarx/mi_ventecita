@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import { Button, Checkbox } from "antd";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import "./Form.css";
 import Input from "../input/Input";
 import store from "../../../store/main/store";
 
 const Form = () => {
-  const history = useHistory();
   const [credentials, setCredentials] = useState({});
   const loginCheck = () => {
     const { username, password } = store.getState();
@@ -26,7 +25,7 @@ const Form = () => {
         type: "SET_LOGGED",
         logged: true,
       });
-      history.push("/");
+      <Redirect to="/" />;
     }
   };
 
