@@ -10,10 +10,11 @@ import {
 import { v4 as uuid } from "uuid";
 
 import Main from "./layout/main/Main";
-import Login from "./view/login/Login";
+
 import store from "./store/main/store";
 import routes from "./routes/default.routes";
 import Register from "./layout/loginComponents/registration/Register";
+import Login from "./views/login/Login";
 
 const App = () => {
   const [isLogged, setIsLogged] = useState(false);

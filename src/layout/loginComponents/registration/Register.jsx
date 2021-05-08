@@ -2,8 +2,8 @@
 import "./Register.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from "antd";
-import Input from "../input/Input";
+import { Button, Input } from "antd";
+import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import Logo from "../logo/Logo";
 import InputPassword from "../input/InputPassword";
 
@@ -24,33 +24,33 @@ const Register = () => {
     }
   }, [nombreCompleto]);
   return (
-    <div className="Login">
+    <div className="login">
       <div>
         <Logo />
         <form className="form">
-          <label htmlFor="name">Nombre completo</label>
+          <label>Nombre completo</label>
           <Input
-            type="text"
             value={nombreCompleto}
+            prefix={<UserOutlined />}
             onChange={(e) => SetnombreCompleto(e.target.value)}
-            errorNombre={nombreError}
-            id="name"
-            name="NombreCompleto"
+            className="inputRegister"
           />
-
           {nombreError && <label>Nombre inválido</label>}
-          <label htmlFor="username">Nombre de Usuario</label>
+          <label>Nombre de Usuario</label>
           <Input
-            name="username"
-            id="username"
-            type="text"
             value={nombreUsuario}
-            onChange={(e) => {
-              SetnombreUsuario(e.target.value);
-            }}
+            prefix={<UserOutlined />}
+            onChange={(e) => SetnombreUsuario(e.target.value)}
+            className="inputRegister"
           />
-          <label htmlFor="email"> Email </label>
-          <Input type="email" id="email" name="email" />
+          <label> Email </label>
+          <Input
+            prefix={<MailOutlined />}
+            type="email"
+            id="email"
+            name="email"
+            className="inputRegister"
+          />
           <InputPassword />
         </form>
         <Button
@@ -68,7 +68,7 @@ const Register = () => {
           Go back
         </Button>
       </div>
-      <div />
+      <div className="rightside" />
     </div>
   );
 };

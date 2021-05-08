@@ -11,17 +11,7 @@
   font-weight: bold;
   margin: 5px 10px 5px 0;
 }
-input {
-  border-radius: 25px;
-  padding: 10px;
-  background-color: #fff;
-  border: 2px solid rgb(165, 163, 163);
-  outline: none;
-  width: 100%;
-  padding: 12px 20px;
-  margin: 2px;
-  display: block;
-}
+
 .form input:focus {
   box-shadow: 0 0 1pt 0pt rgb(7, 8, 8);
 }
@@ -47,4 +37,14 @@ input {
   background: linear-gradient(90deg, #ffffff 50%, 50%);
   height: 100vh;
 }
-
+.inputRegister
+{
+  border-radius: 25px;
+  background-color: #fff;
+  border: 2px solid rgb(165, 163, 163);
+  outline: none;
+  width: 100%;
+  padding: 0px 20px;
+  margin: 2px;
+  display: block;
+}
