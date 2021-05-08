@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Input.css";
 import store from "../../../store/main/store";
 
 const Input = ({ type, name, value, errorNombre, isPassword }) => {
@@ -14,7 +14,7 @@ const Input = ({ type, name, value, errorNombre, isPassword }) => {
           pass: event.target.value,
         });
       }}
-      className={errorNombre ? "ErrorUsuario" : "input"}
+      className={errorNombre ? "error" : "input"}
     />
   ) : (
     <input
@@ -27,7 +27,7 @@ const Input = ({ type, name, value, errorNombre, isPassword }) => {
           user: event.target.value,
         });
       }}
-      className={errorNombre ? "ErrorUsuario" : "input"}
+      className={errorNombre ? "error" : "input"}
     />
   );
 };

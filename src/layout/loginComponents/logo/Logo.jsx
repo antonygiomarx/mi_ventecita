@@ -1,5 +1,6 @@
 import React from "react";
 import { SmileOutlined } from "@ant-design/icons";
+import "./Logo.css";
 
 const Logo = () => {
   return (

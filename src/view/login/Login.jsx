@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import "./Login.css";
 import Registerbutton from "../../layout/loginComponents/registration/Registerbutton";
@@ -7,12 +8,13 @@ import Logo from "../../layout/loginComponents/logo/Logo";
 function Login() {
   return (
     <div className="login">
-      <div className="leftside">
+      <div>
         <Logo />
         <Form />
         <Registerbutton />
       </div>
       <div className="rightside" />
+      <Link to="/login" />
     </div>
   );
 }

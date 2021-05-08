@@ -4,8 +4,8 @@ import { Layout } from "antd";
 import "./Main.css";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
-import Searchbar from "../../components/searchbar/Searchbar";
 import HeaderComponent from "../header/Header";
+import SearchbarComponent from "../../components/searchbar/Searchbar";
 
 const Main = ({ children }) => {
   return (
@@ -13,7 +13,7 @@ const Main = ({ children }) => {
       <HeaderComponent />
       <Sidebar />
       <Layout className="site-layout">
-        <Searchbar />
+        <SearchbarComponent />
         {children}
         <FooterComponent />
       </Layout>
