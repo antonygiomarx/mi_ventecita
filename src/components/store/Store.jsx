@@ -9,6 +9,7 @@ import CardComponent from "../card/Card";
 import LoadingCard from "../card/Loading";
 import FloatingActionButtonComponent from "../floating-button/FloatingActionButton";
 import SearchbarComponent from "../searchbar/Searchbar";
+import storeActions from "../../reducers/actions/store.action";
 
 const StoreComponent = () => {
   const [products, setProducts] = useState([]);
@@ -16,10 +17,7 @@ const StoreComponent = () => {
     fetch(`https://fakestoreapi.com/products?limit=${Math.random() * 100}`)
       .then((res) => res.json())
       .then((apiProducts) => {
-        store.dispatch({
-          type: "SET_PRODUCTS",
-          json: apiProducts,
-        });
+        storeActions.SET_PRODUCTS(apiProducts);
         setProducts(store.getState().PRODUCTS);
       });
   }, []);
