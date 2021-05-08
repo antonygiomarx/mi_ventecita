@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import "./Form.css";
 import Input from "../input/Input";
 import store from "../../../store/main/store";
+import loginActions from "../../../reducers/actions/login.actions";
 
 const Form = () => {
   const [credentials, setCredentials] = useState({});
@@ -21,10 +22,7 @@ const Form = () => {
   const login = () => {
     const { username, password } = credentials;
     if (username === "admin" && password === "admin") {
-      store.dispatch({
-        type: "SET_LOGGED",
-        logged: true,
-      });
+      loginActions.SET_LOGGED();
       <Redirect to="/" />;
     }
   };
