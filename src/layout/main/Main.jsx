@@ -5,7 +5,7 @@ import "./Main.css";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import HeaderComponent from "../header/Header";
-import SearchbarComponent from "../../components/searchbar/Searchbar";
+import SearchbarComponent from "../../components/Searchbar/Searchbar";
 
 const Main = ({ children }) => {
   return (
