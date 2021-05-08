@@ -23,8 +23,8 @@ const App = () => {
   const [isLogged, setIsLogged] = useState(false);
 
   const toggleLogged = () => {
-    const { LOGGED } = store.getState();
-    setIsLogged(LOGGED);
+    const { logged } = store.getState();
+    setIsLogged(logged);
   };
 
   store.subscribe(toggleLogged);
@@ -55,7 +55,7 @@ const App = () => {
             </Route>
           );
         })}
-        {!isLogged ? <Redirect to="/login" /> : <Redirect to="/" />}
+        {!isLogged ? <Redirect to="/login" /> : <Redirect to="/store" />}
       </Switch>
     </Router>
   );
