@@ -3,7 +3,7 @@ import "./Register.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Input } from "antd";
-import { MailOutlined, UserOutlined } from "@ant-design/icons";
+import { MailOutlined, UserOutlined, TeamOutlined } from "@ant-design/icons";
 import Logo from "../logo/Logo";
 import InputPassword from "../input/InputPassword";
 
@@ -31,11 +31,11 @@ const Register = () => {
           <label>Nombre completo</label>
           <Input
             value={nombreCompleto}
-            prefix={<UserOutlined />}
+            prefix={<TeamOutlined />}
             onChange={(e) => SetnombreCompleto(e.target.value)}
             className="inputRegister"
           />
-          {nombreError && <label>Nombre inválido</label>}
+          {nombreError && <label className="error">Nombre inválido</label>}
           <label>Nombre de Usuario</label>
           <Input
             value={nombreUsuario}
