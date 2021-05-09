@@ -38,6 +38,11 @@ const storeReducer = (state = {}, action) => {
         ...state,
         logged: action.logged,
       };
+    case "SET_UNLOGGED":
+      return {
+        ...state,
+        logged: action.logged,
+      };
 
     default:
       return state;

@@ -6,6 +6,11 @@ const loginActions = {
       type: "SET_LOGGED",
       logged: true,
     }),
+  SET_UNLOGGED: () =>
+    store.dispatch({
+      type: "SET_UNLOGGED",
+      logged: false,
+    }),
 };
 
 export default loginActions;

@@ -5,23 +5,23 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
+  useHistory,
 } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
 import Main from "./layout/main/Main";
-import Login from "./view/login/Login";
 import store from "./store/main/store";
 import routes from "./routes/default.routes";
-import Register from "./layout/loginComponents/registration/Register";
 
 const App = () => {
   const [isLogged, setIsLogged] = useState(false);
-
+  console.log(isLogged);
   const toggleLogged = () => {
     const { logged } = store.getState();
     setIsLogged(logged);
   };
+
+  const history = useHistory();
 
   store.subscribe(toggleLogged);
 
@@ -29,29 +29,32 @@ const App = () => {
     <Router>
       <Switch>
         {routes.map(({ route, component: Component }) => {
-          if (Component === Login) {
+          if (!isLogged && Component.name === "Login") {
             return (
               <Route key={uuid()} exact path={`${route}`}>
-                <Login />
+                {history.push(route)}
+                <Component />
               </Route>
             );
           }
-          if (Component === Register) {
+          if (!isLogged && Component.name === "Register") {
             return (
               <Route key={uuid()} exact path={`${route}`}>
-                <Register />
+                {history.push(route)}
+                <Component />
               </Route>
             );
           }
+
           return (
-            <Route key={uuid()} exact path={`${route}`}>
+            <Route key={uuid()} exact path="/">
               <Main>
+                {history.push(route)}
                 <Component />
               </Main>
             </Route>
           );
         })}
-        {!isLogged ? <Redirect to="/login" /> : <Redirect to="/store" />}
       </Switch>
     </Router>
   );

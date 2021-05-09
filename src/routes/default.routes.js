@@ -8,7 +8,6 @@ import StoreComponent from "../components/store/Store";
 import LoadingCard from "../components/card/Loading";
 import Login from "../view/login/Login";
 import Register from "../layout/loginComponents/registration/Register";
-// import Store from "../components/layout/store/store";
 
 const routes = [
   {
@@ -16,7 +15,9 @@ const routes = [
     icon: <DashboardTwoTone />,
     route: "/dashboard",
     component: LoadingCard,
+    isMain: true,
   },
+
   {
     name: "Tienda",
     icon: <ShoppingTwoTone />,
@@ -34,12 +35,14 @@ const routes = [
     route: "/login",
     component: Login,
     hidden: true,
+    isMain: true,
   },
   {
     name: "Register",
     route: "/register",
     component: Register,
     hidden: true,
+    isMain: true,
   },
 ];
 
