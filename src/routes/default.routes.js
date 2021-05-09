@@ -6,8 +6,9 @@ import {
 } from "@ant-design/icons";
 import StoreComponent from "../components/store/Store";
 import LoadingCard from "../components/card/Loading";
-import Login from "../view/login/Login";
 import Register from "../layout/loginComponents/registration/Register";
+// import Store from "../components/layout/store/store";
+import Login from "../views/login/Login";
 
 const routes = [
   {

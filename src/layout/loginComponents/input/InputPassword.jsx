@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import "./Input.css";
 
 const InputPassword = (error) => {
@@ -35,25 +35,28 @@ const InputPassword = (error) => {
   };
   return (
     <div className="errorPassword">
-      <label className="input">Contraseña</label>
-      <input
+      <label>Contraseña</label>
+      <Input
         name="password"
         type="password"
         value={password}
         error={passworderror}
         onChange={(e) => SetPassword(e.target.value)}
         style={{ color: "black", padding: "15px" }}
-        className={error ? "Error" : "input"}
+        className={error ? "input" : "error"}
       />
-      {passworderror && <label className="Error">Mínimo 6 caracteres</label>}
+      {passworderror && password.length > 0 && (
+        <label className="error">Mínimo 6 caracteres</label>
+      )}
       <br />
       <br />
-      <label className="input">Verificación Contraseña</label>
-      <input
+      <label>Verificación Contraseña</label>
+      <Input
         name="Verificacionpassword"
         type="password"
         value={verificacion}
         onChange={(e) => SetVerificacion(e.target.value)}
+        className="inputPassword"
       />
       {VerificacionError && (
         <label className="error">Contraseñas no coinciden</label>
