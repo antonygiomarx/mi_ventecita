@@ -1,6 +1,14 @@
-import { createStore } from "redux";
-import storeReducer from "../../reducers/StoreReducer";
+import { createStore, combineReducers } from "redux";
+import STORE_REDUCER from "../../redux/reducers/store.reducer";
+import ROUTER_REDUCER from "../../redux/reducers/router.reducer";
+import AUTH_REDUCER from "../../redux/reducers/auth.reducer";
 
-const store = createStore(storeReducer);
+const reducers = combineReducers({
+  STORE_REDUCER,
+  ROUTER_REDUCER,
+  AUTH_REDUCER,
+});
+
+const store = createStore(reducers);
 
 export default store;
