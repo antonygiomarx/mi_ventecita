@@ -3,9 +3,9 @@ import "./App.css";
 import "antd/dist/antd.css";
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
@@ -13,46 +13,43 @@ import Main from "./layout/main/Main";
 
 import store from "./store/main/store";
 import routes from "./routes/default.routes";
-import Register from "./layout/loginComponents/registration/Register";
 import Login from "./views/login/Login";
 
 const App = () => {
+  const { getState, subscribe } = store;
   const [isLogged, setIsLogged] = useState(false);
-
   const toggleLogged = () => {
-    const { logged } = store.getState();
+    const { AUTH_REDUCER } = getState();
+    const { logged } = AUTH_REDUCER;
     setIsLogged(logged);
   };
 
-  store.subscribe(toggleLogged);
+  const [{ component: Home }] = routes.filter(
+    (route) => route.name === "Dashboard"
+  );
+
+  subscribe(toggleLogged);
 
   return (
     <Router>
       <Switch>
-        {routes.map(({ route, component: Component }) => {
-          if (Component === Login) {
-            return (
-              <Route key={uuid()} exact path={`${route}`}>
-                <Login />
-              </Route>
-            );
-          }
-          if (Component === Register) {
-            return (
-              <Route key={uuid()} exact path={`${route}`}>
-                <Register />
-              </Route>
-            );
-          }
-          return (
-            <Route key={uuid()} exact path={`${route}`}>
+        {!isLogged ? (
+          <>
+            <Redirect push to="/login" />
+            <Route key={uuid()}>
+              <Login />
+            </Route>
+          </>
+        ) : (
+          <>
+            <Redirect push to="/" />
+            <Route>
               <Main>
-                <Component />
+                <Home />
               </Main>
             </Route>
-          );
-        })}
-        {!isLogged ? <Redirect to="/login" /> : <Redirect to="/store" />}
+          </>
+        )}
       </Switch>
     </Router>
   );

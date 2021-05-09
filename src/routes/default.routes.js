@@ -16,7 +16,9 @@ const routes = [
     icon: <DashboardTwoTone />,
     route: "/dashboard",
     component: LoadingCard,
+    isMain: true,
   },
+
   {
     name: "Tienda",
     icon: <ShoppingTwoTone />,
@@ -34,12 +36,14 @@ const routes = [
     route: "/login",
     component: Login,
     hidden: true,
+    isMain: true,
   },
   {
     name: "Register",
     route: "/register",
     component: Register,
     hidden: true,
+    isMain: true,
   },
 ];
 

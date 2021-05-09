@@ -9,7 +9,7 @@ import CardComponent from "../card/Card";
 import LoadingCard from "../card/Loading";
 import FloatingActionButtonComponent from "../floating-button/FloatingActionButton";
 import SearchbarComponent from "../searchbar/Searchbar";
-import storeActions from "../../reducers/actions/store.action";
+import storeActions from "../../redux/actions/store.action";
 
 const StoreComponent = () => {
   const [products, setProducts] = useState([]);
@@ -24,6 +24,7 @@ const StoreComponent = () => {
 
   const filterProducts = () => {};
 
+  console.log(products);
   store.subscribe(filterProducts);
 
   return (

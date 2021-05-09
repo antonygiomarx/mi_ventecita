@@ -1,7 +1,7 @@
 const config = {
   auth: {
     username: "admin",
-    pass: "admin",
+    password: "admin",
   },
 };
 

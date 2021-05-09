@@ -1,15 +1,17 @@
 import store from "../../store/main/store";
 
+const { dispatch } = store;
+
 const storeActions = {
   SET_PRODUCTS: (products) => {
-    store.dispatch({
+    dispatch({
       type: "SET_PRODUCTS",
       products,
     });
   },
 
   ADD_PRODUCTS: (product) => {
-    store.dispatch({
+    dispatch({
       type: "SET_PRODUCTS",
       product,
     });
