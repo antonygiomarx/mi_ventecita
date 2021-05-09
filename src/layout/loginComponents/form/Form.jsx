@@ -6,12 +6,16 @@ import { Redirect } from "react-router-dom";
 import "./Form.css";
 import Input from "../input/Input";
 import store from "../../../store/main/store";
-import loginActions from "../../../reducers/actions/login.actions";
+import AUTH_ACTIONS from "../../../redux/actions/auth.actions";
+import config from "../../../config/config";
 
 const Form = () => {
+  const { getState, subscribe } = store;
+
   const [credentials, setCredentials] = useState({});
   const loginCheck = () => {
-    const { username, password } = store.getState();
+    const { AUTH_REDUCER } = getState();
+    const { username, password } = AUTH_REDUCER;
 
     setCredentials({
       username,
@@ -19,15 +23,18 @@ const Form = () => {
     });
   };
 
+  subscribe(loginCheck);
+
   const login = () => {
+    const { auth } = config;
     const { username, password } = credentials;
-    if (username === "admin" && password === "admin") {
-      loginActions.SET_LOGGED();
+
+    if (username === auth.username && password === auth.password) {
+      AUTH_ACTIONS.LOGGED(true);
       <Redirect to="/" />;
     }
   };
 
-  store.subscribe(loginCheck);
   return (
     <form className="form">
       <label htmlFor="user">Nombre de Usuario</label>

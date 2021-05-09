@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 
 import "./Sidebar.css";
 import routes from "../../routes/default.routes";
+import ROUTER_ACTIONS from "../../redux/actions/router.actions";
 
 const SidebarComponent = () => {
   return (
@@ -24,7 +25,12 @@ const SidebarComponent = () => {
       >
         {routes.map(({ icon, route, hidden }) => {
           return (
-            <Menu.Item className="sidebar-item" key={uuid()} hidden={hidden}>
+            <Menu.Item
+              onClick={ROUTER_ACTIONS.SET_ROUTE(route)}
+              className="sidebar-item"
+              key={uuid()}
+              hidden={hidden}
+            >
               {icon}
               <Link to={`${route}`} />
             </Menu.Item>

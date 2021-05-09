@@ -4,7 +4,7 @@ import Avatar from "antd/lib/avatar/avatar";
 import { UserOutlined } from "@ant-design/icons";
 
 import "./ProfileMenu.css";
-import loginActions from "../../reducers/actions/login.actions";
+import AUTH_ACTIONS from "../../redux/actions/auth.actions";
 
 const ProfileMenu = ({ username }) => {
   const { ItemGroup, Item } = Menu;
@@ -14,7 +14,7 @@ const ProfileMenu = ({ username }) => {
         <Item
           className="menu-item"
           onClick={() => {
-            loginActions.SET_UNLOGGED();
+            AUTH_ACTIONS.LOGGED(false);
           }}
         >
           Cerrar Sesión
