@@ -33,7 +33,7 @@ const Form = () => {
   return (
     <form className="form">
       <label htmlFor="user">Nombre de Usuario</label>
-      <Input name="usuario" type="text" id="user" />
+      <Input name="usuario" type="text" id="user" className="input" />
 
       <label htmlFor="pass-form">Contraseña</label>
       <Input isPassword name="contraseña" type="password" id="pass-form" />

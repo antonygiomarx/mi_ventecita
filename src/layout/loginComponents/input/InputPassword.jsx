@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Input } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import "./Input.css";
 
 const InputPassword = (error) => {
@@ -36,7 +37,10 @@ const InputPassword = (error) => {
   return (
     <div className="errorPassword">
       <label>Contraseña</label>
-      <Input
+      <Input.Password
+        iconRender={(visible) =>
+          visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+        }
         name="password"
         type="password"
         value={password}

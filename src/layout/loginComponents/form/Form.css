@@ -11,16 +11,14 @@
   font-weight: bold;
   margin: 5px 10px 5px 0;
 }
-input {
+.input {
   border-radius: 25px;
-  padding: 10px;
   background-color: #fff;
   border: 2px solid rgb(165, 163, 163);
   outline: none;
   width: 100%;
-  padding: 12px 20px;
+  padding: 15px 20px;
   margin: 2px;
-  display: block;
 }
 .form input:focus {
   box-shadow: 0 0 1pt 0pt rgb(7, 8, 8);
