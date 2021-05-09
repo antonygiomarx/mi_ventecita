@@ -35,9 +35,9 @@
 
 .site-layout {
   display: flex;
+  flex-direction: column;
+  margin: 70px 0 0 50px;
   align-items: center;
   justify-content: center;
-  margin: 10px 0;
+  margin: 65px 0 0 50px;
 }
-
-

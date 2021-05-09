@@ -16,10 +16,6 @@ import routes from "./routes/default.routes";
 import Register from "./layout/loginComponents/registration/Register";
 import Login from "./views/login/Login";
 
-export const user = {
-  username: "admin",
-  pass: "admin",
-};
 const App = () => {
   const [isLogged, setIsLogged] = useState(false);
 
