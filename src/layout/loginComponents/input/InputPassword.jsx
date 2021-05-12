@@ -27,7 +27,7 @@ const InputPassword = (error) => {
       SetVerificacion(password);
       SetVerificacionError(false);
       Setdisable(false);
-      history.push("/card");
+      history.push("/");
     } else {
       Setdisable(true);
       SetVerificacion("");

@@ -10,10 +10,11 @@ import {
 import { v4 as uuid } from "uuid";
 
 import Main from "./layout/main/Main";
-
 import store from "./store/main/store";
 import routes from "./routes/default.routes";
 import Login from "./views/login/Login";
+import Register from "./layout/loginComponents/registration/Register";
+// import StoreComponent from "./components/store/Store";
 
 const App = () => {
   const { getState, subscribe } = store;
@@ -25,7 +26,7 @@ const App = () => {
   };
 
   const [{ component: Home }] = routes.filter(
-    (route) => route.name === "Dashboard"
+    (route) => route.name === "Inventario"
   );
 
   subscribe(toggleLogged);
@@ -36,9 +37,8 @@ const App = () => {
         {!isLogged ? (
           <>
             <Redirect push to="/login" />
-            <Route key={uuid()}>
-              <Login />
-            </Route>
+            <Route key={uuid()} exact path="/login" component={Login} />
+            <Route key={uuid()} exact path="/register" component={Register} />
           </>
         ) : (
           <>

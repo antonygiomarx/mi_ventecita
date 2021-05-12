@@ -24,7 +24,7 @@ const StoreComponent = () => {
 
   const filterProducts = () => {};
 
-  console.log(products);
+  // console.log(products);
   store.subscribe(filterProducts);
 
   return (
