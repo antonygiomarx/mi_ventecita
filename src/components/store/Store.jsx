@@ -18,7 +18,7 @@ const StoreComponent = () => {
       .then((res) => res.json())
       .then((apiProducts) => {
         storeActions.SET_PRODUCTS(apiProducts);
-        setProducts(store.getState().PRODUCTS);
+        setProducts(apiProducts);
       });
   }, []);
 

@@ -1,36 +1,23 @@
 import React from "react";
-// import { useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Layout } from "antd";
 import "./Main.css";
+import { v4 as uuid } from "uuid";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import HeaderComponent from "../header/Header";
-// import routes from "../../routes/default.routes";
+import StoreComponent from "../../components/store/Store";
+import LoadingCard from "../../components/card/Loading";
 
 const Main = () => {
-  /* const ac = new AbortController();
-
-  const { location } = useHistory();
-  const { pathname } = location;
-
-  const [actualRoute, setActualRoute] = useState(pathname);
-
-  const [{ component: Component }] = routes.filter(
-    ({ route }) => route === actualRoute
-  );
-
-  useEffect(() => {
-    setActualRoute(pathname);
-    console.log(pathname);
-    return ac.abort();
-  }, [pathname]); */
-
   return (
     <Layout>
       <HeaderComponent />
       <Sidebar />
       <Layout className="site-layout">
-        {/* <Component /> */}
+        <Route key={uuid()} exact path="/store" component={StoreComponent} />
+        <Route key={uuid()} exact path="/shop" component={LoadingCard} />
+        <Route key={uuid()} exact path="/dashboard" component={LoadingCard} />
         <FooterComponent />
       </Layout>
     </Layout>
