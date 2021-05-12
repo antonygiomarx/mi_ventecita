@@ -14,7 +14,6 @@ import store from "./store/main/store";
 import routes from "./routes/default.routes";
 import Login from "./views/login/Login";
 import Register from "./layout/loginComponents/registration/Register";
-// import StoreComponent from "./components/store/Store";
 
 const App = () => {
   const { getState, subscribe } = store;
@@ -26,7 +25,7 @@ const App = () => {
   };
 
   const [{ component: Home }] = routes.filter(
-    (route) => route.name === "Inventario"
+    (route) => route.name === "Dashboard"
   );
 
   subscribe(toggleLogged);

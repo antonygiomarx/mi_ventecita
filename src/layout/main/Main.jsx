@@ -1,9 +1,11 @@
 import React from "react";
+// import { useHistory } from "react-router-dom";
 import { Layout } from "antd";
 import "./Main.css";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import HeaderComponent from "../header/Header";
+// import routes from "../../routes/default.routes";
 
 const Main = () => {
   /* const ac = new AbortController();
@@ -28,6 +30,7 @@ const Main = () => {
       <HeaderComponent />
       <Sidebar />
       <Layout className="site-layout">
+        {/* <Component /> */}
         <FooterComponent />
       </Layout>
     </Layout>
