@@ -16,7 +16,9 @@ import Home from "./views/home/Home";
 
 const App = () => {
   const { getState, subscribe } = store;
+
   const [isLogged, setIsLogged] = useState(false);
+
   const toggleLogged = () => {
     const { AUTH_REDUCER } = getState();
     const { logged } = AUTH_REDUCER;
