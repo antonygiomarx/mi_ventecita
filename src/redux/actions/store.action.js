@@ -2,7 +2,7 @@ import store from "../../store/main/store";
 
 const { dispatch } = store;
 
-const storeActions = {
+const STORE_ACTIONS = {
   SET_PRODUCTS: (products) => {
     dispatch({
       type: "SET_PRODUCTS",
@@ -10,12 +10,18 @@ const storeActions = {
     });
   },
 
-  ADD_PRODUCTS: (product) => {
+  ADD_PRODUCT: (product) => {
     dispatch({
-      type: "SET_PRODUCTS",
+      type: "SET_PRODUCT",
       product,
+    });
+  },
+  TOGGLE_MODAL: (value) => {
+    store.dispatch({
+      type: "TOGGLE_MODAL",
+      value,
     });
   },
 };
 
-export default storeActions;
+export default STORE_ACTIONS;
