@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { Button, Input } from "antd";
 import { MailOutlined, UserOutlined, TeamOutlined } from "@ant-design/icons";
 import Logo from "../logo/Logo";
-// import InputPassword from "../input/InputPassword";
 
 const Register = () => {
   const history = useHistory();
@@ -17,9 +16,16 @@ const Register = () => {
     passwordVerification: "",
     disable: "",
   });
-  const { password, username, Nombre, email } = information;
+  const {
+    password,
+    username,
+    Nombre,
+    email,
+    passwordVerification,
+  } = information;
   let { disable } = information;
   if (
+    password !== passwordVerification ||
     password.length < 6 ||
     username.length === 0 ||
     Nombre.length === 0 ||
@@ -29,6 +35,7 @@ const Register = () => {
   } else {
     disable = false;
   }
+
   return (
     <div className="login">
       <div>
@@ -64,7 +71,6 @@ const Register = () => {
             name="email"
             className="inputRegister"
           />
-          {/* <InputPassword /> */}
           <label>Contraseña</label>
           <Input.Password
             placeholder="Contraseña"
@@ -76,6 +82,10 @@ const Register = () => {
             }
             className="inputRegister"
           />
+          {password.length > 0 && password.length < 6 && (
+            <label className="error">Mínimo 6 caracteres</label>
+          )}
+          <br />
           <label> Verificación Contraseña</label>
           <Input
             placeholder="Ingrese nuevamente la contraseña"
@@ -90,20 +100,10 @@ const Register = () => {
             }
             className="inputRegister"
           />
+          {password !== passwordVerification && (
+            <label className="error">Contraseñas no coinciden</label>
+          )}
         </form>
-        <Button
-          type="primary"
-          disabled={disable}
-          style={{
-            width: "50%",
-            margin: "15px 2px",
-            borderRadius: "25px",
-            fontWeight: "bold",
-            height: "50px",
-          }}
-        >
-          Registrate
-        </Button>
         <Button
           type="primary"
           onClick={() => history.push("/login")}
@@ -113,10 +113,18 @@ const Register = () => {
             width: "35%",
             left: "2%",
             textAlign: "center",
-            top: "-40px",
+            top: "50px",
           }}
         >
           Go back
+        </Button>
+        <Button
+          type="primary"
+          disabled={disable}
+          htmlType="submit"
+          className="button-register"
+        >
+          Registrate
         </Button>
       </div>
       <div className="rightside" />
