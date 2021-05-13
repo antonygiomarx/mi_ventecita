@@ -13,6 +13,7 @@ import { v4 as uuid } from "uuid";
 import store from "./store/main/store";
 import Login from "./views/login/Login";
 import Home from "./views/home/Home";
+import Register from "./components/registration/Register";
 
 const App = () => {
   const { getState, subscribe } = store;
