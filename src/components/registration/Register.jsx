@@ -16,6 +16,7 @@ const Register = () => {
     passwordVerification: "",
     disable: "",
   });
+  console.log(information);
   const {
     password,
     username,
@@ -26,10 +27,10 @@ const Register = () => {
   let { disable } = information;
   if (
     password !== passwordVerification ||
-    password.length < 6 ||
-    username.length === 0 ||
-    Nombre.length === 0 ||
-    email.length === 0
+    password.length <= 6 ||
+    !username.length ||
+    !Nombre.length ||
+    !email.length
   ) {
     disable = true;
   } else {
