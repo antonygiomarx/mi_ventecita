@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Button } from "react-floating-action-button";
+import STORE_ACTIONS from "../../redux/actions/store.action";
 
 import AddProductModalComponent from "../modal/add-product/AddProductModal";
 
 import "./FAB.css";
-import store from "../../store/main/store";
 
 const FloatingActionButtonComponent = () => {
   return (
@@ -14,10 +14,7 @@ const FloatingActionButtonComponent = () => {
           tooltip="Agregar producto"
           className="fab-button"
           onClick={() => {
-            store.dispatch({
-              type: "TOGGLE_MODAL",
-              value: true,
-            });
+            STORE_ACTIONS.TOGGLE_MODAL(true);
           }}
         >
           <span className="text-button">+</span>

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import "./Login.css";
-import Registerbutton from "../../layout/loginComponents/registration/Registerbutton";
-import Form from "../../layout/loginComponents/form/Form";
-import Logo from "../../layout/loginComponents/logo/Logo";
+import Registerbutton from "../../components/registration/Registerbutton";
+import Form from "../../components/login-form/LoginForm";
+import Logo from "../../components/logo/Logo";
 
 function Login() {
   return (
