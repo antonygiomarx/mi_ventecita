@@ -17,7 +17,9 @@ import StoreComponent from "./components/store/Store";
 
 const App = () => {
   const { getState, subscribe } = store;
+
   const [isLogged, setIsLogged] = useState(false);
+
   const toggleLogged = () => {
     const { AUTH_REDUCER } = getState();
     const { logged } = AUTH_REDUCER;
