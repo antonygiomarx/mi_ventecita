@@ -4,7 +4,7 @@
   flex-flow: row wrap;
   align-items: center;
   margin-top: 20%;
-  margin: 60px;
+  margin: 35px;
   justify-content: center;
 }
 .form label {
@@ -18,7 +18,7 @@
   outline: none;
   width: 100%;
   padding: 15px 20px;
-  margin: 2px;
+  margin: 10px;
 }
 .form input:focus {
   box-shadow: 0 0 1pt 0pt rgb(7, 8, 8);
