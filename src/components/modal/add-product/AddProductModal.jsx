@@ -1,12 +1,19 @@
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
+
+import STORE_ACTIONS from "../../../redux/actions/store.action";
 import store from "../../../store/main/store";
 
 const AddProductModalComponent = () => {
   const [visible, setVisible] = useState(false);
 
+  const { getState } = store;
+
   const toggleModal = () => {
-    const { modalIsOpen } = store.getState();
+    const { STORE_REDUCER } = getState();
+
+    const { modalIsOpen } = STORE_REDUCER;
+
     setVisible(modalIsOpen);
   };
 
@@ -17,10 +24,7 @@ const AddProductModalComponent = () => {
       centered
       closable
       onCancel={() => {
-        store.dispatch({
-          type: "TOGGLE_MODAL",
-          value: false,
-        });
+        STORE_ACTIONS.TOGGLE_MODAL(false);
       }}
       visible={visible}
       title="Agregar producto"

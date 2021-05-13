@@ -3,18 +3,16 @@ import "./App.css";
 import "antd/dist/antd.css";
 import {
   BrowserRouter as Router,
+  Link,
   Redirect,
   Route,
   Switch,
 } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-import Main from "./layout/main/Main";
 import store from "./store/main/store";
-// import routes from "./routes/default.routes";
 import Login from "./views/login/Login";
-import Register from "./layout/loginComponents/registration/Register";
-// import StoreComponent from "./components/store/Store";
+import Home from "./views/home/Home";
 
 const App = () => {
   const { getState, subscribe } = store;
@@ -24,10 +22,6 @@ const App = () => {
     const { logged } = AUTH_REDUCER;
     setIsLogged(logged);
   };
-
-  /*  const [{ component: Home }] = routes.filter(
-    (route) => route.name === "Login"
-  ); */
 
   subscribe(toggleLogged);
 
@@ -43,9 +37,11 @@ const App = () => {
         ) : (
           <>
             <Redirect push to="/" />
-            <Route>
-              <Main />
-            </Route>
+            <Link to="/">
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Link>
           </>
         )}
       </Switch>
