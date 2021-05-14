@@ -12,10 +12,9 @@ import { v4 as uuid } from "uuid";
 import store from "./store/main/store";
 import Login from "./views/login/Login";
 import Register from "./components/registration/Register";
-// import Main from "./layout/main/Main";
+import Main from "./layout/main/Main";
 // import Home from "./views/home/Home";
 // import StoreComponent from "./components/store/Store";
-// import routes from "./routes/default.routes";
 
 const App = () => {
   const { getState, subscribe } = store;
@@ -33,14 +32,18 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        {!isLogged && (
+        {!isLogged ? (
           <>
             <Redirect push to="/login" />
             <Route key={uuid()} exact path="/login" component={Login} />
             <Route key={uuid()} exact path="/register" component={Register} />
           </>
+        ) : (
+          <>
+            <Redirect push to="/" />
+            <Main />
+          </>
         )}
-        <Redirect push to="/" />
       </Switch>
     </Router>
   );
