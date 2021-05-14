@@ -6,7 +6,7 @@ const Registerbutton = () => {
   const history = useHistory();
   return (
     <div>
-      <h4 style={{ fontWeight: "bold", marginTop: "-45px" }}>
+      <h4 style={{ fontWeight: "bold", marginTop: "-15px" }}>
         ¿Aún no te has registrado?
       </h4>
       <Button

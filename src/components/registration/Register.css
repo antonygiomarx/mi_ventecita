@@ -1,50 +1,38 @@
-.form {
-  vertical-align: middle;
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  margin-top: 20%;
-  margin: 60px;
-  justify-content: center;
-}
-.form label {
-  font-weight: bold;
-  margin: 5px 10px 5px 0;
-}
-
-.form input:focus {
-  box-shadow: 0 0 1pt 0pt rgb(7, 8, 8);
-}
-.button {
-  width: 100%;
-  margin: 15px 2px;
-  border-radius: 25px;
-  font-weight: bold;
-  height: 50px;
-}
-.rightside {
-  height: auto;
-  width: 100%;
-  background-size: cover;
-  background-image: url(https://image.freepik.com/vector-gratis/papel-tapiz-azul-clasico-estilo-abstracto_23-2148437427.jpg);
-  background-position: center;
-  background-attachment: fixed;
-}
-
-.login {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: linear-gradient(90deg, #ffffff 50%, 50%);
-  height: 100vh;
-}
-.inputRegister
-{
+.inputRegister {
   border-radius: 25px;
   background-color: #fff;
   border: 2px solid rgb(165, 163, 163);
   outline: none;
   width: 100%;
   padding: 15px 15px;
-  margin: 2px;
+  margin: 10px;
+}
+.form-register
+{
+  vertical-align: middle;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-top: 20%;
+  margin: 30px;
+  justify-content: center;
+}
 
+.form-register label
+{
+  font-weight: bold;
+  margin: 5px 10px 5px 0;
+}
+.button-register
+{
+  width: 60%;
+  border-radius: 25px;
+  font-weight: bold;
+  height: 50px;
+  top: -25px;
+  left: -15%;
+}
+.error {
+  color: red;
+  font-size: 10px;
 }

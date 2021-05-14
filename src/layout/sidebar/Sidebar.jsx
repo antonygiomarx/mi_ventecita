@@ -9,7 +9,7 @@ import routes from "../../routes/default.routes";
 
 const SidebarComponent = () => {
   return (
-    <Sider className="sidebar" width="50" theme="dark">
+    <Sider key={uuid()} className="sidebar" width="50" theme="dark">
       <Menu
         style={{
           display: "flex",
@@ -18,6 +18,7 @@ const SidebarComponent = () => {
           alignContent: "center",
           alignItems: "center",
         }}
+        key={uuid()}
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["0"]}
@@ -29,6 +30,7 @@ const SidebarComponent = () => {
                 {icon}
                 <Link to={`${route}`} />
               </Menu.Item>
+              <Link key={uuid()} to={`${route}`} />
             </>
           );
         })}
