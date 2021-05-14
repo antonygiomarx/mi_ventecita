@@ -9,7 +9,7 @@ import routes from "../../routes/default.routes";
 
 const SidebarComponent = () => {
   return (
-    <Sider key={uuid()} className="sidebar" width="50" theme="dark">
+    <Sider className="sidebar" width="50" theme="dark">
       <Menu
         style={{
           display: "flex",
@@ -18,19 +18,16 @@ const SidebarComponent = () => {
           alignContent: "center",
           alignItems: "center",
         }}
-        key={uuid()}
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["0"]}
       >
         {routes.map(({ icon, route, hidden }) => {
           return (
-            <>
-              <Menu.Item className="sidebar-item" key={uuid()} hidden={hidden}>
-                {icon}
-                <Link key={uuid()} to={`${route}`} />
-              </Menu.Item>
-            </>
+            <Menu.Item className="sidebar-item" key={uuid()} hidden={hidden}>
+              {icon}
+              <Link key={uuid()} to={`${route}`} />
+            </Menu.Item>
           );
         })}
       </Menu>
