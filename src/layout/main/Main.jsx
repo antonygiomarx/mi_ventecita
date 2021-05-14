@@ -1,24 +1,20 @@
 import React from "react";
-import { Route } from "react-router-dom";
+// import { Route } from "react-router-dom";
 import { Layout } from "antd";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 import "./Main.css";
 import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import HeaderComponent from "../header/Header";
-import routes from "../../routes/default.routes";
+// import routes from "../../routes/default.routes";
 
-const Main = () => {
+const Main = ({ children }) => {
   return (
     <Layout>
       <HeaderComponent />
       <Sidebar />
       <Layout className="site-layout">
-        {routes.map(({ route, component }) => {
-          return (
-            <Route exact path={`${route}`} component={component} key={uuid()} />
-          );
-        })}
+        {children}
         <FooterComponent />
       </Layout>
     </Layout>

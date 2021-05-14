@@ -28,8 +28,8 @@ const SidebarComponent = () => {
             <>
               <Menu.Item className="sidebar-item" key={uuid()} hidden={hidden}>
                 {icon}
+                <Link key={uuid()} to={`${route}`} />
               </Menu.Item>
-              <Link key={uuid()} to={`${route}`} />
             </>
           );
         })}
