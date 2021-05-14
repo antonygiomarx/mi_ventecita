@@ -5,12 +5,13 @@ import Sidebar from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import HeaderComponent from "../header/Header";
 
-const Main = () => {
+const Main = ({ children }) => {
   return (
     <Layout>
       <HeaderComponent />
       <Sidebar />
       <Layout className="site-layout">
+        {children}
         <FooterComponent />
       </Layout>
     </Layout>
