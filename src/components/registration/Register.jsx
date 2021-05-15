@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import "./Register.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Input } from "antd";
 import { MailOutlined, UserOutlined, TeamOutlined } from "@ant-design/icons";
@@ -16,6 +16,10 @@ const Register = () => {
     passwordVerification: "",
     disable: "",
   });
+
+  const [isValidPassword, setIsValidPassword] = useState(false);
+  const [isCheckedPassword, setIsCheckedPassword] = useState(false);
+
   console.log(information);
   const {
     password,
@@ -24,10 +28,33 @@ const Register = () => {
     email,
     passwordVerification,
   } = information;
+
+  const passwordValidation = () => {
+    if (password.length > 5) {
+      setIsValidPassword(true);
+    } else {
+      setIsValidPassword(false);
+    }
+  };
+  useEffect(() => {
+    const ac = new AbortController();
+    passwordValidation();
+    return () => {
+      ac.abort();
+    };
+  }, [password]);
+  const checkPasswords = () => {
+    if (password === passwordVerification) {
+      setIsCheckedPassword(true);
+    } else {
+      setIsCheckedPassword(false);
+    }
+  };
+
   let { disable } = information;
   if (
     password !== passwordVerification ||
-    password.length <= 6 ||
+    isValidPassword ||
     !username.length ||
     !Nombre.length ||
     !email.length
@@ -45,9 +72,9 @@ const Register = () => {
           <label>Nombre completo</label>
           <Input
             prefix={<TeamOutlined />}
-            onChange={({ target }) =>
-              setInformation({ ...information, Nombre: target.value })
-            }
+            onChange={({ target }) => {
+              setInformation({ ...information, Nombre: target.value });
+            }}
             className="inputRegister"
             placeholder="Nombre Completo"
           />
@@ -78,12 +105,13 @@ const Register = () => {
             type="password"
             id="pass-register"
             name="pass-register"
-            onChange={({ target }) =>
-              setInformation({ ...information, password: target.value })
-            }
+            onChange={({ target }) => {
+              setInformation({ ...information, password: target.value });
+              passwordValidation();
+            }}
             className="inputRegister"
           />
-          {password.length > 0 && password.length < 6 && (
+          {!isValidPassword && password.length > 0 && (
             <label className="error">Mínimo 6 caracteres</label>
           )}
           <br />
@@ -93,15 +121,16 @@ const Register = () => {
             type="password"
             id="pass-register"
             name="pass-register"
-            onChange={({ target }) =>
+            onChange={({ target }) => {
               setInformation({
                 ...information,
                 passwordVerification: target.value,
-              })
-            }
+              });
+              checkPasswords();
+            }}
             className="inputRegister"
           />
-          {password !== passwordVerification && (
+          {isCheckedPassword && isValidPassword && (
             <label className="error">Contraseñas no coinciden</label>
           )}
         </form>

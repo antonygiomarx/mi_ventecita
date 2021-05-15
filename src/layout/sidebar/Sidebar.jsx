@@ -17,6 +17,7 @@ const SidebarComponent = () => {
           justifyContent: "center",
           alignContent: "center",
           alignItems: "center",
+          top: "61px",
         }}
         theme="dark"
         mode="inline"

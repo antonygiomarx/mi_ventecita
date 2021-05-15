@@ -51,16 +51,16 @@ const StoreComponent = () => {
                 <LoadingCard />
               </Col>
             ) : (
-              products.map(({ title, price, category, description, image }) => {
+              products.map(({ title, price, category, image, description }) => {
                 return (
                   <Col xs key={uuid()}>
                     <CardComponent
                       title={title}
-                      description={description}
                       img={image}
                       price={price}
                       category={category}
                       key={uuid()}
+                      description={description}
                     />
                   </Col>
                 );
