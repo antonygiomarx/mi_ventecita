@@ -15,6 +15,7 @@ const CardModalComponent = ({
   return (
     <Modal centered visible={visible} onCancel={cancel}>
       <Card
+        bordered={false}
         cover={
           <img
             src={img}
