@@ -12,8 +12,10 @@ import { v4 as uuid } from "uuid";
 import store from "./store/main/store";
 import Login from "./views/login/Login";
 import Register from "./components/registration/Register";
-import Home from "./views/home/Home";
-import StoreComponent from "./components/store/Store";
+import Main from "./layout/main/Main";
+import routes from "./routes/default.routes";
+// import Home from "./views/home/Home";
+// import StoreComponent from "./components/store/Store";
 
 const App = () => {
   const { getState, subscribe } = store;
@@ -40,13 +42,18 @@ const App = () => {
         ) : (
           <>
             <Redirect push to="/" />
-            <Route
-              key={uuid()}
-              exact
-              path="/store"
-              component={StoreComponent}
-            />
-            <Home />
+            <Main>
+              {routes.map(({ route, component }) => {
+                return (
+                  <Route
+                    exact
+                    path={`${route}`}
+                    component={component}
+                    key={uuid()}
+                  />
+                );
+              })}
+            </Main>
           </>
         )}
       </Switch>

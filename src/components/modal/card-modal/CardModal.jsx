@@ -1,5 +1,5 @@
 import { Card, Modal } from "antd";
-import Paragraph from "antd/lib/skeleton/Paragraph";
+// import Paragraph from "antd/lib/skeleton/Paragraph";
 import React from "react";
 
 import "./CardModal.css";
@@ -7,55 +7,33 @@ import "./CardModal.css";
 const CardModalComponent = ({
   title,
   img,
-  description,
   price,
-  category,
+  description,
   visible,
   cancel,
 }) => {
   return (
     <Modal centered visible={visible} onCancel={cancel}>
       <Card
-        hoverable
-        className="card"
         cover={
           <img
             src={img}
             alt={title}
-            style={{ maxWidth: "100%", maxHeight: "158px", width: "100%" }}
+            style={{
+              width: "30%",
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
           />
         }
       >
         <div className="card-header">
           <div className="card-header title">
-            <h1>{title}</h1>
-            <span
-              style={{
-                display: "flex",
-                alignItems: "flex-end",
-                margin: "0 0 0 150px",
-                fontWeight: "bold",
-              }}
-            >
-              C${price}
-            </span>
+            <h3>{title}</h3>
+            <span className="price">C${price}</span>
           </div>
-
-          <Paragraph
-            ellipsis={
-              description
-                ? {
-                    rows: 2,
-                    expandable: true,
-                    symbol: "Ver más",
-                  }
-                : false
-            }
-          >
-            {description}
-          </Paragraph>
-
-          <p>{category}</p>
+          <div>{description}</div>
         </div>
       </Card>
     </Modal>

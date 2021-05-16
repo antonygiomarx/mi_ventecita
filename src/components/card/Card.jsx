@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Card } from "antd";
-import Paragraph from "antd/es/typography/Paragraph";
 
 import "./card.css";
 import CardModalComponent from "../modal/card-modal/CardModal";
@@ -43,20 +42,6 @@ const CardComponent = ({ title, img, description, price, category }) => {
               C${price}
             </span>
           </div>
-
-          <Paragraph
-            ellipsis={
-              description
-                ? {
-                    rows: 2,
-                    expandable: true,
-                    symbol: "Ver más",
-                  }
-                : false
-            }
-          >
-            {description}
-          </Paragraph>
 
           <p>{category}</p>
         </div>

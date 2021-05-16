@@ -3,10 +3,10 @@
   height: 100vh;
   position: fixed;
   left: 0;
-  top: 61px;
 }
 
 .sidebar-item {
+  top: 61px;
   display: flex;
   flex-direction: column;
   justify-content: center;
