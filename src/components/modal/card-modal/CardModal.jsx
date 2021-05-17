@@ -1,8 +1,7 @@
 import "./CardModal.css";
-import { Card, Modal, Typography, InputNumber } from "antd";
+import { Card, Modal, Typography } from "antd";
 // import Paragraph from "antd/lib/skeleton/Paragraph";
 import React, { useState } from "react";
-import { UserOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 const CardModalComponent = ({
@@ -15,6 +14,7 @@ const CardModalComponent = ({
   ok,
 }) => {
   const [editableText, setEditableText] = useState(title);
+  const [editablePrice, setEditablePrice] = useState(price);
   return (
     <Modal centered visible={visible} onCancel={cancel} onOk={ok}>
       <Card
@@ -37,11 +37,9 @@ const CardModalComponent = ({
             <Title level={3} editable={{ onChange: setEditableText }}>
               {editableText}
             </Title>
-            <InputNumber
-              prefix={<UserOutlined />}
-              defaultValue={price}
-              className="price"
-            />
+            <Title level={5} editable={{ onChange: setEditablePrice }}>
+              {editablePrice}
+            </Title>
           </div>
           <div>{description}</div>
         </div>
