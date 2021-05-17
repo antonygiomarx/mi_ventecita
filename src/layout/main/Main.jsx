@@ -1,20 +1,28 @@
-import React from "react";
-// import { Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
-// import { v4 as uuid } from "uuid";
 import "./Main.css";
 import SidebarComponent from "../sidebar/Sidebar";
 import FooterComponent from "../footer/Footer";
 import HeaderComponent from "../header/Header";
-// import routes from "../../routes/default.routes";
+import LoadingCard from "../../components/card/Loading";
 
 const Main = ({ children }) => {
+  const [component, setComponent] = useState(children);
+
+  useEffect(() => {
+    const ac = new AbortController();
+    setComponent(children);
+    return () => {
+      ac.abort();
+    };
+  }, [children]);
+
   return (
     <Layout>
       <HeaderComponent />
       <SidebarComponent />
       <Layout className="site-layout">
-        {children}
+        {!component ? <LoadingCard /> : component}
         <FooterComponent />
       </Layout>
     </Layout>

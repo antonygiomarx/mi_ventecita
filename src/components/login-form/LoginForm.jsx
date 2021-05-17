@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import { Badge, Button, Checkbox, Input } from "antd";
+import { Button, Checkbox, Input } from "antd";
 import { Redirect } from "react-router-dom";
 
 import "./LoginForm.css";
@@ -21,6 +21,12 @@ const Form = () => {
     // const { auth } = config;
     try {
       const { username, password } = credentials;
+
+      await FIREBASE_SERVICE.AUTH.setPersistence(
+        FIREBASE_SERVICE.AUTH.getAuth(),
+        FIREBASE_SERVICE.AUTH.browserSessionPersistence
+      );
+
       const {
         user: authUser,
       } = await FIREBASE_SERVICE.AUTH.signInWithEmailAndPassword(
@@ -30,13 +36,13 @@ const Form = () => {
       );
       setUser(authUser);
     } catch (error) {
-      console.log(`Error en loginForm -> ${error.message}`);
+      if (error.message === "Firebase: Error (auth/invalid-email).") {
+        setIncorrectPassword(true);
+      }
     }
     if (user) {
       AUTH_ACTIONS.LOGGED(true);
       <Redirect to="/" />;
-    } else {
-      setIncorrectPassword(true);
     }
   };
 
@@ -79,14 +85,6 @@ const Form = () => {
         ¿Olvidaste tu contraseña?
       </Button>
 
-      {incorrectPassword && (
-        <Badge
-          status="error"
-          text="Correo o Contraseña Incorrecta"
-          color="red"
-          title="Correo o Contraseña Incorrecta"
-        />
-      )}
       <Button
         type="primary"
         className="button"
@@ -96,6 +94,9 @@ const Form = () => {
       >
         Iniciar sesión
       </Button>
+      {incorrectPassword && (
+        <label className="error">Correo o Contraseña Incorrectos</label>
+      )}
     </form>
   );
 };
