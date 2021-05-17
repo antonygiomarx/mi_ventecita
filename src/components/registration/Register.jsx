@@ -20,7 +20,6 @@ const Register = () => {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isCheckedPassword, setIsCheckedPassword] = useState(false);
 
-  console.log(information);
   const {
     password,
     username,
@@ -69,8 +68,9 @@ const Register = () => {
       <div>
         <Logo />
         <form className="form-register">
-          <label>Nombre completo</label>
+          <label htmlFor="input-name">Nombre completo</label>
           <Input
+            id="input-name"
             prefix={<TeamOutlined />}
             onChange={({ target }) => {
               setInformation({ ...information, Nombre: target.value });
@@ -119,7 +119,6 @@ const Register = () => {
           <Input
             placeholder="Ingrese nuevamente la contraseña"
             type="password"
-            id="pass-register"
             name="pass-register"
             onChange={({ target }) => {
               setInformation({

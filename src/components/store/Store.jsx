@@ -17,6 +17,7 @@ const StoreComponent = () => {
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
+    const ac = new AbortController();
     try {
       (async () => {
         const { data } = await axios.get(
@@ -32,8 +33,12 @@ const StoreComponent = () => {
         setProducts(stateProducts);
       })();
     } catch (error) {
-      console.error(error.message);
+      // eslint-disable-next-line no-console
+      console.log(error.message);
     }
+    return () => {
+      ac.abort();
+    };
   }, []);
 
   const filterProducts = () => {};
