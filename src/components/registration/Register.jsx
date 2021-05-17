@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Input } from "antd";
 import { MailOutlined, UserOutlined, TeamOutlined } from "@ant-design/icons";
 import Logo from "../logo/Logo";
+import { FIREBASE_SERVICE } from "../../firebase/firebase";
 
 const Register = () => {
   const history = useHistory();
@@ -20,6 +21,8 @@ const Register = () => {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isCheckedPassword, setIsCheckedPassword] = useState(false);
 
+  const [emailExists, setEmailExists] = useState(false);
+  console.log(information);
   const {
     password,
     username,
@@ -62,6 +65,27 @@ const Register = () => {
   } else {
     disable = false;
   }
+
+  const registerUser = async () => {
+    try {
+      const newUser = await FIREBASE_SERVICE.AUTH.createUserWithEmailAndPassword(
+        FIREBASE_SERVICE.AUTH.getAuth(),
+        email,
+        password
+      );
+      if (newUser) {
+        FIREBASE_SERVICE.AUTH.upd(
+          FIREBASE_SERVICE.AUTH.getAuth(),
+          newUser.user
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+        setEmailExists(true);
+      }
+    }
+  };
 
   return (
     <div className="login">
@@ -132,10 +156,15 @@ const Register = () => {
           {isCheckedPassword && isValidPassword && (
             <label className="error">Contraseñas no coinciden</label>
           )}
+          {emailExists && (
+            <label className="error">Email ya está registrado</label>
+          )}
         </form>
         <Button
           type="primary"
-          onClick={() => history.push("/login")}
+          onClick={() => {
+            history.push("/login");
+          }}
           className="button"
           style={{
             backgroundColor: "#4781ed",
@@ -152,6 +181,7 @@ const Register = () => {
           disabled={disable}
           htmlType="submit"
           className="button-register"
+          onClick={registerUser}
         >
           Registrate
         </Button>
