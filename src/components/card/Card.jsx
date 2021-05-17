@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Card } from "antd";
-
 import "./card.css";
+import React, { useState } from "react";
+import { Card, Typography } from "antd";
 import CardModalComponent from "../modal/card-modal/CardModal";
+
+const { Title } = Typography;
 
 const CardComponent = ({ title, img, description, price, category }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,20 +31,9 @@ const CardComponent = ({ title, img, description, price, category }) => {
       >
         <div className="card-header">
           <div className="card-header title">
-            <h1>{title}</h1>
-            <span
-              style={{
-                display: "flex",
-                alignItems: "flex-end",
-                margin: "0 0 0 150px",
-                fontWeight: "bold",
-              }}
-            >
-              C${price}
-            </span>
+            <Title level={5}>{title}</Title>
+            <span className="price">C${price}</span>
           </div>
-
-          <p>{category}</p>
         </div>
       </Card>
       <CardModalComponent
@@ -54,6 +44,7 @@ const CardComponent = ({ title, img, description, price, category }) => {
         price={price}
         category={category}
         cancel={handleCancel}
+        ok={handleCancel}
       />
     </>
   );
