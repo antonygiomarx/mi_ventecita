@@ -6,7 +6,6 @@
   justify-content: flex-start;
   flex-direction: column;
   border-radius: 30px;
-  width: 270px;
   height: 360px;
 }
 
@@ -18,4 +17,10 @@
 .card-header .title {
   flex-direction: column-reverse;
   white-space: pre-line;
+}
+.price {
+  display: block;
+  align-items: flex-end;
+  font-weight: bold;
+  margin-right: auto;
 }
