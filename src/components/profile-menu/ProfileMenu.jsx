@@ -15,11 +15,9 @@ const ProfileMenu = () => {
   FIREBASE_SERVICE.AUTH.getAuth().onAuthStateChanged((user) => {
     if (!user) {
       AUTH_ACTIONS.LOGGED(false);
-      console.log(`Sin usuario`);
     } else {
       setUsername(user);
       AUTH_ACTIONS.LOGGED(true);
-      console.log(`Con usuario`);
     }
   });
 

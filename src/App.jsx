@@ -14,8 +14,6 @@ import Login from "./views/login/Login";
 import Register from "./components/registration/Register";
 import Main from "./layout/main/Main";
 import routes from "./routes/default.routes";
-// import Home from "./views/home/Home";
-// import StoreComponent from "./components/store/Store";
 
 const App = () => {
   const { getState, subscribe } = store;
