@@ -2,6 +2,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { DatePicker, Form, Input, InputNumber, Select, Upload } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
 import { FIREBASE_SERVICE } from "../../../firebase/firebase";
 
 import STORE_ACTIONS from "../../../redux/actions/store.action";
@@ -28,14 +29,27 @@ const AddProductModalComponent = () => {
     setComponentSize(size);
   };
 
-  const normFile = (e) => {
-    console.log("Upload event:", e);
+  const customUpload = async ({ onError, onSuccess, file, onProgress }) => {
+    const fileId = uuid();
+    const fileRef = FIREBASE_SERVICE.STORAGE.STORAGE.ref("demo").child(fileId);
+    try {
+      const image = fileRef.put(file, {
+        customMetadata: { uploadedBy: "Antony", fileName: file.name },
+      });
 
-    if (Array.isArray(e)) {
-      return e;
+      image.on(
+        "state_changed",
+        (snap) =>
+          onProgress({
+            percent: (snap.bytesTransferred / snap.totalBytes) * 100,
+          }),
+        (err) => onError(err),
+        // eslint-disable-next-line no-underscore-dangle
+        () => onSuccess(null, image.metadata_)
+      );
+    } catch (e) {
+      onError(e.message);
     }
-
-    return e && e.fileList;
   };
   return (
     <Modal
@@ -62,18 +76,12 @@ const AddProductModalComponent = () => {
         size={componentSize}
       >
         <Form.Item label="Imagen">
-          <Form.Item
-            name="dragger"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-            noStyle
-          >
+          <Form.Item name="dragger" valuePropName="fileList">
             <Upload.Dragger
-              accept="image/png, image/jpeg, image/jpg"
-              name="files"
-              onChange={async (ev) => {
-                await FIREBASE_SERVICE.STORAGE.uploadImage(ev.fileList[0]);
-              }}
+              name="avatar"
+              listType="picture-card"
+              className="avatar-uploader"
+              customRequest={customUpload}
             >
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />

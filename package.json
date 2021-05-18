@@ -33,7 +33,8 @@
     "test": "npx react-scripts test",
     "eject": "npx react-scripts eject",
     "prepare": "npx husky install",
-    "lint": "npx eslint --fix"
+    "lint": "npx eslint --fix",
+    "deploy": "firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": [
