@@ -14,18 +14,12 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-const uploadImage = async (image) => {
-  const storageRef = storage().ref();
-
-  const imageResponse = await storageRef.put(image);
-  console.log(imageResponse);
-};
-
 const FIREBASE_SERVICE = {
   AUTH: auth,
   STORAGE: {
-    storage,
-    uploadImage,
+    REF: storage.ref,
+    UPLOAD_BYTES: (ref, bytes) => storage.getStorage(ref, bytes),
+    STORAGE: storage,
   },
 };
 
