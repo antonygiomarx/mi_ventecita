@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import * as auth from "firebase/auth";
-
+import * as storage from "firebase/storage";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyC_0lzxM9ndDYeAddTImhfoU2Sh9ygru9U",
@@ -16,6 +16,11 @@ initializeApp(firebaseConfig);
 
 const FIREBASE_SERVICE = {
   AUTH: auth,
+  STORAGE: {
+    REF: storage.ref,
+    UPLOAD_BYTES: (ref, bytes) => storage.getStorage(ref, bytes),
+    STORAGE: storage,
+  },
 };
 
 export { FIREBASE_SERVICE, firebaseConfig };
