@@ -3,7 +3,7 @@ import * as express from "express";
 import morgan = require("morgan");
 import * as cors from "cors";
 
-import router from "./controllers/store.controller";
+import storeController from "./controllers/store.controller";
 import storageController from "./controllers/storage.controller";
 
 const app = express();
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 // Router
-app.use(router);
+app.use(storeController);
 app.use(storageController);
 
 export default app;

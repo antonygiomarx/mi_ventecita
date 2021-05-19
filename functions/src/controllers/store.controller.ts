@@ -176,7 +176,7 @@ storeController.get(
   }
 );
 
-storeController.get(
+storeController.post(
   "/updateProduct",
   authMiddleware,
   async (req: Request, res: Response) => {
