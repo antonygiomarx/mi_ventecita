@@ -1,19 +1,36 @@
-import { Card, Modal } from "antd";
-// import Paragraph from "antd/lib/skeleton/Paragraph";
-import React from "react";
-
 import "./CardModal.css";
+import React, { useState } from "react";
+import { Card, Modal, Typography, Select } from "antd";
+import STORE_ACTIONS from "../../../redux/actions/store.action";
+// import store from "../../../store/main/store";
+// import Paragraph from "antd/lib/skeleton/Paragraph";
 
+const { Title, Text } = Typography;
 const CardModalComponent = ({
   title,
   img,
-  price,
-  description,
+  category,
   visible,
   cancel,
+  ok,
+  price,
+  description,
 }) => {
+  const [editableText, setEditableText] = useState(title);
+  const [editablePrice, setEditablePrice] = useState(price);
+  const [editableDescription, setEditableDescription] = useState(description);
+  const editable = [
+    {
+      title: editableText,
+      precio: editablePrice,
+      description: editableDescription,
+      category: { category },
+    },
+  ];
+  STORE_ACTIONS.UPDATED_PRODUCTS(editable);
+
   return (
-    <Modal centered visible={visible} onCancel={cancel}>
+    <Modal centered visible={visible} onCancel={cancel} onOk={ok}>
       <Card
         bordered={false}
         cover={
@@ -31,10 +48,19 @@ const CardModalComponent = ({
       >
         <div className="card-header">
           <div className="card-header title">
-            <h3>{title}</h3>
-            <span className="price">C${price}</span>
+            <Title level={3} editable={{ onChange: setEditableText }}>
+              {editableText}
+            </Title>
+            <Title level={5} editable={{ onChange: setEditablePrice }}>
+              {editablePrice}
+            </Title>
           </div>
-          <div>{description}</div>
+          <Text editable={{ onChange: setEditableDescription }}>
+            {editableDescription}
+          </Text>
+          <Select size="large">
+            <Select.Option value="category">{category}</Select.Option>
+          </Select>
         </div>
       </Card>
     </Modal>

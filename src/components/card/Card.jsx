@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Card } from "antd";
-
 import "./card.css";
+import React, { useState } from "react";
+import { Card, Typography } from "antd";
+import store from "../../store/main/store";
 import CardModalComponent from "../modal/card-modal/CardModal";
 
-const CardComponent = ({ title, img, description, price, category }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+const { Title } = Typography;
 
+const CardComponent = ({ title, img, description, category, price }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -14,6 +15,13 @@ const CardComponent = ({ title, img, description, price, category }) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const { getState } = store;
+  const { STORE_REDUCER } = getState();
+  const { updatedProducts } = STORE_REDUCER;
+  updatedProducts.map(({ precio }) => {
+    console.log({ precio });
+    return { precio };
+  });
 
   return (
     <>
@@ -30,30 +38,20 @@ const CardComponent = ({ title, img, description, price, category }) => {
       >
         <div className="card-header">
           <div className="card-header title">
-            <h1>{title}</h1>
-            <span
-              style={{
-                display: "flex",
-                alignItems: "flex-end",
-                margin: "0 0 0 150px",
-                fontWeight: "bold",
-              }}
-            >
-              C${price}
-            </span>
+            <Title level={5}>{title}</Title>
+            <span className="price">C${price}</span>
           </div>
-
-          <p>{category}</p>
         </div>
       </Card>
       <CardModalComponent
         visible={isModalVisible}
         title={title}
+        price={price}
         description={description}
         img={img}
-        price={price}
         category={category}
         cancel={handleCancel}
+        ok={handleCancel}
       />
     </>
   );

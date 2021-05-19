@@ -56,7 +56,7 @@ const Register = () => {
   let { disable } = information;
   if (
     password !== passwordVerification ||
-    isValidPassword ||
+    !isValidPassword ||
     !username.length ||
     !Nombre.length ||
     !email.length

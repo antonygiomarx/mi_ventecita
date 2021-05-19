@@ -27,15 +27,15 @@ const StoreComponent = () => {
         STORE_ACTIONS.SET_PRODUCTS(data);
 
         const { STORE_REDUCER } = getState();
-
         const { products: stateProducts } = STORE_REDUCER;
-
         setProducts(stateProducts);
+        console.log(stateProducts);
       })();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error.message);
     }
+
     return () => {
       ac.abort();
     };
@@ -44,7 +44,6 @@ const StoreComponent = () => {
   const filterProducts = () => {};
 
   subscribe(filterProducts);
-
   return (
     <>
       <SearchbarComponent />

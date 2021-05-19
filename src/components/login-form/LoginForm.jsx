@@ -76,6 +76,7 @@ const Form = () => {
             password: target.value,
           });
         }}
+        onPressEnter={login}
       />
 
       <Checkbox>Recuerdame</Checkbox>

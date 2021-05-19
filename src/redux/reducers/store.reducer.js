@@ -1,5 +1,5 @@
 const STORE_REDUCER = (state = {}, action) => {
-  const { type, products, word, value } = action;
+  const { type, products, word, value, updatedProducts } = action;
   switch (type) {
     case "ADD_PRODUCT":
       return {
@@ -23,10 +23,13 @@ const STORE_REDUCER = (state = {}, action) => {
         ...state,
         modalIsOpen: value,
       };
-
+    case "UPDATED_PRODUCTS":
+      return {
+        ...state,
+        updatedProducts,
+      };
     default:
       return state;
   }
 };
-
 export default STORE_REDUCER;
