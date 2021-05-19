@@ -7,6 +7,7 @@ import store from "../../store/main/store";
 const SearchbarComponent = () => {
   // TODO connect search to algolia
   // eslint-disable-next-line no-unused-vars
+
   const onSearch = (word) => {
     if (word) {
       store.dispatch({

@@ -1,13 +1,13 @@
 import "./card.css";
 import React, { useState } from "react";
 import { Card, Typography } from "antd";
+import store from "../../store/main/store";
 import CardModalComponent from "../modal/card-modal/CardModal";
 
 const { Title } = Typography;
 
-const CardComponent = ({ title, img, description, price, category }) => {
+const CardComponent = ({ title, img, description, category, price }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -15,6 +15,13 @@ const CardComponent = ({ title, img, description, price, category }) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const { getState } = store;
+  const { STORE_REDUCER } = getState();
+  const { updatedProducts } = STORE_REDUCER;
+  updatedProducts.map(({ precio }) => {
+    console.log({ precio });
+    return { precio };
+  });
 
   return (
     <>
@@ -39,9 +46,9 @@ const CardComponent = ({ title, img, description, price, category }) => {
       <CardModalComponent
         visible={isModalVisible}
         title={title}
+        price={price}
         description={description}
         img={img}
-        price={price}
         category={category}
         cancel={handleCancel}
         ok={handleCancel}

@@ -22,6 +22,9 @@ const STORE_ACTIONS = {
       value,
     });
   },
+  UPDATED_PRODUCTS: (updatedProducts) => {
+    dispatch({ type: "UPDATED_PRODUCTS", updatedProducts });
+  },
 };
 
 export default STORE_ACTIONS;

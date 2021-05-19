@@ -16,7 +16,6 @@ const AddProductModalComponent = () => {
     const { STORE_REDUCER } = getState();
 
     const { modalIsOpen } = STORE_REDUCER;
-
     setVisible(modalIsOpen);
   };
 
