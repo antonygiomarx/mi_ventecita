@@ -18,4 +18,4 @@ const LoadingCard = () => {
     </>
   );
 };
-export default LoadingCard;
+export default React.memo(LoadingCard);

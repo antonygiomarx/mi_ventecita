@@ -22,8 +22,8 @@ const STORE_ACTIONS = {
       value,
     });
   },
-  UPDATED_PRODUCTS: (updatedProducts) => {
-    dispatch({ type: "UPDATED_PRODUCTS", updatedProducts });
+  UPDATE_PRODUCT: (product) => {
+    dispatch({ type: "UPDATE_PRODUCT", product });
   },
 };
 

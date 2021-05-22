@@ -1,12 +1,12 @@
-import "./CardModal.css";
 import React, { useState } from "react";
 import { Card, Modal, Typography, Select } from "antd";
+
+import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
-// import store from "../../../store/main/store";
-// import Paragraph from "antd/lib/skeleton/Paragraph";
 
 const { Title, Text } = Typography;
 const CardModalComponent = ({
+  id,
   title,
   img,
   category,
@@ -16,18 +16,18 @@ const CardModalComponent = ({
   price,
   description,
 }) => {
-  const [editableText, setEditableText] = useState(title);
-  const [editablePrice, setEditablePrice] = useState(price);
-  const [editableDescription, setEditableDescription] = useState(description);
-  const editable = [
-    {
-      title: editableText,
-      precio: editablePrice,
-      description: editableDescription,
-      category: { category },
-    },
-  ];
-  STORE_ACTIONS.UPDATED_PRODUCTS(editable);
+  const [productInfo, setProductInfo] = useState({
+    id,
+    title,
+    price,
+    description,
+    category,
+  });
+
+  const updateProduct = (productUpdated) => {
+    console.log("product updated", productUpdated);
+    STORE_ACTIONS.UPDATE_PRODUCT(productUpdated);
+  };
 
   return (
     <Modal centered visible={visible} onCancel={cancel} onOk={ok}>
@@ -48,18 +48,54 @@ const CardModalComponent = ({
       >
         <div className="card-header">
           <div className="card-header title">
-            <Title level={3} editable={{ onChange: setEditableText }}>
-              {editableText}
+            <Title
+              level={3}
+              editable={{
+                onChange: (newTitle) => {
+                  console.log(newTitle);
+                  setProductInfo({
+                    ...productInfo,
+                    title: newTitle,
+                  });
+                  updateProduct(productInfo);
+                },
+              }}
+            >
+              {productInfo.title}
             </Title>
-            <Title level={5} editable={{ onChange: setEditablePrice }}>
-              {editablePrice}
+            <Title
+              level={5}
+              editable={{
+                onChange: (newPrice) => {
+                  console.log("new Price", newPrice);
+                  setProductInfo({
+                    ...productInfo,
+                    price: Number(newPrice),
+                  });
+                  updateProduct(productInfo);
+                },
+              }}
+            >
+              {productInfo.price}
             </Title>
           </div>
-          <Text editable={{ onChange: setEditableDescription }}>
-            {editableDescription}
+          <Text
+            editable={{
+              onChange: (newDescription) => {
+                setProductInfo({
+                  ...productInfo,
+                  description: newDescription,
+                });
+                updateProduct(productInfo);
+              },
+            }}
+          >
+            {productInfo.description}
           </Text>
           <Select size="large">
-            <Select.Option value="category">{category}</Select.Option>
+            <Select.Option value="category">
+              {productInfo.category}
+            </Select.Option>
           </Select>
         </div>
       </Card>
@@ -67,4 +103,4 @@ const CardModalComponent = ({
   );
 };
 
-export default CardModalComponent;
+export default React.memo(CardModalComponent);
