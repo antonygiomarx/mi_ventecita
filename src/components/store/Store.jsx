@@ -13,9 +13,23 @@ import SearchbarComponent from "../searchbar/Searchbar";
 import STORE_ACTIONS from "../../redux/actions/store.action";
 
 const StoreComponent = () => {
-  const { subscribe, getState } = store;
+  const { getState, subscribe } = store;
 
   const [products, setProducts] = useState([]);
+
+  const renderProducts = (productsToRender) => {
+    STORE_ACTIONS.SET_PRODUCTS(productsToRender);
+    const { STORE_REDUCER } = getState();
+    const { products: stateProducts } = STORE_REDUCER;
+    setProducts(stateProducts);
+  };
+
+  const renderUpdatedProducts = () => {
+    const { STORE_REDUCER } = getState();
+    const { products: stateProducts } = STORE_REDUCER;
+    setProducts(stateProducts);
+  };
+
   useEffect(() => {
     const ac = new AbortController();
     try {
@@ -23,13 +37,7 @@ const StoreComponent = () => {
         const { data } = await axios.get(
           `https://fakestoreapi.com/products?limit=${Math.random() * 100}`
         );
-
-        STORE_ACTIONS.SET_PRODUCTS(data);
-
-        const { STORE_REDUCER } = getState();
-        const { products: stateProducts } = STORE_REDUCER;
-        setProducts(stateProducts);
-        // console.log(stateProducts);
+        renderProducts(data);
       })();
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -41,9 +49,10 @@ const StoreComponent = () => {
     };
   }, []);
 
-  const filterProducts = () => {};
+  // const filterProducts = () => {};
 
-  subscribe(filterProducts);
+  subscribe(renderUpdatedProducts);
+
   return (
     <>
       <SearchbarComponent />
@@ -55,20 +64,23 @@ const StoreComponent = () => {
                 <LoadingCard />
               </Col>
             ) : (
-              products.map(({ title, price, category, image, description }) => {
-                return (
-                  <Col xs key={uuid()}>
-                    <CardComponent
-                      title={title}
-                      img={image}
-                      price={price}
-                      category={category}
-                      key={uuid()}
-                      description={description}
-                    />
-                  </Col>
-                );
-              })
+              products.map(
+                ({ id, title, price, category, image, description }) => {
+                  return (
+                    <Col xs key={uuid()}>
+                      <CardComponent
+                        title={title}
+                        img={image}
+                        price={price}
+                        category={category}
+                        key={uuid()}
+                        description={description}
+                        id={id}
+                      />
+                    </Col>
+                  );
+                }
+              )
             )}
             <FloatingActionButtonComponent />
           </Row>
@@ -78,4 +90,4 @@ const StoreComponent = () => {
   );
 };
 
-export default StoreComponent;
+export default React.memo(StoreComponent);
