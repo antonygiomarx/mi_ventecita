@@ -29,7 +29,7 @@ const StoreComponent = () => {
         const { STORE_REDUCER } = getState();
         const { products: stateProducts } = STORE_REDUCER;
         setProducts(stateProducts);
-        console.log(stateProducts);
+        // console.log(stateProducts);
       })();
     } catch (error) {
       // eslint-disable-next-line no-console
