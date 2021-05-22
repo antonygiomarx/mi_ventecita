@@ -1,5 +1,8 @@
 const STORE_REDUCER = (state = {}, action) => {
-  const { type, products, word, value, updatedProducts } = action;
+  // eslint-disable-next-line prefer-const
+  let { type, products, word, value, product } = action;
+
+  console.log(product, products, state);
   switch (type) {
     case "ADD_PRODUCT":
       return {
@@ -23,10 +26,14 @@ const STORE_REDUCER = (state = {}, action) => {
         ...state,
         modalIsOpen: value,
       };
-    case "UPDATED_PRODUCTS":
+    case "UPDATE_PRODUCT":
       return {
         ...state,
-        updatedProducts,
+        products: state.products.map((productsCtx) =>
+          product.id === productsCtx.id
+            ? { ...productsCtx, product }
+            : productsCtx
+        ),
       };
     default:
       return state;
