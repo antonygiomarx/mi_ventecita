@@ -2,7 +2,7 @@ const STORE_REDUCER = (state = {}, action) => {
   // eslint-disable-next-line prefer-const
   let { type, products, word, value, product } = action;
 
-  console.log(product, products, state);
+  console.log(product);
   switch (type) {
     case "ADD_PRODUCT":
       return {
