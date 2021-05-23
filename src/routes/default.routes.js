@@ -4,11 +4,11 @@ import {
   ShoppingTwoTone,
   ShopTwoTone,
 } from "@ant-design/icons";
-import StoreComponent from "../components/store/Store";
-import LoadingCard from "../components/card/Loading";
-import Register from "../components/registration/Register";
-// import Store from "../components/layout/store/store";
-import Login from "../views/login/Login";
+
+import LoadingCard from "../components/Card/Loading";
+import Login from "../views/Login/Login";
+import Register from "../components/Registration/Register";
+import StoreComponent from "../components/Store/Store";
 
 const routes = [
   {

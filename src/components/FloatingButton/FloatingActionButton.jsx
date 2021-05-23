@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Button } from "react-floating-action-button";
 import STORE_ACTIONS from "../../redux/actions/store.action";
 
-import AddProductModalComponent from "../modal/add-product/AddProductModal";
+import AddProductModalComponent from "../Modal/add-product/AddProductModal";
 
 import "./FAB.css";
 
