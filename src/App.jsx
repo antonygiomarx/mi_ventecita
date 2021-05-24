@@ -10,10 +10,10 @@ import {
 import { v4 as uuid } from "uuid";
 
 import store from "./store/main/store";
-import Login from "./views/login/Login";
-import Register from "./components/registration/Register";
-import Main from "./layout/main/Main";
 import routes from "./routes/default.routes";
+import Main from "./layout/Main/Main";
+import Login from "./views/Login/Login";
+import Register from "./components/Registration/Register";
 
 const App = () => {
   const { getState, subscribe } = store;

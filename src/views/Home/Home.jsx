@@ -1,6 +1,5 @@
 import React from "react";
-import LoadingCard from "../../components/card/Loading";
-import Main from "../../layout/main/Main";
+import Main from "../../layout/Main/Main";
 
 const Home = () => {
   return (
