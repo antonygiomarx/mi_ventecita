@@ -57,7 +57,7 @@ const CardModalComponent = ({
                     ...productInfo,
                     title: newTitle,
                   });
-                  updateProduct(productInfo);
+                  // updateProduct(productInfo);
                 },
               }}
             >
