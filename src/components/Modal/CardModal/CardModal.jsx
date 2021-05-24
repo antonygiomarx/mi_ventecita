@@ -26,7 +26,16 @@ const CardModalComponent = ({
 
   const updateProduct = (productUpdated) => {
     console.log("product updated", productUpdated);
-    STORE_ACTIONS.UPDATE_PRODUCT(productUpdated);
+    setTimeout(() => {
+      STORE_ACTIONS.UPDATE_PRODUCT({
+        id: 1,
+        title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptop",
+        price: 109.95,
+        description:
+          "Your perfect pack for everyday use and walks in th…to 15 inches) in the padded sleeve, your everyday",
+        category: "men's clothing",
+      });
+    }, 1000);
   };
 
   return (
@@ -52,12 +61,13 @@ const CardModalComponent = ({
               level={3}
               editable={{
                 onChange: (newTitle) => {
-                  console.log(newTitle);
                   setProductInfo({
                     ...productInfo,
                     title: newTitle,
                   });
-                  // updateProduct(productInfo);
+                },
+                onEnd: () => {
+                  updateProduct(productInfo);
                 },
               }}
             >
@@ -72,8 +82,11 @@ const CardModalComponent = ({
                     ...productInfo,
                     price: Number(newPrice),
                   });
+                },
+                onEnd: () => {
                   updateProduct(productInfo);
                 },
+                tooltip: "Editar precio",
               }}
             >
               {productInfo.price}
@@ -103,4 +116,4 @@ const CardModalComponent = ({
   );
 };
 
-export default React.memo(CardModalComponent);
+export default CardModalComponent;
