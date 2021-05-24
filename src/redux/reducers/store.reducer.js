@@ -29,11 +29,13 @@ const STORE_REDUCER = (state = {}, action) => {
     case "UPDATE_PRODUCT":
       return {
         ...state,
-        products: state.products.map((productsCtx) =>
-          product.id === productsCtx.id
-            ? { ...productsCtx, product }
-            : productsCtx
-        ),
+        products: state.products
+          .map((productsCtx) =>
+            product.id === productsCtx.id
+              ? { ...productsCtx, product }
+              : productsCtx
+          )
+          .sort(),
       };
     default:
       return state;
