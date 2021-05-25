@@ -1,15 +1,30 @@
-import { InboxOutlined } from "@ant-design/icons";
-import { DatePicker, Form, Input, InputNumber, Select, Upload } from "antd";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Select,
+  Upload,
+} from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
-import { v4 as uuid } from "uuid";
-import { FIREBASE_SERVICE } from "../../../firebase/firebase";
+// import { FIREBASE_SERVICE } from "../../../firebase/firebase";
 
+import getBase64 from "../../../utils/utils";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
 import store from "../../../store/main/store";
 
 const AddProductModalComponent = () => {
   const [visible, setVisible] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const [image, setImage] = useState({
+    url: "",
+  });
+  console.log(image);
 
   const { getState } = store;
 
@@ -28,28 +43,57 @@ const AddProductModalComponent = () => {
     setComponentSize(size);
   };
 
-  const customUpload = async ({ onError, onSuccess, file, onProgress }) => {
-    const fileId = uuid();
-    const fileRef = FIREBASE_SERVICE.STORAGE.STORAGE.ref("demo").child(fileId);
-    try {
-      const image = fileRef.put(file, {
-        customMetadata: { uploadedBy: "Antony", fileName: file.name },
-      });
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("You can only upload JPG/PNG file!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error("Image must smaller than 2MB!");
+    }
+    return isJpgOrPng && isLt2M;
+  };
 
-      image.on(
-        "state_changed",
-        (snap) =>
-          onProgress({
-            percent: (snap.bytesTransferred / snap.totalBytes) * 100,
+  const handleChange = (info) => {
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      getBase64(
+        info.file.originFileObj,
+        (url) =>
+          setImage({
+            url,
           }),
-        (err) => onError(err),
-        // eslint-disable-next-line no-underscore-dangle
-        () => onSuccess(null, image.metadata_)
+
+        setLoading(false)
       );
-    } catch (e) {
-      onError(e.message);
     }
   };
+
+  // const onRemove = (file) => {
+  //   const { value, onChange } = this.props;
+
+  //   const files = value.filter((v) => v.url !== file.url);
+
+  //   if (onChange) {
+  //     onChange(files);
+  //   }
+  // };
+  // const uploadImage = (file) => {
+
+  // };
+
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   return (
     <Modal
       centered
@@ -75,24 +119,23 @@ const AddProductModalComponent = () => {
         size={componentSize}
       >
         <Form.Item label="Imagen">
-          <Form.Item name="dragger" valuePropName="fileList">
-            <Upload.Dragger
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              customRequest={customUpload}
-            >
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">
-                Haz click o arrastra la imagen hasta acá
-              </p>
-              <p className="ant-upload-hint">
-                Solo imagenes en formato PNG/JPG.
-              </p>
-            </Upload.Dragger>
-          </Form.Item>
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+            action={(file) => {
+              console.log(file);
+            }}
+            accept="image/*"
+          >
+            {image.url ? (
+              <img src={image.url} alt="avatar" style={{ width: "100%" }} />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
         </Form.Item>
         <Form.Item label="Nombre">
           <Input />

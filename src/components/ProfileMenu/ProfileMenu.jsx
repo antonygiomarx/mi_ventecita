@@ -12,7 +12,7 @@ const ProfileMenu = () => {
 
   const [username, setUsername] = useState({});
 
-  FIREBASE_SERVICE.AUTH.getAuth().onAuthStateChanged((user) => {
+  FIREBASE_SERVICE.AUTH().onAuthStateChanged((user) => {
     if (!user) {
       AUTH_ACTIONS.LOGGED(false);
     } else {
