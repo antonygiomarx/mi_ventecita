@@ -25,6 +25,7 @@ const CardModalComponent = ({
   });
 
   const updateProduct = (productUpdated) => {
+    // eslint-disable-next-line no-console
     console.log("product updated", productUpdated);
     setTimeout(() => {
       STORE_ACTIONS.UPDATE_PRODUCT({
@@ -77,6 +78,7 @@ const CardModalComponent = ({
               level={5}
               editable={{
                 onChange: (newPrice) => {
+                  // eslint-disable-next-line no-console
                   console.log("new Price", newPrice);
                   setProductInfo({
                     ...productInfo,

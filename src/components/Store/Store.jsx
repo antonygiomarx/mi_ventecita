@@ -17,7 +17,7 @@ const StoreComponent = () => {
 
   const [products, setProducts] = useState([]);
   const [searchProducts, setSearchProducts] = useState([]);
-  const [words, setWords] = useState("");
+  const [searchTitle, setSearchTitle] = useState("");
   const renderProducts = (productsToRender) => {
     STORE_ACTIONS.SET_PRODUCTS(productsToRender);
     const { STORE_REDUCER } = getState();
@@ -58,11 +58,10 @@ const StoreComponent = () => {
     const titles = products.filter(({ title }) => {
       return title.toLowerCase().includes(word.toLowerCase());
     });
-    setWords(word);
+    setSearchTitle(word);
     setSearchProducts(titles);
   };
-  console.log(words.length);
-  console.log(searchProducts);
+
   return (
     <>
       <SearchbarComponent
@@ -78,7 +77,7 @@ const StoreComponent = () => {
                 <LoadingCard />
               </Col>
             )}
-            {words.length < 1
+            {searchTitle.length < 1
               ? products.map(
                   ({ id, title, price, category, image, description }) => (
                     <CardComponent

@@ -22,7 +22,6 @@ const Register = () => {
   const [isCheckedPassword, setIsCheckedPassword] = useState(false);
 
   const [emailExists, setEmailExists] = useState(false);
-  console.log(information);
   const {
     password,
     username,
@@ -68,6 +67,7 @@ const Register = () => {
 
   const registerUser = async () => {
     try {
+      // eslint-disable-next-line max-len
       const newUser = await FIREBASE_SERVICE.AUTH.createUserWithEmailAndPassword(
         FIREBASE_SERVICE.AUTH.getAuth(),
         email,
@@ -80,6 +80,7 @@ const Register = () => {
         );
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error.message);
       if (error.message === "Firebase: Error (auth/email-already-in-use).") {
         setEmailExists(true);
