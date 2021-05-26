@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Typography } from "antd";
 
 import "./Card.css";
-import CardModalComponent from "../Modal/CardModal/CardModal";
+import CardModalComponent from "../modal/CardModal/CardModal";
 
 const { Title } = Typography;
 

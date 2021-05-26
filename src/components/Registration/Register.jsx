@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Input } from "antd";
 import { MailOutlined, UserOutlined, TeamOutlined } from "@ant-design/icons";
 import { FIREBASE_SERVICE } from "../../firebase/firebase";
-import Logo from "../Logo/Logo";
+import Logo from "../logo/Logo";
 
 const Register = () => {
   const history = useHistory();

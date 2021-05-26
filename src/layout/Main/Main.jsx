@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
 import "./Main.css";
-import SidebarComponent from "../Sidebar/Sidebar";
-import HeaderComponent from "../Header/Header";
-import FooterComponent from "../Footer/Footer";
-import LoadingCard from "../../components/Card/Loading";
+import SidebarComponent from "../sidebar/Sidebar";
+import HeaderComponent from "../header/Header";
+import FooterComponent from "../footer/Footer";
+import LoadingCard from "../../components/card/Loading";
 
 const Main = ({ children }) => {
   const [component, setComponent] = useState(children);

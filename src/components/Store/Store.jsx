@@ -6,17 +6,18 @@ import axios from "axios";
 
 import "./Store.css";
 import store from "../../store/main/store";
-import CardComponent from "../Card/Card";
-import LoadingCard from "../Card/Loading";
+import CardComponent from "../card/Card";
+import LoadingCard from "../card/Loading";
 import FloatingActionButtonComponent from "../FloatingButton/FloatingActionButton";
 import STORE_ACTIONS from "../../redux/actions/store.action";
-import SearchbarComponent from "../Searchbar/Searchbar";
+import SearchbarComponent from "../searchbar/Searchbar";
 
 const StoreComponent = () => {
   const { getState, subscribe } = store;
 
   const [products, setProducts] = useState([]);
-
+  const [searchProducts, setSearchProducts] = useState([]);
+  const [words, setWords] = useState("");
   const renderProducts = (productsToRender) => {
     STORE_ACTIONS.SET_PRODUCTS(productsToRender);
     const { STORE_REDUCER } = getState();
@@ -52,36 +53,58 @@ const StoreComponent = () => {
   // const filterProducts = () => {};
 
   subscribe(renderUpdatedProducts);
-
+  const onSearch = (word) => {
+    // eslint-disable-next-line no-unused-vars
+    const titles = products.filter(({ title }) => {
+      return title.toLowerCase().includes(word.toLowerCase());
+    });
+    setWords(word);
+    setSearchProducts(titles);
+  };
+  console.log(words.length);
+  console.log(searchProducts);
   return (
     <>
-      <SearchbarComponent />
+      <SearchbarComponent
+        searchableProduct={(e) => {
+          onSearch(e.target.value);
+        }}
+      />
       <Content className="main-content">
         <div className="site-layout-background">
           <Row className="content-products">
-            {!products.length ? (
+            {!products.length && (
               <Col xs key={uuid()}>
                 <LoadingCard />
               </Col>
-            ) : (
-              products.map(
-                ({ id, title, price, category, image, description }) => {
-                  return (
-                    <Col xs key={uuid()}>
-                      <CardComponent
-                        title={title}
-                        img={image}
-                        price={price}
-                        category={category}
-                        key={uuid()}
-                        description={description}
-                        id={id}
-                      />
-                    </Col>
-                  );
-                }
-              )
             )}
+            {words.length < 1
+              ? products.map(
+                  ({ id, title, price, category, image, description }) => (
+                    <CardComponent
+                      title={title}
+                      img={image}
+                      price={price}
+                      category={category}
+                      key={uuid()}
+                      description={description}
+                      id={id}
+                    />
+                  )
+                )
+              : searchProducts.map(
+                  ({ id, title, price, category, image, description }) => (
+                    <CardComponent
+                      title={title}
+                      img={image}
+                      price={price}
+                      category={category}
+                      key={uuid()}
+                      description={description}
+                      id={id}
+                    />
+                  )
+                )}
             <FloatingActionButtonComponent />
           </Row>
         </div>

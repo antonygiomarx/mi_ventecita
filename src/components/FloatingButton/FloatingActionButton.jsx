@@ -3,7 +3,7 @@ import { Container, Button } from "react-floating-action-button";
 import STORE_ACTIONS from "../../redux/actions/store.action";
 
 import "./FAB.css";
-import AddProductModalComponent from "../Modal/AddProduct/AddProductModal";
+import AddProductModalComponent from "../modal/AddProduct/AddProductModal";
 
 const FloatingActionButtonComponent = () => {
   return (
