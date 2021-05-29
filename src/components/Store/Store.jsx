@@ -3,7 +3,7 @@ import { Content } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 import "./Store.css";
 import store from "../../store/main/store";
 import CardComponent from "../Card/Card";
@@ -14,7 +14,6 @@ import SearchbarComponent from "../Searchbar/Searchbar";
 
 const StoreComponent = () => {
   const { getState, subscribe } = store;
-
   const [products, setProducts] = useState([]);
 
   const [searchProducts, setSearchProducts] = useState([]);
@@ -27,14 +26,15 @@ const StoreComponent = () => {
     const { products: stateProducts } = STORE_REDUCER;
     setProducts(stateProducts);
   };
-
+  const { updatedProducts: a } = useSelector((state) => state.STORE_REDUCER);
+  console.log(a);
   const renderUpdatedProducts = () => {
     const { STORE_REDUCER } = getState();
     const { products: stateProducts } = STORE_REDUCER;
 
     setProducts(stateProducts);
   };
-
+  console.log(products);
   useEffect(() => {
     const ac = new AbortController();
     try {

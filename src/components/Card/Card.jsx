@@ -15,7 +15,6 @@ const CardComponent = ({ title, img, description, category, price, id }) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
   return (
     <>
       <Card

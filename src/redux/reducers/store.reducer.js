@@ -13,12 +13,6 @@ const STORE_REDUCER = (state = {}, action) => {
         products,
       };
 
-    case "SEARCH_PRODUCT":
-      return {
-        ...state,
-        PRODUCT_TO_FILTER: word,
-      };
-
     case "TOGGLE_MODAL":
       return {
         ...state,
@@ -33,6 +27,7 @@ const STORE_REDUCER = (state = {}, action) => {
             : productsCtx
         ),
       };
+
     default:
       return state;
   }
