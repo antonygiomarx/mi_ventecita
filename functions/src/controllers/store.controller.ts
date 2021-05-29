@@ -64,8 +64,15 @@ storeController.post(
   authMiddleware,
   async (req: Request, res: Response) => {
     try {
-      const { name, category, imageUrl, price, provider, companyId } =
-        req.body as Product;
+      const {
+        name,
+        category,
+        imageUrl,
+        price,
+        provider,
+        companyId,
+        description,
+      } = req.body as Product;
 
       if (
         !name ||
@@ -73,13 +80,14 @@ storeController.post(
         !price ||
         !imageUrl ||
         !provider ||
-        !companyId
+        !companyId ||
+        !description
       ) {
         return res
           .json({
             success: false,
             message:
-              "name, category, imageUrl, price, provider, companyId are required",
+              "name, category, description, imageUrl, price, provider, companyId are required",
           })
           .status(400);
       }
@@ -99,6 +107,7 @@ storeController.post(
         createdAt,
         updateAt,
         companyId,
+        description,
       });
 
       return res.json({
