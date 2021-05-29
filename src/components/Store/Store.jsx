@@ -6,17 +6,20 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import "./Store.css";
 import store from "../../store/main/store";
-import CardComponent from "../card/Card";
-import LoadingCard from "../card/Loading";
+import CardComponent from "../Card/Card";
+import LoadingCard from "../Card/Loading";
 import FloatingActionButtonComponent from "../FloatingButton/FloatingActionButton";
 import STORE_ACTIONS from "../../redux/actions/store.action";
-import SearchbarComponent from "../searchbar/Searchbar";
+import SearchbarComponent from "../Searchbar/Searchbar";
 
 const StoreComponent = () => {
   const { getState, subscribe } = store;
   const [products, setProducts] = useState([]);
+
   const [searchProducts, setSearchProducts] = useState([]);
+
   const [searchTitle, setSearchTitle] = useState("");
+
   const renderProducts = (productsToRender) => {
     STORE_ACTIONS.SET_PRODUCTS(productsToRender);
     const { STORE_REDUCER } = getState();
@@ -28,6 +31,7 @@ const StoreComponent = () => {
   const renderUpdatedProducts = () => {
     const { STORE_REDUCER } = getState();
     const { products: stateProducts } = STORE_REDUCER;
+
     setProducts(stateProducts);
   };
   console.log(products);
@@ -53,6 +57,7 @@ const StoreComponent = () => {
   // const filterProducts = () => {};
 
   subscribe(renderUpdatedProducts);
+
   const onSearch = (word) => {
     // eslint-disable-next-line no-unused-vars
     const titles = products.filter(({ title }) => {

@@ -1,6 +1,5 @@
 import React from "react";
 import Search from "antd/es/input/Search";
-// import { List } from "antd";
 import "./Searchbar.css";
 
 const SearchbarComponent = ({ searchableProduct }) => {

@@ -5,6 +5,7 @@ import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
 
 const { Title, Text } = Typography;
+
 const CardModalComponent = ({
   id,
   title,
@@ -25,18 +26,7 @@ const CardModalComponent = ({
   });
 
   const updateProduct = (productUpdated) => {
-    // eslint-disable-next-line no-console
-    console.log("product updated", productUpdated);
-    setTimeout(() => {
-      STORE_ACTIONS.UPDATE_PRODUCT({
-        id: 1,
-        title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptop",
-        price: 109.95,
-        description:
-          "Your perfect pack for everyday use and walks in th…to 15 inches) in the padded sleeve, your everyday",
-        category: "men's clothing",
-      });
-    }, 1000);
+    STORE_ACTIONS.UPDATE_PRODUCT(productUpdated);
   };
 
   return (
@@ -66,9 +56,7 @@ const CardModalComponent = ({
                     ...productInfo,
                     title: newTitle,
                   });
-                },
-                onEnd: () => {
-                  updateProduct(productInfo);
+                  updateProduct({ ...productInfo, title: newTitle });
                 },
               }}
             >
@@ -84,14 +72,13 @@ const CardModalComponent = ({
                     ...productInfo,
                     price: Number(newPrice),
                   });
+                  updateProduct({ ...productInfo, price: newPrice });
                 },
-                onEnd: () => {
-                  updateProduct(productInfo);
-                },
+
                 tooltip: "Editar precio",
               }}
             >
-              {productInfo.price}
+              C${productInfo.price}
             </Title>
           </div>
           <Text
@@ -101,7 +88,7 @@ const CardModalComponent = ({
                   ...productInfo,
                   description: newDescription,
                 });
-                updateProduct(productInfo);
+                updateProduct({ ...productInfo, description: newDescription });
               },
             }}
           >

@@ -2,7 +2,6 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Form, Input, InputNumber, message, Select, Upload } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
-// import { FIREBASE_SERVICE } from "../../../firebase/firebase";
 
 import getBase64 from "../../../utils/utils";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
@@ -22,6 +21,7 @@ const AddProductModalComponent = () => {
     price: "",
     provider: "",
     companyId: "Bq7agxz8zsxvF8YDcq2k",
+
   });
   const { imageUrl, name, category, price, provider, companyId } = product;
   const { getState } = store;
@@ -91,18 +91,7 @@ const AddProductModalComponent = () => {
       setLoading(false);
     }
   };
-  // const onRemove = (file) => {
-  //   const { value, onChange } = this.props;
 
-  //   const files = value.filter((v) => v.url !== file.url);
-
-  //   if (onChange) {
-  //     onChange(files);
-  //   }
-  // };
-  // const uploadImage = (file) => {
-
-  // };
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -130,6 +119,7 @@ const AddProductModalComponent = () => {
       }}
       visible={visible}
       title="Agregar producto"
+      onOk
     >
       <Form
         labelCol={{
