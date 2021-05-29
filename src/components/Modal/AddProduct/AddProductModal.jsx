@@ -15,16 +15,16 @@ import React, { useState } from "react";
 import getBase64 from "../../../utils/utils";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
 import store from "../../../store/main/store";
+import { FIREBASE_SERVICE } from "../../../firebase/firebase";
 
 const AddProductModalComponent = () => {
   const [visible, setVisible] = useState(false);
 
   const [loading, setLoading] = useState(false);
-
+  console.log(loading);
   const [image, setImage] = useState({
     url: "",
   });
-  console.log(image);
 
   const { getState } = store;
 
@@ -71,6 +71,26 @@ const AddProductModalComponent = () => {
 
         setLoading(false)
       );
+    }
+  };
+
+  const upload = async (imageToUpload) => {
+    const imageRef = FIREBASE_SERVICE.STORAGE().ref(
+      `demo/${imageToUpload.file.name}`
+    );
+
+    const bucketImage = await imageRef.put(await imageToUpload.file, {
+      contentType: imageToUpload.file.type,
+    });
+
+    if (bucketImage.state !== "success") {
+      console.log("Error subiendo imagen");
+    } else {
+      setImage({
+        ...image,
+        url: await imageRef.getDownloadURL(bucketImage),
+      });
+      setLoading(false);
     }
   };
 
@@ -125,10 +145,11 @@ const AddProductModalComponent = () => {
             className="avatar-uploader"
             beforeUpload={beforeUpload}
             onChange={handleChange}
-            action={(file) => {
-              console.log(file);
+            customRequest={async (imageToUpload) => {
+              await upload(imageToUpload);
             }}
             accept="image/*"
+            maxCount={1}
           >
             {image.url ? (
               <img src={image.url} alt="avatar" style={{ width: "100%" }} />
