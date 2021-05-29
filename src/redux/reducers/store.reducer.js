@@ -1,5 +1,5 @@
 const STORE_REDUCER = (state = {}, action) => {
-  const { type, products, word, value, product } = action;
+  const { type, products, value, product } = action;
 
   switch (type) {
     case "ADD_PRODUCT":

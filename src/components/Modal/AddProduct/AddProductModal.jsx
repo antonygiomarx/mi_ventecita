@@ -21,7 +21,6 @@ const AddProductModalComponent = () => {
     price: "",
     provider: "",
     companyId: "Bq7agxz8zsxvF8YDcq2k",
-
   });
   const { imageUrl, name, category, price, provider, companyId } = product;
   const { getState } = store;
@@ -119,7 +118,6 @@ const AddProductModalComponent = () => {
       }}
       visible={visible}
       title="Agregar producto"
-      onOk
     >
       <Form
         labelCol={{
