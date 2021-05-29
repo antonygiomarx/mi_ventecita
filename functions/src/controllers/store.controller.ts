@@ -67,6 +67,22 @@ storeController.post(
       const { name, category, imageUrl, price, provider, companyId } =
         req.body as Product;
 
+      if (
+        !name ||
+        !category ||
+        !price ||
+        !imageUrl ||
+        !provider ||
+        !companyId
+      ) {
+        return res
+          .json({
+            success: false,
+            message:
+              "name, category, imageUrl, price, provider, companyId are required",
+          })
+          .status(400);
+      }
       const product = new ProductService();
 
       const id = uuid();
@@ -104,7 +120,7 @@ storeController.get(
   authMiddleware,
   async (req: Request, res: Response) => {
     try {
-      const { id: companyId } = req.body as Company;
+      const { id: companyId } = req.query as unknown as Company;
 
       if (!companyId) {
         return res
