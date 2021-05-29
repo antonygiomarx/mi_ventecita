@@ -17,12 +17,13 @@ fireorm.initialize(firestore);
 
 class Product {
   id!: string;
-  public name!: string;
+  name!: string;
   category!: string;
   imageUrl!: string;
   price!: number;
   provider!: string;
   companyId!: string;
+  description!: string;
   updateAt!: Firestore.Timestamp;
   createdAt!: Firestore.Timestamp;
 }

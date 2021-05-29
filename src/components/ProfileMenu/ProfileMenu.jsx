@@ -30,7 +30,7 @@ const ProfileMenu = () => {
         <Item
           className="menu-item"
           onClick={() => {
-            FIREBASE_SERVICE.AUTH.getAuth().signOut();
+            FIREBASE_SERVICE.AUTH().signOut();
           }}
         >
           Cerrar Sesión

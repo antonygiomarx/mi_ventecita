@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Input } from "antd";
 import { MailOutlined, UserOutlined, TeamOutlined } from "@ant-design/icons";
+
 import { FIREBASE_SERVICE } from "../../firebase/firebase";
 import Logo from "../Logo/Logo";
 
@@ -68,19 +69,18 @@ const Register = () => {
   const registerUser = async () => {
     try {
       // eslint-disable-next-line max-len
-      const newUser = await FIREBASE_SERVICE.AUTH.createUserWithEmailAndPassword(
-        FIREBASE_SERVICE.AUTH.getAuth(),
+      const newUser = await FIREBASE_SERVICE.AUTH().createUserWithEmailAndPassword(
+        FIREBASE_SERVICE.AUTH().getAuth(),
         email,
         password
       );
       if (newUser) {
-        FIREBASE_SERVICE.AUTH.upd(
-          FIREBASE_SERVICE.AUTH.getAuth(),
+        FIREBASE_SERVICE.AUTH().upd(
+          FIREBASE_SERVICE.AUTH().getAuth(),
           newUser.user
         );
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error.message);
       if (error.message === "Firebase: Error (auth/email-already-in-use).") {
         setEmailExists(true);
