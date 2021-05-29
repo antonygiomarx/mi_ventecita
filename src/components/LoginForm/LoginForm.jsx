@@ -22,18 +22,20 @@ const Form = () => {
     try {
       const { username, password } = credentials;
 
-      await FIREBASE_SERVICE.AUTH.setPersistence(
-        FIREBASE_SERVICE.AUTH.getAuth(),
-        FIREBASE_SERVICE.AUTH.browserSessionPersistence
-      );
+      // await FIREBASE_SERVICE.AUTH().setPersistence(
+      //   FIREBASE_SERVICE.AUTH().getAuth(),
+      //   FIREBASE_SERVICE.AUTH().browserSessionPersistence
+      // );
 
       const {
         user: authUser,
-      } = await FIREBASE_SERVICE.AUTH.signInWithEmailAndPassword(
-        FIREBASE_SERVICE.AUTH.getAuth(),
+      } = await FIREBASE_SERVICE.AUTH().signInWithEmailAndPassword(
         username,
         password
       );
+
+      console.log("usuario", authUser);
+
       setUser(authUser);
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {
