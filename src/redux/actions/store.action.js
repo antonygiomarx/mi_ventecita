@@ -12,7 +12,7 @@ const STORE_ACTIONS = {
 
   ADD_PRODUCT: (product) => {
     dispatch({
-      type: "SET_PRODUCT",
+      type: "ADD_PRODUCT",
       product,
     });
   },

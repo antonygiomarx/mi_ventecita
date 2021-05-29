@@ -7,7 +7,7 @@ import getBase64 from "../../../utils/utils";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
 import store from "../../../store/main/store";
 import { FIREBASE_SERVICE } from "../../../firebase/firebase";
-import createProduct from "../../../services/addProduct.service";
+import { createProduct } from "../../../services/product.service";
 
 const AddProductModalComponent = () => {
   const [visible, setVisible] = useState(false);
@@ -97,21 +97,25 @@ const AddProductModalComponent = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-
+  const productInfo = async () => {
+    const data = await createProduct({
+      name,
+      category,
+      imageUrl,
+      price,
+      provider,
+      companyId,
+    });
+    console.log(data);
+    STORE_ACTIONS.TOGGLE_MODAL(false);
+    STORE_ACTIONS.ADD_PRODUCT(product);
+  };
   return (
     <Modal
       centered
       closable
-      onOk={async () => {
-        const data = await createProduct({
-          name,
-          category,
-          imageUrl,
-          price,
-          provider,
-          companyId,
-        });
-        console.log(data);
+      onOk={() => {
+        productInfo();
       }}
       onCancel={() => {
         STORE_ACTIONS.TOGGLE_MODAL(false);

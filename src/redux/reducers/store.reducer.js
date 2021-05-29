@@ -5,6 +5,7 @@ const STORE_REDUCER = (state = {}, action) => {
     case "ADD_PRODUCT":
       return {
         ...state,
+        products: [...state.products, ...[product]],
       };
 
     case "SET_PRODUCTS":
