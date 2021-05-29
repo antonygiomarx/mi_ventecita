@@ -1,13 +1,5 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import {
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  message,
-  Select,
-  Upload,
-} from "antd";
+import { Form, Input, InputNumber, message, Select, Upload } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
 // import { FIREBASE_SERVICE } from "../../../firebase/firebase";
@@ -16,16 +8,22 @@ import getBase64 from "../../../utils/utils";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
 import store from "../../../store/main/store";
 import { FIREBASE_SERVICE } from "../../../firebase/firebase";
+import createProduct from "../../../services/addProduct.service";
 
 const AddProductModalComponent = () => {
   const [visible, setVisible] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  console.log(loading);
-  const [image, setImage] = useState({
-    url: "",
+  // console.log(loading);
+  const [product, setProduct] = useState({
+    imageUrl: "",
+    name: "",
+    category: "",
+    price: "",
+    provider: "",
+    companyId: "Bq7agxz8zsxvF8YDcq2k",
   });
-
+  const { imageUrl, name, category, price, provider, companyId } = product;
   const { getState } = store;
 
   const toggleModal = () => {
@@ -65,8 +63,8 @@ const AddProductModalComponent = () => {
       getBase64(
         info.file.originFileObj,
         (url) =>
-          setImage({
-            url,
+          setProduct({
+            imageUrl: url,
           }),
 
         setLoading(false)
@@ -86,14 +84,13 @@ const AddProductModalComponent = () => {
     if (bucketImage.state !== "success") {
       console.log("Error subiendo imagen");
     } else {
-      setImage({
-        ...image,
-        url: await imageRef.getDownloadURL(bucketImage),
+      setProduct({
+        ...product,
+        imageUrl: await imageRef.getDownloadURL(bucketImage),
       });
       setLoading(false);
     }
   };
-
   // const onRemove = (file) => {
   //   const { value, onChange } = this.props;
 
@@ -106,7 +103,6 @@ const AddProductModalComponent = () => {
   // const uploadImage = (file) => {
 
   // };
-
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -118,6 +114,17 @@ const AddProductModalComponent = () => {
     <Modal
       centered
       closable
+      onOk={async () => {
+        const data = await createProduct({
+          name,
+          category,
+          imageUrl,
+          price,
+          provider,
+          companyId,
+        });
+        console.log(data);
+      }}
       onCancel={() => {
         STORE_ACTIONS.TOGGLE_MODAL(false);
       }}
@@ -151,15 +158,24 @@ const AddProductModalComponent = () => {
             accept="image/*"
             maxCount={1}
           >
-            {image.url ? (
-              <img src={image.url} alt="avatar" style={{ width: "100%" }} />
+            {product.imageUrl ? (
+              <img
+                src={product.imageUrl}
+                alt="avatar"
+                style={{ width: "100%" }}
+              />
             ) : (
               uploadButton
             )}
           </Upload>
         </Form.Item>
         <Form.Item label="Nombre">
-          <Input />
+          <Input
+            onChange={(e) => {
+              setProduct({ ...product, name: e.target.value });
+              console.log(product.name);
+            }}
+          />
         </Form.Item>
         <Form.Item label="Categoría">
           <Select>
@@ -167,10 +183,21 @@ const AddProductModalComponent = () => {
           </Select>
         </Form.Item>
         <Form.Item label="Precio">
-          <InputNumber placeholder="C$" />
+          <InputNumber
+            onChange={(number) => {
+              setProduct({ ...product, price: number });
+            }}
+            placeholder="C$"
+          />
         </Form.Item>
-        <Form.Item label="Vencimiento">
-          <DatePicker />
+        <Form.Item label="Provider">
+          <Input
+            onChange={(e) => {
+              setProduct({ ...product, provider: e.target.value });
+              console.log(product.provider);
+            }}
+            placeholder="proveedor"
+          />
         </Form.Item>
       </Form>
     </Modal>
