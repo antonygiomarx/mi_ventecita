@@ -6,11 +6,11 @@ import axios from "axios";
 
 import "./Store.css";
 import store from "../../store/main/store";
-import CardComponent from "../card/Card";
-import LoadingCard from "../card/Loading";
+import CardComponent from "../Card/Card";
+import LoadingCard from "../Card/Loading";
 import FloatingActionButtonComponent from "../FloatingButton/FloatingActionButton";
 import STORE_ACTIONS from "../../redux/actions/store.action";
-import SearchbarComponent from "../searchbar/Searchbar";
+import SearchbarComponent from "../Searchbar/Searchbar";
 
 const StoreComponent = () => {
   const { getState, subscribe } = store;
