@@ -21,8 +21,17 @@ const AddProductModalComponent = () => {
     price: "",
     provider: "",
     companyId: "Bq7agxz8zsxvF8YDcq2k",
+    description: "",
   });
-  const { imageUrl, name, category, price, provider, companyId } = product;
+  const {
+    imageUrl,
+    name,
+    category,
+    price,
+    provider,
+    companyId,
+    description,
+  } = product;
   const { getState } = store;
 
   const toggleModal = () => {
@@ -105,6 +114,7 @@ const AddProductModalComponent = () => {
       price,
       provider,
       companyId,
+      description,
     });
     console.log(data);
     STORE_ACTIONS.TOGGLE_MODAL(false);
@@ -166,6 +176,14 @@ const AddProductModalComponent = () => {
             onChange={(e) => {
               setProduct({ ...product, name: e.target.value });
               console.log(product.name);
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Descripcion">
+          <Input.TextArea
+            onChange={(e) => {
+              setProduct({ ...product, description: e.target.value });
+              console.log(product.description);
             }}
           />
         </Form.Item>
