@@ -34,8 +34,6 @@ const Form = () => {
         password
       );
 
-      console.log("usuario", authUser);
-
       setUser(authUser);
     } catch (error) {
       if (error.message === "Firebase: Error (auth/invalid-email).") {

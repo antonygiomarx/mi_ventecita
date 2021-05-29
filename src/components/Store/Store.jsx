@@ -16,8 +16,11 @@ const StoreComponent = () => {
   const { getState, subscribe } = store;
 
   const [products, setProducts] = useState([]);
+
   const [searchProducts, setSearchProducts] = useState([]);
+
   const [searchTitle, setSearchTitle] = useState("");
+
   const renderProducts = (productsToRender) => {
     STORE_ACTIONS.SET_PRODUCTS(productsToRender);
     const { STORE_REDUCER } = getState();
@@ -28,6 +31,7 @@ const StoreComponent = () => {
   const renderUpdatedProducts = () => {
     const { STORE_REDUCER } = getState();
     const { products: stateProducts } = STORE_REDUCER;
+
     setProducts(stateProducts);
   };
 
@@ -53,6 +57,7 @@ const StoreComponent = () => {
   // const filterProducts = () => {};
 
   subscribe(renderUpdatedProducts);
+
   const onSearch = (word) => {
     // eslint-disable-next-line no-unused-vars
     const titles = products.filter(({ title }) => {

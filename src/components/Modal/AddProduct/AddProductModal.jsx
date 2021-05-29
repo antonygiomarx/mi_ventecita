@@ -10,7 +10,6 @@ import {
 } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
-// import { FIREBASE_SERVICE } from "../../../firebase/firebase";
 
 import getBase64 from "../../../utils/utils";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
@@ -21,7 +20,7 @@ const AddProductModalComponent = () => {
   const [visible, setVisible] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  console.log(loading);
+
   const [image, setImage] = useState({
     url: "",
   });
@@ -94,19 +93,6 @@ const AddProductModalComponent = () => {
     }
   };
 
-  // const onRemove = (file) => {
-  //   const { value, onChange } = this.props;
-
-  //   const files = value.filter((v) => v.url !== file.url);
-
-  //   if (onChange) {
-  //     onChange(files);
-  //   }
-  // };
-  // const uploadImage = (file) => {
-
-  // };
-
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -123,6 +109,7 @@ const AddProductModalComponent = () => {
       }}
       visible={visible}
       title="Agregar producto"
+      onOk
     >
       <Form
         labelCol={{
