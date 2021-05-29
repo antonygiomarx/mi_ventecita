@@ -2,7 +2,6 @@ import { Col, Row } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import "./Store.css";
 import store from "../../store/main/store";
@@ -11,6 +10,7 @@ import LoadingCard from "../Card/Loading";
 import FloatingActionButtonComponent from "../FloatingButton/FloatingActionButton";
 import STORE_ACTIONS from "../../redux/actions/store.action";
 import SearchbarComponent from "../Searchbar/Searchbar";
+import getProducts from "../../services/product.service";
 
 const StoreComponent = () => {
   const { getState, subscribe } = store;
@@ -25,6 +25,7 @@ const StoreComponent = () => {
     const { STORE_REDUCER } = getState();
     const { products: stateProducts } = STORE_REDUCER;
     setProducts(stateProducts);
+    console.log(stateProducts);
   };
   const { updatedProducts: a } = useSelector((state) => state.STORE_REDUCER);
   console.log(a);
@@ -39,10 +40,9 @@ const StoreComponent = () => {
     const ac = new AbortController();
     try {
       (async () => {
-        const { data } = await axios.get(
-          `https://fakestoreapi.com/products?limit=${Math.random() * 100}`
-        );
-        renderProducts(data);
+        const { products: productsDb } = await getProducts();
+        console.log(productsDb);
+        renderProducts(productsDb);
       })();
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -60,8 +60,8 @@ const StoreComponent = () => {
 
   const onSearch = (word) => {
     // eslint-disable-next-line no-unused-vars
-    const titles = products.filter(({ title }) => {
-      return title.toLowerCase().includes(word.toLowerCase());
+    const titles = products.filter(({ name: product }) => {
+      return product.toLowerCase().includes(word.toLowerCase());
     });
     setSearchTitle(word);
     setSearchProducts(titles);
@@ -84,10 +84,10 @@ const StoreComponent = () => {
             )}
             {searchTitle.length < 1
               ? products.map(
-                  ({ id, title, price, category, image, description }) => (
+                  ({ id, name, price, category, imageUrl, description }) => (
                     <CardComponent
-                      title={title}
-                      img={image}
+                      title={name}
+                      img={imageUrl}
                       price={price}
                       category={category}
                       key={uuid()}
@@ -97,10 +97,10 @@ const StoreComponent = () => {
                   )
                 )
               : searchProducts.map(
-                  ({ id, title, price, category, image, description }) => (
+                  ({ id, name, price, category, imageUrl, description }) => (
                     <CardComponent
-                      title={title}
-                      img={image}
+                      title={name}
+                      img={imageUrl}
                       price={price}
                       category={category}
                       key={uuid()}

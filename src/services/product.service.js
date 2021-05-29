@@ -23,4 +23,16 @@ const createProduct = async ({
   return data;
 };
 
-export default createProduct;
+const getProducts = async () => {
+  const { data } = await axios.get(
+    "https://us-central1-miventecita-6be84.cloudfunctions.net/api/getProducts?id=Bq7agxz8zsxvF8YDcq2k",
+    {
+      headers: {
+        Authorization: "Bearer B7569BD14D1C9632DC3711151F6C8",
+      },
+    }
+  );
+  return data;
+};
+
+export { createProduct, getProducts as default };
