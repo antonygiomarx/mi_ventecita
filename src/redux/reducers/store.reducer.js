@@ -1,6 +1,6 @@
 const STORE_REDUCER = (state = {}, action) => {
   // eslint-disable-next-line prefer-const
-  let { type, products, word, value, product } = action;
+  let { type, products, value, product } = action;
 
   switch (type) {
     case "ADD_PRODUCT":
@@ -12,12 +12,6 @@ const STORE_REDUCER = (state = {}, action) => {
       return {
         ...state,
         products,
-      };
-
-    case "SEARCH_PRODUCT":
-      return {
-        ...state,
-        PRODUCT_TO_FILTER: word,
       };
 
     case "TOGGLE_MODAL":
@@ -36,6 +30,7 @@ const STORE_REDUCER = (state = {}, action) => {
           )
           .sort(),
       };
+
     default:
       return state;
   }
