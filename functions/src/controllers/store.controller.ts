@@ -91,6 +91,7 @@ storeController.post(
           })
           .status(400);
       }
+
       const product = new ProductService();
 
       const id = uuid();
