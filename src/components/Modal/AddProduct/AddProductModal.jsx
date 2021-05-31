@@ -13,7 +13,7 @@ const AddProductModalComponent = () => {
   const [visible, setVisible] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  // console.log(loading);
+
   const [product, setProduct] = useState({
     imageUrl: "",
     name: "",
@@ -23,15 +23,7 @@ const AddProductModalComponent = () => {
     companyId: "Bq7agxz8zsxvF8YDcq2k",
     description: "",
   });
-  const {
-    imageUrl,
-    name,
-    category,
-    price,
-    provider,
-    companyId,
-    description,
-  } = product;
+
   const { getState } = store;
 
   const toggleModal = () => {
@@ -106,19 +98,19 @@ const AddProductModalComponent = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+
   const productInfo = async () => {
-    const data = await createProduct({
-      name,
-      category,
-      imageUrl,
-      price,
-      provider,
-      companyId,
-      description,
-    });
+    console.log(product);
+    const data = await createProduct(product);
     console.log(data);
-    STORE_ACTIONS.TOGGLE_MODAL(false);
-    STORE_ACTIONS.ADD_PRODUCT(product);
+
+    if (!data.success) {
+      message.error("Hubo un error al crear el producto.");
+    } else {
+      STORE_ACTIONS.TOGGLE_MODAL(false);
+      STORE_ACTIONS.ADD_PRODUCT(product);
+      message.success("Producto creado.");
+    }
   };
   return (
     <Modal
@@ -132,6 +124,7 @@ const AddProductModalComponent = () => {
       }}
       visible={visible}
       title="Agregar producto"
+      destroyOnClose
     >
       <Form
         labelCol={{
@@ -175,7 +168,6 @@ const AddProductModalComponent = () => {
           <Input
             onChange={(e) => {
               setProduct({ ...product, name: e.target.value });
-              console.log(product.name);
             }}
           />
         </Form.Item>
@@ -183,13 +175,19 @@ const AddProductModalComponent = () => {
           <Input.TextArea
             onChange={(e) => {
               setProduct({ ...product, description: e.target.value });
-              console.log(product.description);
             }}
           />
         </Form.Item>
         <Form.Item label="Categoría">
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
+          <Select
+            onSelect={(value) => {
+              setProduct({
+                ...product,
+                category: value,
+              });
+            }}
+          >
+            <Select.Option value="Demo">Demo</Select.Option>
           </Select>
         </Form.Item>
         <Form.Item label="Precio">
@@ -204,7 +202,6 @@ const AddProductModalComponent = () => {
           <Input
             onChange={(e) => {
               setProduct({ ...product, provider: e.target.value });
-              console.log(product.provider);
             }}
             placeholder="proveedor"
           />

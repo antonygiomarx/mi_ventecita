@@ -2,7 +2,7 @@ import { Col, Row } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { useSelector } from "react-redux";
+
 import "./Store.css";
 import store from "../../store/main/store";
 import CardComponent from "../Card/Card";
@@ -25,23 +25,19 @@ const StoreComponent = () => {
     const { STORE_REDUCER } = getState();
     const { products: stateProducts } = STORE_REDUCER;
     setProducts(stateProducts);
-    console.log(stateProducts);
   };
-  const { updatedProducts: a } = useSelector((state) => state.STORE_REDUCER);
-  console.log(a);
+  // const { updatedProducts: a } = useSelector((state) => state.STORE_REDUCER);
   const renderUpdatedProducts = () => {
     const { STORE_REDUCER } = getState();
     const { products: stateProducts } = STORE_REDUCER;
 
     setProducts(stateProducts);
   };
-  console.log(products);
   useEffect(() => {
     const ac = new AbortController();
     try {
       (async () => {
         const { products: productsDb } = await getProducts();
-        console.log(productsDb);
         renderProducts(productsDb);
       })();
     } catch (error) {
@@ -86,7 +82,7 @@ const StoreComponent = () => {
               ? products.map(
                   ({ id, name, price, category, imageUrl, description }) => (
                     <CardComponent
-                      title={name}
+                      name={name}
                       img={imageUrl}
                       price={price}
                       category={category}

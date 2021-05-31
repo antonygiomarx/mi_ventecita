@@ -6,7 +6,7 @@ import CardModalComponent from "../Modal/CardModal/CardModal";
 
 const { Title } = Typography;
 
-const CardComponent = ({ title, img, description, category, price, id }) => {
+const CardComponent = ({ name, img, description, category, price, id }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
@@ -23,21 +23,21 @@ const CardComponent = ({ title, img, description, category, price, id }) => {
         cover={
           <img
             src={img}
-            alt={title}
+            alt={name}
             style={{ maxWidth: "100%", maxHeight: "158px", width: "100%" }}
           />
         }
       >
         <div className="card-header">
           <div className="card-header title">
-            <Title level={5}>{title}</Title>
+            <Title level={5}>{name}</Title>
             <span className="price">C${price}</span>
           </div>
         </div>
       </Card>
       <CardModalComponent
         visible={isModalVisible}
-        title={title}
+        name={name}
         price={price}
         description={description}
         img={img}

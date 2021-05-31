@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Card, Modal, Typography, Select } from "antd";
+import { Card, Modal, Typography, Select, message } from "antd";
 
 import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
+import { updateProductService } from "../../../services/product.service";
+import config from "../../../config/config";
 
 const { Title, Text } = Typography;
 
 const CardModalComponent = ({
   id,
-  title,
+  name,
   img,
   category,
   visible,
@@ -19,14 +21,21 @@ const CardModalComponent = ({
 }) => {
   const [productInfo, setProductInfo] = useState({
     id,
-    title,
+    name,
     price,
     description,
     category,
+    companyId: config.companyId,
   });
 
-  const updateProduct = (productUpdated) => {
-    STORE_ACTIONS.UPDATE_PRODUCT(productUpdated);
+  const updateProduct = async (productUpdated) => {
+    const isUpdated = await updateProductService(productUpdated);
+    if (!isUpdated.success) {
+      message.error("Error al actualizar el producto");
+    } else {
+      STORE_ACTIONS.UPDATE_PRODUCT(productUpdated);
+      message.success("Producto actualizado");
+    }
   };
 
   return (
@@ -36,7 +45,7 @@ const CardModalComponent = ({
         cover={
           <img
             src={img}
-            alt={title}
+            alt={name}
             style={{
               width: "30%",
               display: "block",
@@ -54,34 +63,38 @@ const CardModalComponent = ({
                 onChange: (newTitle) => {
                   setProductInfo({
                     ...productInfo,
-                    title: newTitle,
+                    name: newTitle,
                   });
                   updateProduct({ ...productInfo, title: newTitle });
                 },
+                tooltip: "Editar titulo",
               }}
             >
-              {productInfo.title}
+              {productInfo.name}
             </Title>
-            <Title
+          </div>
+          <div className="card-header price">
+            <Text
               level={5}
               editable={{
                 onChange: (newPrice) => {
-                  // eslint-disable-next-line no-console
-                  console.log("new Price", newPrice);
                   setProductInfo({
                     ...productInfo,
                     price: Number(newPrice),
                   });
                   updateProduct({ ...productInfo, price: newPrice });
                 },
-
                 tooltip: "Editar precio",
+                autoSize: true,
               }}
             >
               C${productInfo.price}
-            </Title>
+            </Text>
           </div>
+        </div>
+        <div className="card-body">
           <Text
+            className="card-body description"
             editable={{
               onChange: (newDescription) => {
                 setProductInfo({
@@ -90,19 +103,19 @@ const CardModalComponent = ({
                 });
                 updateProduct({ ...productInfo, description: newDescription });
               },
+              tooltip: "Editar descripción",
+              autoSize: true,
             }}
           >
             {productInfo.description}
           </Text>
-          <Select size="large">
-            <Select.Option value="category">
-              {productInfo.category}
-            </Select.Option>
-          </Select>
         </div>
+        <Select size="large">
+          <Select.Option value="category">{productInfo.category}</Select.Option>
+        </Select>
       </Card>
     </Modal>
   );
 };
 
-export default CardModalComponent;
+export default React.memo(CardModalComponent);

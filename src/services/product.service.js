@@ -7,6 +7,7 @@ const createProduct = async ({
   price,
   provider,
   companyId,
+  description,
 }) => {
   const { data } = await axios.post(
     "https://us-central1-miventecita-6be84.cloudfunctions.net/api/addProduct",
@@ -17,6 +18,7 @@ const createProduct = async ({
       price,
       provider,
       companyId,
+      description,
     },
     { headers: { Authorization: "Bearer B7569BD14D1C9632DC3711151F6C8" } }
   );
@@ -35,4 +37,19 @@ const getProducts = async () => {
   return data;
 };
 
-export { createProduct, getProducts as default };
+const updateProduct = async (product) => {
+  const {
+    data,
+  } = await axios.post(
+    "https://us-central1-miventecita-6be84.cloudfunctions.net/api/updateProduct",
+    product,
+    { headers: { Authorization: "Bearer B7569BD14D1C9632DC3711151F6C8" } }
+  );
+  return data;
+};
+
+export {
+  createProduct,
+  getProducts as default,
+  updateProduct as updateProductService,
+};

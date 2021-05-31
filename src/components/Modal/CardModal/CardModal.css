@@ -11,16 +11,30 @@
 
 .card-header {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  justify-content: space-between;
 }
 
 .card-header .title {
-  flex-direction: column-reverse;
-  white-space: pre-line;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
 }
-.price {
-  display: block;
-  align-items: flex-end;
+.card-header .price {
+  display: flex;
+  justify-content: flex-end;
   font-weight: bold;
   margin-right: auto;
+}
+.card-body {
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  max-height: 200px;
+}
+.card-body .description {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
 }
