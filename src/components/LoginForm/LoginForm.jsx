@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import { Button, Checkbox, Input } from "antd";
+import { Button, Checkbox, Input, message } from "antd";
 import { Redirect } from "react-router-dom";
 
 import "./LoginForm.css";
 import AUTH_ACTIONS from "../../redux/actions/auth.actions";
 import { FIREBASE_SERVICE } from "../../firebase/firebase";
+import { setSessionToLocalStorage } from "../../utils/utils";
 
 const Form = () => {
   const [credentials, setCredentials] = useState({
@@ -15,17 +16,13 @@ const Form = () => {
 
   const [user, setUser] = useState({});
 
-  const [incorrectPassword, setIncorrectPassword] = useState(false);
-
   const login = async () => {
-    // const { auth } = config;
     try {
       const { username, password } = credentials;
 
-      // await FIREBASE_SERVICE.AUTH().setPersistence(
-      //   FIREBASE_SERVICE.AUTH().getAuth(),
-      //   FIREBASE_SERVICE.AUTH().browserSessionPersistence
-      // );
+      await FIREBASE_SERVICE.AUTH().setPersistence(
+        FIREBASE_SERVICE.AUTH.Auth.Persistence.SESSION
+      );
 
       const {
         user: authUser,
@@ -36,12 +33,21 @@ const Form = () => {
 
       setUser(authUser);
     } catch (error) {
-      if (error.message === "Firebase: Error (auth/invalid-email).") {
-        setIncorrectPassword(true);
+      switch (error.code) {
+        case "auth/user-not-found":
+          message.error("Usuario no existe");
+          break;
+        case "auth/wrong-password":
+          message.error("Correo o contraseña incorrectos");
+          break;
+        default:
+          message.error("Error al iniciar sesion");
+          break;
       }
     }
     if (user) {
       AUTH_ACTIONS.LOGGED(true);
+      setSessionToLocalStorage();
       <Redirect to="/" />;
     }
   };
@@ -94,9 +100,6 @@ const Form = () => {
       >
         Iniciar sesión
       </Button>
-      {incorrectPassword && (
-        <label className="error">Correo o Contraseña Incorrectos</label>
-      )}
     </form>
   );
 };

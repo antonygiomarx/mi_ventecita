@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
 import {
@@ -14,13 +14,27 @@ import routes from "./routes/default.routes";
 import Main from "./layout/Main/Main";
 import Login from "./views/Login/Login";
 import Register from "./components/Registration/Register";
+import { getSessionFromLocalStorage } from "./utils/utils";
 
 const App = () => {
   const { getState, subscribe } = store;
 
   const [isLogged, setIsLogged] = useState(false);
 
-  const toggleLogged = () => {
+  useEffect(() => {
+    const ac = new AbortController();
+    const sessionInStorage = getSessionFromLocalStorage();
+
+    if (sessionInStorage === "true") {
+      setIsLogged(true);
+    }
+
+    return () => {
+      ac.abort();
+    };
+  }, []);
+
+  const toggleLogged = async () => {
     const { AUTH_REDUCER } = getState();
     const { logged } = AUTH_REDUCER;
     setIsLogged(logged);
