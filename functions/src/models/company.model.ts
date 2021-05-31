@@ -20,7 +20,7 @@ class Product {
   name!: string;
   category!: string;
   imageUrl!: string;
-  price!: number;
+  price!: string;
   provider!: string;
   companyId!: string;
   description!: string;

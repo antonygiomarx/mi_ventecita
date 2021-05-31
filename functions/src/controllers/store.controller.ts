@@ -233,7 +233,7 @@ storeController.post(
       return res.json({
         success: true,
         message: "Product",
-        products: product,
+        product: product,
       });
     } catch (error) {
       return res.json({

@@ -35,6 +35,7 @@ export class ProductService {
     id,
     updateAt,
     companyId,
+    description,
   }: Product): Promise<Product | null> {
     try {
       const companyToUpdate = await companiesRepository.findById(companyId);
@@ -51,6 +52,7 @@ export class ProductService {
         id,
         updateAt,
         companyId,
+        description,
       });
 
       return newProduct;
