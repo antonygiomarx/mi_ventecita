@@ -6,6 +6,7 @@ import { UserOutlined } from "@ant-design/icons";
 import "./ProfileMenu.css";
 import AUTH_ACTIONS from "../../redux/actions/auth.actions";
 import { FIREBASE_SERVICE } from "../../firebase/firebase";
+import { setSessionToLocalStorage } from "../../utils/utils";
 
 const ProfileMenu = () => {
   const { ItemGroup, Item } = Menu;
@@ -31,6 +32,7 @@ const ProfileMenu = () => {
           className="menu-item"
           onClick={() => {
             FIREBASE_SERVICE.AUTH().signOut();
+            setSessionToLocalStorage("false");
           }}
         >
           Cerrar Sesión

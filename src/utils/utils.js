@@ -4,10 +4,10 @@ const getBase64 = (img, callback) => {
   reader.readAsDataURL(img);
 };
 
-const setSessionToLocalStorage = () => {
+const setSessionToLocalStorage = (logged) => {
   const { localStorage } = window;
 
-  localStorage.setItem("isLogged", "true");
+  localStorage.setItem("isLogged", logged);
 };
 
 const getSessionFromLocalStorage = () => {

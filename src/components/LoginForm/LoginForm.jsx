@@ -47,7 +47,7 @@ const Form = () => {
     }
     if (user) {
       AUTH_ACTIONS.LOGGED(true);
-      setSessionToLocalStorage();
+      setSessionToLocalStorage("true");
       <Redirect to="/" />;
     }
   };
