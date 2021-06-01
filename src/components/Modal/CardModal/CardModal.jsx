@@ -15,7 +15,6 @@ const CardModalComponent = ({
   category,
   visible,
   cancel,
-  ok,
   price,
   description,
 }) => {
@@ -39,7 +38,16 @@ const CardModalComponent = ({
   };
 
   return (
-    <Modal centered visible={visible} onCancel={cancel} onOk={ok}>
+    <Modal
+      destroyOnClose
+      closeIcon
+      closable
+      centered
+      visible={visible}
+      onCancel={cancel}
+      title={name}
+      footer={null}
+    >
       <Card
         bordered={false}
         cover={
@@ -110,7 +118,7 @@ const CardModalComponent = ({
             {productInfo.description}
           </Text>
         </div>
-        <Select size="large">
+        <Select size="large" value={productInfo.category}>
           <Select.Option value="category">{productInfo.category}</Select.Option>
         </Select>
       </Card>
