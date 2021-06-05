@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Card, Modal, Typography, Select, message } from "antd";
+import { Button } from "antd/lib/radio";
 
 import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
 import { updateProductService } from "../../../services/product.service";
 import config from "../../../config/config";
+import SHOP_ACTIONS from "../../../redux/actions/shop.actions";
 
 const { Title, Text } = Typography;
 
@@ -17,6 +19,7 @@ const CardModalComponent = ({
   cancel,
   price,
   description,
+  isShop,
 }) => {
   const [productInfo, setProductInfo] = useState({
     id,
@@ -46,7 +49,19 @@ const CardModalComponent = ({
       visible={visible}
       onCancel={cancel}
       title={name}
-      footer={null}
+      footer={
+        !isShop
+          ? null
+          : [
+              <Button
+                key="add-to-cart"
+                onClick={() => SHOP_ACTIONS.ADD_PRODUCT_TO_CART(productInfo)}
+              >
+                Agregar al carrito
+              </Button>,
+            ]
+      }
+      fo
     >
       <Card
         bordered={false}

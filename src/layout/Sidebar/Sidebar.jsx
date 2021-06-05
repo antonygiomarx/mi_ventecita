@@ -9,7 +9,7 @@ import routes from "../../routes/default.routes";
 
 const SidebarComponent = () => {
   return (
-    <Sider className="sidebar" width="50" theme="dark">
+    <Sider className="sidebar" width="55" theme="dark">
       <Menu
         style={{
           display: "flex",
