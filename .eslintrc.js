@@ -10,6 +10,7 @@ module.exports = {
   },
   rules: {
     "jsx-a11y/href-no-hash": ["off"],
+    "import/no-named-as-default-member": "off",
 
     "react/jsx-filename-extension": [
       "warn",

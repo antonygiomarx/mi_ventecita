@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Modal, Typography, Select, message } from "antd";
+import { Card, Modal, Typography, Select, message, InputNumber } from "antd";
 
 import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
@@ -24,6 +24,7 @@ const CardModalComponent = ({
     price,
     description,
     category,
+
     companyId: config.companyId,
   });
 
@@ -73,7 +74,7 @@ const CardModalComponent = ({
                     ...productInfo,
                     name: newTitle,
                   });
-                  updateProduct({ ...productInfo, title: newTitle });
+                  updateProduct({ ...productInfo, name: newTitle });
                 },
                 tooltip: "Editar titulo",
               }}
@@ -98,6 +99,7 @@ const CardModalComponent = ({
             >
               C${productInfo.price}
             </Text>
+            <InputNumber value={productInfo.cantidad} />
           </div>
         </div>
         <div className="card-body">

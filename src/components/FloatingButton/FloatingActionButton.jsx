@@ -3,23 +3,23 @@ import { Container, Button } from "react-floating-action-button";
 import STORE_ACTIONS from "../../redux/actions/store.action";
 
 import "./FAB.css";
-import AddProductModalComponent from "../Modal/AddProduct/AddProductModal";
+// import AddProductModalComponent from "../Modal/AddProduct/AddProductModal";
 
-const FloatingActionButtonComponent = () => {
+const FloatingActionButtonComponent = ({ tooltip, textButton, container }) => {
   return (
     <>
       <Container className="fab-container">
         <Button
-          tooltip="Agregar producto"
+          tooltip={tooltip}
           className="fab-button"
           onClick={() => {
             STORE_ACTIONS.TOGGLE_MODAL(true);
           }}
         >
-          <span className="text-button">+</span>
+          <span className="text-button">{textButton}</span>
         </Button>
       </Container>
-      <AddProductModalComponent />
+      {container}
     </>
   );
 };

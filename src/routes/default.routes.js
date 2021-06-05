@@ -9,6 +9,7 @@ import LoadingCard from "../components/Card/Loading";
 import Login from "../views/Login/Login";
 import Register from "../components/Registration/Register";
 import StoreComponent from "../components/Store/Store";
+import ShopComponent from "../components/Shop/Shop";
 
 const routes = [
   {
@@ -23,7 +24,7 @@ const routes = [
     name: "Tienda",
     icon: <ShoppingTwoTone />,
     route: "/shop",
-    component: LoadingCard,
+    component: ShopComponent,
   },
   {
     name: "Inventario",
