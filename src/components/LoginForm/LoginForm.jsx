@@ -24,11 +24,12 @@ const Form = () => {
         FIREBASE_SERVICE.AUTH.Auth.Persistence.SESSION
       );
 
-      const { user: authUser } =
-        await FIREBASE_SERVICE.AUTH().signInWithEmailAndPassword(
-          username,
-          password
-        );
+      const {
+        user: authUser,
+      } = await FIREBASE_SERVICE.AUTH().signInWithEmailAndPassword(
+        username,
+        password
+      );
 
       setUser(authUser);
     } catch (error) {

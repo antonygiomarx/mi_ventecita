@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Card, Modal, Typography, Select, message, InputNumber } from "antd";
+import {
+  Card,
+  Modal,
+  Typography,
+  Select,
+  message,
+  InputNumber,
+  Button,
+} from "antd";
 
 import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
@@ -113,7 +121,6 @@ const CardModalComponent = ({
             >
               C${productInfo.price}
             </Text>
-            <InputNumber value={productInfo.cantidad} />
           </div>
         </div>
         <div className="card-body">
@@ -133,6 +140,9 @@ const CardModalComponent = ({
           >
             {productInfo.description}
           </Text>
+        </div>
+        <div>
+          <InputNumber value={productInfo.cantidad} min={1} />
         </div>
         <Select size="large" value={productInfo.category}>
           <Select.Option value="category">{productInfo.category}</Select.Option>
