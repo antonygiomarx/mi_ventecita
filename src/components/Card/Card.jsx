@@ -6,7 +6,16 @@ import CardModalComponent from "../Modal/CardModal/CardModal";
 
 const { Title } = Typography;
 
-const CardComponent = ({ name, img, description, category, price, id }) => {
+const CardComponent = ({
+  name,
+  img,
+  description,
+  category,
+  price,
+  id,
+  isSelectable,
+}) => {
+  console.log(isSelectable);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
@@ -15,11 +24,13 @@ const CardComponent = ({ name, img, description, category, price, id }) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
   return (
     <>
       <Card
         onClick={showModal}
         className="card"
+        se
         cover={
           <img
             src={img}
@@ -36,6 +47,7 @@ const CardComponent = ({ name, img, description, category, price, id }) => {
         </div>
       </Card>
       <CardModalComponent
+        isShop={isSelectable}
         visible={isModalVisible}
         name={name}
         price={price}

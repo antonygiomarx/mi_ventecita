@@ -38,9 +38,8 @@ const getProducts = async () => {
 };
 
 const updateProduct = async (product) => {
-  const {
-    data,
-  } = await axios.post(
+  console.log(product);
+  const { data } = await axios.post(
     "https://us-central1-miventecita-6be84.cloudfunctions.net/api/updateProduct",
     product,
     { headers: { Authorization: "Bearer B7569BD14D1C9632DC3711151F6C8" } }

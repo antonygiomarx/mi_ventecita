@@ -1,5 +1,5 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Form, Input, InputNumber, message, Select, Upload } from "antd";
+import { Form, Image, Input, InputNumber, message, Select, Upload } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
 
@@ -94,7 +94,11 @@ const AddProductModalComponent = () => {
 
   const uploadButton = (
     <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      {loading ? (
+        <LoadingOutlined id="prueba" />
+      ) : (
+        !product.imageUrl && <PlusOutlined />
+      )}
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
@@ -142,25 +146,25 @@ const AddProductModalComponent = () => {
       >
         <Form.Item label="Imagen">
           <Upload
+            multiple={false}
+            id="upload"
             name="avatar"
+            previewFile={product.imageUrl}
             listType="picture-card"
             className="avatar-uploader"
             beforeUpload={beforeUpload}
             onChange={handleChange}
+            showUploadList={false}
             customRequest={async (imageToUpload) => {
               await upload(imageToUpload);
             }}
             accept="image/*"
             maxCount={1}
           >
-            {product.imageUrl ? (
-              <img
-                src={product.imageUrl}
-                alt="avatar"
-                style={{ width: "100%" }}
-              />
-            ) : (
+            {!product.imageUrl ? (
               uploadButton
+            ) : (
+              <Image src={product.imageUrl} />
             )}
           </Upload>
         </Form.Item>
