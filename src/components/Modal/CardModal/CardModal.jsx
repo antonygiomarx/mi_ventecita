@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Card,
-  Modal,
-  Typography,
-  Select,
-  message,
-  InputNumber,
-  Button,
-} from "antd";
+import { Card, Modal, Typography, Select, message, Button } from "antd";
 
 import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
@@ -26,6 +18,7 @@ const CardModalComponent = ({
   cancel,
   price,
   description,
+  quantity,
   isShop,
 }) => {
   const [productInfo, setProductInfo] = useState({
@@ -34,7 +27,7 @@ const CardModalComponent = ({
     price,
     description,
     category,
-
+    quantity,
     companyId: config.companyId,
   });
 
@@ -141,8 +134,23 @@ const CardModalComponent = ({
             {productInfo.description}
           </Text>
         </div>
-        <div>
-          <InputNumber value={productInfo.cantidad} min={1} />
+        <div className="card-header price">
+          <Text
+            level={5}
+            editable={{
+              onChange: (newqty) => {
+                setProductInfo({
+                  ...productInfo,
+                  quantity: Number(newqty),
+                });
+                updateProduct({ ...productInfo, quantity: newqty });
+              },
+              tooltip: "Editar cantidad",
+              autoSize: true,
+            }}
+          >
+            {!productInfo.quantity ? 0 : productInfo.quantity}
+          </Text>
         </div>
         <Select size="large" value={productInfo.category}>
           <Select.Option value="category">{productInfo.category}</Select.Option>

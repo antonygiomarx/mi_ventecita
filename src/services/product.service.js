@@ -6,6 +6,7 @@ const createProduct = async ({
   imageUrl,
   price,
   provider,
+  quantity,
   companyId,
   description,
 }) => {
@@ -18,6 +19,7 @@ const createProduct = async ({
       price,
       provider,
       companyId,
+      quantity,
       description,
     },
     { headers: { Authorization: "Bearer B7569BD14D1C9632DC3711151F6C8" } }

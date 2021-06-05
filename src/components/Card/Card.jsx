@@ -14,6 +14,7 @@ const CardComponent = ({
   price,
   id,
   isSelectable,
+  quantity,
 }) => {
   console.log(isSelectable);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -57,6 +58,7 @@ const CardComponent = ({
         cancel={handleCancel}
         ok={handleCancel}
         id={id}
+        quantity={quantity}
       />
     </>
   );
