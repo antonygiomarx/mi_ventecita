@@ -5,18 +5,18 @@ import {
   ShopTwoTone,
 } from "@ant-design/icons";
 
-import LoadingCard from "../components/Card/Loading";
 import Login from "../views/Login/Login";
 import Register from "../components/Registration/Register";
 import StoreComponent from "../layout/Store/Store";
 import ShopComponent from "../layout/Shop/Shop";
+import DashboardComponent from "../layout/Dashboard/Dashboard";
 
 const routes = [
   {
     name: "Dashboard",
     icon: <DashboardTwoTone />,
     route: "/dashboard",
-    component: LoadingCard,
+    component: DashboardComponent,
     isMain: true,
   },
 
