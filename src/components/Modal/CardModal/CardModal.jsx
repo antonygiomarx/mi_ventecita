@@ -88,7 +88,7 @@ const CardModalComponent = ({
                     ...productInfo,
                     name: newTitle,
                   });
-                  updateProduct({ ...productInfo, title: newTitle });
+                  updateProduct({ ...productInfo, name: newTitle });
                 },
                 tooltip: "Editar titulo",
               }}
