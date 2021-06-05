@@ -38,6 +38,7 @@ const getProducts = async () => {
 };
 
 const updateProduct = async (product) => {
+  console.log(product);
   const { data } = await axios.post(
     "https://us-central1-miventecita-6be84.cloudfunctions.net/api/updateProduct",
     product,
