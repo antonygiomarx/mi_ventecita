@@ -1,44 +1,28 @@
-import { Col, Row } from "antd";
-import { Content } from "antd/lib/layout/layout";
-import React, { useEffect, useState } from "react";
+import { Row, Col } from "antd";
+import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
-
-import "./Store.css";
-import store from "../../store/main/store";
-import CardComponent from "../Card/Card";
-import LoadingCard from "../Card/Loading";
-import FloatingActionButtonComponent from "../FloatingButton/FloatingActionButton";
-import STORE_ACTIONS from "../../redux/actions/store.action";
-import SearchbarComponent from "../Searchbar/Searchbar";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Content } from "antd/lib/layout/layout";
 import getProducts from "../../services/product.service";
+import FloatingActionButtonComponent from "../FloatingButton/FloatingActionButton";
+import LoadingCard from "../Card/Loading";
+import ShopCard from "../ShopCard/ShopCard";
+import SearchbarComponent from "../Searchbar/Searchbar";
+import AddProductModalComponent from "../Modal/AddProduct/AddProductModal";
 
-const StoreComponent = () => {
-  const { getState, subscribe } = store;
+const ShopComponent = () => {
   const [products, setProducts] = useState([]);
 
   const [searchProducts, setSearchProducts] = useState([]);
 
   const [searchTitle, setSearchTitle] = useState("");
 
-  const renderProducts = (productsToRender) => {
-    STORE_ACTIONS.SET_PRODUCTS(productsToRender);
-    const { STORE_REDUCER } = getState();
-    const { products: stateProducts } = STORE_REDUCER;
-    setProducts(stateProducts);
-  };
-  // const { updatedProducts: a } = useSelector((state) => state.STORE_REDUCER);
-  const renderUpdatedProducts = () => {
-    const { STORE_REDUCER } = getState();
-    const { products: stateProducts } = STORE_REDUCER;
-
-    setProducts(stateProducts);
-  };
   useEffect(() => {
     const ac = new AbortController();
     try {
       (async () => {
         const { products: productsDb } = await getProducts();
-        renderProducts(productsDb);
+        setProducts(productsDb);
       })();
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -49,13 +33,7 @@ const StoreComponent = () => {
       ac.abort();
     };
   }, []);
-
-  // const filterProducts = () => {};
-
-  subscribe(renderUpdatedProducts);
-
   const onSearch = (word) => {
-    // eslint-disable-next-line no-unused-vars
     const titles = products.filter(({ name: product }) => {
       return product.toLowerCase().includes(word.toLowerCase());
     });
@@ -81,7 +59,7 @@ const StoreComponent = () => {
             {searchTitle.length < 1
               ? products.map(
                   ({ id, name, price, category, imageUrl, description }) => (
-                    <CardComponent
+                    <ShopCard
                       name={name}
                       img={imageUrl}
                       price={price}
@@ -94,8 +72,8 @@ const StoreComponent = () => {
                 )
               : searchProducts.map(
                   ({ id, name, price, category, imageUrl, description }) => (
-                    <CardComponent
-                      title={name}
+                    <ShopCard
+                      name={name}
                       img={imageUrl}
                       price={price}
                       category={category}
@@ -105,12 +83,15 @@ const StoreComponent = () => {
                     />
                   )
                 )}
-            <FloatingActionButtonComponent />
+            <FloatingActionButtonComponent
+              container={<AddProductModalComponent />}
+              tooltip="Productos vendidos"
+              textButton={<ShoppingCartOutlined />}
+            />
           </Row>
         </div>
       </Content>
     </>
   );
 };
-
-export default StoreComponent;
+export default ShopComponent;

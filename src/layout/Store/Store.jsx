@@ -81,7 +81,16 @@ const StoreComponent = ({ isSelectable }) => {
             )}
             {searchTitle.length < 1
               ? products.map(
-                  ({ id, name, price, category, imageUrl, description }) => (
+                  ({
+                    id,
+                    name,
+                    price,
+                    category,
+                    imageUrl,
+                    description,
+                    quantity,
+                  }) => (
+
                     <CardComponent
                       name={name}
                       img={imageUrl}
@@ -91,12 +100,22 @@ const StoreComponent = ({ isSelectable }) => {
                       description={description}
                       id={id}
                       isSelectable={isSelectable}
+                      quantity={quantity}
+
                     />
                   )
                 )
               : searchProducts.map(
-                  ({ id, name, price, category, imageUrl, description }) => (
-                    <CardComponent
+                  ({
+                    id,
+                    name,
+                    price,
+                    category,
+                    imageUrl,
+                    description,
+                    quantity,
+                  }) => (
+      <CardComponent
                       title={name}
                       img={imageUrl}
                       price={price}
@@ -105,6 +124,8 @@ const StoreComponent = ({ isSelectable }) => {
                       description={description}
                       id={id}
                       isSelectable={isSelectable}
+                      quantity={quantity}
+
                     />
                   )
                 )}

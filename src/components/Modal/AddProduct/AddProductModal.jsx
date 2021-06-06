@@ -22,6 +22,7 @@ const AddProductModalComponent = () => {
     provider: "",
     companyId: "Bq7agxz8zsxvF8YDcq2k",
     description: "",
+    quantity: "",
   });
 
   const { getState } = store;
@@ -179,6 +180,13 @@ const AddProductModalComponent = () => {
           <Input.TextArea
             onChange={(e) => {
               setProduct({ ...product, description: e.target.value });
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Cantidad">
+          <Input
+            onChange={(e) => {
+              setProduct({ ...product, quantity: e.target.value });
             }}
           />
         </Form.Item>

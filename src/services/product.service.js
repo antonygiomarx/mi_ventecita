@@ -6,6 +6,7 @@ const createProduct = async ({
   imageUrl,
   price,
   provider,
+  quantity,
   companyId,
   description,
 }) => {
@@ -18,6 +19,7 @@ const createProduct = async ({
       price,
       provider,
       companyId,
+      quantity,
       description,
     },
     { headers: { Authorization: "Bearer B7569BD14D1C9632DC3711151F6C8" } }
@@ -39,6 +41,9 @@ const getProducts = async () => {
 
 const updateProduct = async (product) => {
   console.log(product);
+  const {
+    data,
+  } = await axios.post(
   const { data } = await axios.post(
     "https://us-central1-miventecita-6be84.cloudfunctions.net/api/updateProduct",
     product,
