@@ -15,6 +15,7 @@ const CardComponent = ({
   id,
   isSelectable,
   quantity,
+
 }) => {
   console.log(isSelectable);
   const [isModalVisible, setIsModalVisible] = useState(false);

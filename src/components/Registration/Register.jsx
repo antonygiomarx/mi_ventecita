@@ -23,13 +23,8 @@ const Register = () => {
   const [isCheckedPassword, setIsCheckedPassword] = useState(false);
 
   const [emailExists, setEmailExists] = useState(false);
-  const {
-    password,
-    username,
-    Nombre,
-    email,
-    passwordVerification,
-  } = information;
+  const { password, username, Nombre, email, passwordVerification } =
+    information;
 
   const passwordValidation = () => {
     if (password.length > 5) {
@@ -69,11 +64,12 @@ const Register = () => {
   const registerUser = async () => {
     try {
       // eslint-disable-next-line max-len
-      const newUser = await FIREBASE_SERVICE.AUTH().createUserWithEmailAndPassword(
-        FIREBASE_SERVICE.AUTH().getAuth(),
-        email,
-        password
-      );
+      const newUser =
+        await FIREBASE_SERVICE.AUTH().createUserWithEmailAndPassword(
+          FIREBASE_SERVICE.AUTH().getAuth(),
+          email,
+          password
+        );
       if (newUser) {
         FIREBASE_SERVICE.AUTH().upd(
           FIREBASE_SERVICE.AUTH().getAuth(),

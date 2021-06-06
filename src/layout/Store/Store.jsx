@@ -90,6 +90,7 @@ const StoreComponent = ({ isSelectable }) => {
                     description,
                     quantity,
                   }) => (
+
                     <CardComponent
                       name={name}
                       img={imageUrl}
@@ -100,6 +101,7 @@ const StoreComponent = ({ isSelectable }) => {
                       id={id}
                       isSelectable={isSelectable}
                       quantity={quantity}
+
                     />
                   )
                 )
@@ -113,7 +115,7 @@ const StoreComponent = ({ isSelectable }) => {
                     description,
                     quantity,
                   }) => (
-                    <CardComponent
+      <CardComponent
                       title={name}
                       img={imageUrl}
                       price={price}
@@ -123,6 +125,7 @@ const StoreComponent = ({ isSelectable }) => {
                       id={id}
                       isSelectable={isSelectable}
                       quantity={quantity}
+
                     />
                   )
                 )}

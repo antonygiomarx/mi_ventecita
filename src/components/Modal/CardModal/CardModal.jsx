@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Modal, Typography, Select, message, Button } from "antd";
 
+
 import "./CardModal.css";
 import STORE_ACTIONS from "../../../redux/actions/store.action";
 import { updateProductService } from "../../../services/product.service";
@@ -19,6 +20,7 @@ const CardModalComponent = ({
   price,
   description,
   quantity,
+
   isShop,
 }) => {
   const [productInfo, setProductInfo] = useState({
