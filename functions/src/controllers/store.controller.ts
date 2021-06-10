@@ -72,6 +72,7 @@ storeController.post(
         provider,
         companyId,
         description,
+        quantity,
       } = req.body as Product;
 
       if (
@@ -81,13 +82,14 @@ storeController.post(
         !imageUrl ||
         !provider ||
         !companyId ||
-        !description
+        !description ||
+        !quantity
       ) {
         return res
           .json({
             success: false,
             message:
-              "name, category, description, imageUrl, price, provider, companyId are required",
+              "name, category, quantity, description, imageUrl, price, provider, companyId are required",
           })
           .status(400);
       }
@@ -109,6 +111,7 @@ storeController.post(
         updateAt,
         companyId,
         description,
+        quantity,
       });
 
       return res.json({

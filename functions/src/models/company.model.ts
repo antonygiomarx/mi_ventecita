@@ -21,6 +21,7 @@ class Product {
   category!: string;
   imageUrl!: string;
   price!: string;
+  quantity!: string;
   provider!: string;
   companyId!: string;
   description!: string;
