@@ -1,6 +1,5 @@
 module.exports = {
-  extends: ["airbnb", "plugin:prettier/recommended", "prettier"],
-  plugins: ["prettier"],
+  root: true,
   env: {
     browser: true,
     commonjs: true,
@@ -8,16 +7,35 @@ module.exports = {
     jest: true,
     node: true,
   },
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "airbnb-typescript-prettier",
+  ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    sourceType: "module",
+    project: ["./tsconfig.eslint.json"],
+    createDefaultProgram: true,
+  },
+  plugins: ["@typescript-eslint", "react", "prettier", "react-hooks"],
   rules: {
+    "react/jsx-filename-extension": [
+      2,
+      { extensions: [".js", ".jsx", ".ts", ".tsx"] },
+    ],
+    "@typescript-eslint/naming-convention": ["off"],
+    "@typescript-eslint/quotes": "off",
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "import/no-useless-path-segments": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-wrap-multilines": "off",
+    "@typescript-eslint/indent": "off",
+    "prettier/prettier": "error",
     "jsx-a11y/href-no-hash": ["off"],
     "import/no-named-as-default-member": "off",
-
-    "react/jsx-filename-extension": [
-      "warn",
-      {
-        extensions: [".js", ".jsx"],
-      },
-    ],
     "max-len": [
       "warn",
       {
@@ -30,8 +48,22 @@ module.exports = {
         ignoreRegExpLiterals: true,
       },
     ],
-    "prettier/prettier": "error",
     "react/prop-types": "off",
     "no-console": "off",
+    "no-undefined": "off",
+    "react/require-default-props": "off",
+    "no-useless-constructor": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        paths: ["src"],
+        extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
+      },
+    },
   },
 };
