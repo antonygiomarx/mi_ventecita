@@ -10,12 +10,12 @@ import { StoreComponent } from "../Store/Store";
 import { FooterComponent } from "../Footer/Footer";
 import { Login } from "../Login/Login";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { Register } from "../../components/Register/Register";
 
 import "./Main.css";
 
 export const Main = (): JSX.Element => {
   const history = useHistory();
-
   const { data: signInCheckResult, status } = useSigninCheck();
 
   if (status === "loading") {
@@ -29,11 +29,12 @@ export const Main = (): JSX.Element => {
         <Route path="/login">
           <Login />
         </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
       </>
     );
   }
-
-  history.push("/");
 
   return (
     <Route path="/">
