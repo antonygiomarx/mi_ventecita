@@ -1,18 +1,17 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Form, Image, Input, InputNumber, message, Select, Upload } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import { useState } from "react";
 
 import getBase64 from "../../../utils/utils";
-import STORE_ACTIONS from "../../../redux/actions/store.action";
-import store from "../../../store/main/store";
-import { FirebaseService } from "../../../firebase/firebase";
 import { ProductService } from "../../../services/product.service";
 import { Product } from "../../../models/product.model";
 import { Config } from "../../../config/config";
 
-const AddProductModalComponent = () => {
-  const [visible, setVisible] = useState(false);
+export const AddProductModalComponent = (): JSX.Element => {
+  const [visible] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -27,17 +26,6 @@ const AddProductModalComponent = () => {
     companyId: Config.companyId,
     quantity: "",
   });
-
-  const { getState } = store;
-
-  const toggleModal = () => {
-    const { STORE_REDUCER } = getState();
-
-    const { modalIsOpen }: any = STORE_REDUCER;
-    setVisible(modalIsOpen);
-  };
-
-  store.subscribe(toggleModal);
 
   const [componentSize, setComponentSize] = useState("default");
 
@@ -74,21 +62,21 @@ const AddProductModalComponent = () => {
     }
   };
 
-  const upload = async ({ file, filename }: any) => {
-    const imageRef = FirebaseService.getStorage()().ref(`demo/${filename}`);
+  // const upload = async ({ file, filename }: any) => {
+  //   // const imageRef = FirebaseService.getStorage()().ref(`demo/${filename}`);
 
-    const bucketImage = await imageRef.put(file);
+  //   const bucketImage = await imageRef.put(file);
 
-    if (bucketImage.state !== "success") {
-      console.log("Error subiendo imagen");
-    } else {
-      setProduct({
-        ...product,
-        imageUrl: await imageRef.getDownloadURL(),
-      });
-      setLoading(false);
-    }
-  };
+  //   if (bucketImage.state !== "success") {
+  //     console.log("Error subiendo imagen");
+  //   } else {
+  //     setProduct({
+  //       ...product,
+  //       imageUrl: await imageRef.getDownloadURL(),
+  //     });
+  //     setLoading(false);
+  //   }
+  // };
 
   const uploadButton = (
     <div>
@@ -108,8 +96,6 @@ const AddProductModalComponent = () => {
     if (!data.success) {
       message.error("Hubo un error al crear el producto.");
     } else {
-      STORE_ACTIONS.TOGGLE_MODAL(false);
-      STORE_ACTIONS.ADD_PRODUCT(product);
       message.success("Producto creado.");
     }
   };
@@ -121,7 +107,7 @@ const AddProductModalComponent = () => {
         productInfo();
       }}
       onCancel={() => {
-        STORE_ACTIONS.TOGGLE_MODAL(false);
+        console.log("cancelado");
       }}
       visible={visible}
       title="Agregar producto"
@@ -150,8 +136,9 @@ const AddProductModalComponent = () => {
             beforeUpload={beforeUpload}
             onChange={handleChange}
             showUploadList={false}
-            customRequest={async (imageToUpload) => {
-              await upload(imageToUpload);
+            customRequest={async () => {
+              // TODO: complete upload
+              console.log("subiendo");
             }}
             accept="image/*"
             maxCount={1}
@@ -209,5 +196,3 @@ const AddProductModalComponent = () => {
     </Modal>
   );
 };
-
-export default AddProductModalComponent;

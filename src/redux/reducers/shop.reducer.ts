@@ -1,3 +1,4 @@
+import { ShopState } from "../models/shop-state.model";
 import { Product } from "../../models/product.model";
 
 interface ShopReducerAction {
@@ -5,12 +6,12 @@ interface ShopReducerAction {
   product: Product;
 }
 
-const SHOP_REDUCER = (
-  state = {
+export const shopReducer = (
+  state: ShopState = {
     products: [],
   },
   action: ShopReducerAction,
-) => {
+): ShopState => {
   const { type, product } = action;
 
   switch (type) {
@@ -34,4 +35,3 @@ const SHOP_REDUCER = (
       return state;
   }
 };
-export default SHOP_REDUCER;

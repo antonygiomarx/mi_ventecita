@@ -1,20 +1,23 @@
-import { memo, useState } from "react";
-import { Card, Modal, Typography, Select, message } from "antd";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Card, Modal, Typography, Select, Image, message } from "antd";
 import { Button } from "antd/lib/radio";
 
 import "./CardModal.css";
+import { useFirestore } from "reactfire";
+import { doc, updateDoc } from "firebase/firestore";
 import { Product } from "../../../models/product.model";
-import STORE_ACTIONS from "../../../redux/actions/store.action";
-import { ProductService } from "../../../services/product.service";
-import SHOP_ACTIONS from "../../../redux/actions/shop.actions";
+import { addProductToCart } from "../../../redux/actions/shop.actions";
 
 const { Title, Text } = Typography;
 
 interface CardModal extends Product {
-  isShop: boolean | undefined;
+  isShop?: boolean;
+  visible?: boolean;
+  cancel?: () => void;
 }
 
-const CardModalComponent = ({
+export const CardModalComponent = ({
   id,
   name,
   imageUrl,
@@ -25,8 +28,10 @@ const CardModalComponent = ({
   quantity,
   companyId,
   provider,
-}: CardModal) => {
-  const [productInfo, setProductInfo] = useState<Product>({
+  visible,
+  cancel,
+}: CardModal): JSX.Element => {
+  const [productInfo] = useState<Product>({
     id,
     name,
     price,
@@ -38,20 +43,32 @@ const CardModalComponent = ({
     provider,
   });
 
-  const updateProduct = async (productUpdated: Product) => {
-    const productService = new ProductService(productInfo);
-    const isUpdated = await productService.update();
-    if (!isUpdated.success) {
-      message.error("Error al actualizar el producto");
-    } else {
-      STORE_ACTIONS.UPDATE_PRODUCT(productUpdated);
+  const dispatch = useDispatch();
+  const firestore = useFirestore();
+
+  const productRef = doc(
+    firestore,
+    "Companies/Bq7agxz8zsxvF8YDcq2k/Products",
+    id,
+  );
+
+  const updateProduct = async (product: Product) => {
+    try {
+      await updateDoc(productRef, {
+        ...product,
+      });
       message.success("Producto actualizado");
+    } catch (error: any) {
+      message.error("Error al actualizar el producto");
+      console.error(error.message);
     }
   };
 
   return (
     <Modal
       destroyOnClose
+      visible={visible}
+      onCancel={cancel}
       closeIcon
       closable
       centered
@@ -62,7 +79,7 @@ const CardModalComponent = ({
           : [
               <Button
                 key="add-to-cart"
-                onClick={() => SHOP_ACTIONS.ADD_PRODUCT_TO_CART(productInfo)}
+                onClick={() => dispatch(addProductToCart(productInfo))}
               >
                 Agregar al carrito
               </Button>,
@@ -72,7 +89,7 @@ const CardModalComponent = ({
       <Card
         bordered={false}
         cover={
-          <img
+          <Image
             src={imageUrl}
             alt={name}
             style={{
@@ -89,12 +106,11 @@ const CardModalComponent = ({
             <Title
               level={3}
               editable={{
-                onChange: (newTitle) => {
-                  setProductInfo({
+                onChange: (newName) => {
+                  updateProduct({
                     ...productInfo,
-                    name: newTitle,
+                    name: newName,
                   });
-                  updateProduct({ ...productInfo, name: newTitle });
                 },
                 tooltip: "Editar titulo",
               }}
@@ -106,10 +122,6 @@ const CardModalComponent = ({
             <Text
               editable={{
                 onChange: (newPrice) => {
-                  setProductInfo({
-                    ...productInfo,
-                    price: newPrice,
-                  });
                   updateProduct({ ...productInfo, price: newPrice });
                 },
                 tooltip: "Editar precio",
@@ -125,10 +137,6 @@ const CardModalComponent = ({
             className="card-body description"
             editable={{
               onChange: (newDescription) => {
-                setProductInfo({
-                  ...productInfo,
-                  description: newDescription,
-                });
                 updateProduct({ ...productInfo, description: newDescription });
               },
               tooltip: "Editar descripción",
@@ -145,5 +153,3 @@ const CardModalComponent = ({
     </Modal>
   );
 };
-
-export default memo(CardModalComponent);

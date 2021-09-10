@@ -1,4 +1,6 @@
-import firebase from "firebase";
+import * as auth from "firebase/auth";
+import * as storage from "firebase/storage";
+import { initializeApp } from "firebase/app";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyC_0lzxM9ndDYeAddTImhfoU2Sh9ygru9U",
@@ -10,15 +12,17 @@ const firebaseConfig = {
   measurementId: "G-405WW4FXBB",
 };
 
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 class FirebaseService {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   static getAuth() {
-    return firebase.auth;
+    return auth;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   static getStorage() {
-    return firebase.storage;
+    return storage;
   }
 }
 

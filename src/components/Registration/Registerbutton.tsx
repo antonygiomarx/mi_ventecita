@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useHistory } from "react-router-dom";
 
-const Registerbutton = () => {
+const Registerbutton = (): JSX.Element => {
   const history = useHistory();
   return (
     <div>

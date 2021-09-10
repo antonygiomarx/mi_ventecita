@@ -1,16 +1,18 @@
-import { Typography, Card } from "antd";
-import { memo, useState } from "react";
+import { Typography, Card, Image } from "antd";
+import { useState } from "react";
 
 import { Product } from "../../models/product.model";
-import CardModalComponent from "../Modal/CardModal/CardModal";
+import { CardModalComponent } from "../Modal/CardModal/CardModal";
+
+import "./Card.css";
 
 const { Title } = Typography;
 
 interface CardModel extends Product {
-  isSelectable?: boolean | undefined;
+  isSelectable?: boolean;
 }
 
-const CardComponent = ({
+export const CardComponent = ({
   name,
   imageUrl,
   description,
@@ -21,9 +23,9 @@ const CardComponent = ({
   quantity,
   companyId,
   provider,
-}: CardModel) => {
-  console.log(isSelectable);
+}: CardModel): JSX.Element => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -32,20 +34,12 @@ const CardComponent = ({
     setIsModalVisible(false);
   };
 
-  console.log(isModalVisible, handleCancel);
-
   return (
     <>
       <Card
         onClick={showModal}
         className="card"
-        cover={
-          <img
-            src={imageUrl}
-            alt={name}
-            style={{ maxWidth: "100%", maxHeight: "158px", width: "100%" }}
-          />
-        }
+        cover={<Image src={imageUrl} alt={name} className="card-image" />}
       >
         <div className="card-header">
           <div className="card-header title">
@@ -56,13 +50,13 @@ const CardComponent = ({
       </Card>
       <CardModalComponent
         isShop={isSelectable}
-        // visible={isModalVisible}
+        visible={isModalVisible}
         name={name}
         price={price}
         description={description}
         imageUrl={imageUrl}
         category={category}
-        // cancel={handleCancel}
+        cancel={handleCancel}
         // ok={handleCancel}
         id={id}
         quantity={quantity}
@@ -72,5 +66,3 @@ const CardComponent = ({
     </>
   );
 };
-
-export default memo(CardComponent);

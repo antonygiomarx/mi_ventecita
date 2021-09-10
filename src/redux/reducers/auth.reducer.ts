@@ -1,3 +1,5 @@
+import { AuthState } from "../models/auth-state.model";
+
 interface AuthReducerAction {
   username: string;
   password: string;
@@ -5,7 +7,14 @@ interface AuthReducerAction {
   type: string;
 }
 
-const AUTH_REDUCER = (state = {}, action: AuthReducerAction) => {
+export const authReducer = (
+  state: AuthState = {
+    logged: false,
+    password: "",
+    username: "",
+  },
+  action: AuthReducerAction,
+): AuthState => {
   const { username, password, logged, type } = action;
 
   switch (type) {
@@ -29,5 +38,3 @@ const AUTH_REDUCER = (state = {}, action: AuthReducerAction) => {
       return state;
   }
 };
-
-export default AUTH_REDUCER;

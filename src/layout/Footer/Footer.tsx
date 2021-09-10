@@ -1,6 +1,6 @@
 import { Footer } from "antd/lib/layout/layout";
 
-const FooterComponent = () => {
+export const FooterComponent = (): JSX.Element => {
   return (
     <Footer
       style={{
@@ -15,5 +15,3 @@ const FooterComponent = () => {
     </Footer>
   );
 };
-
-export default FooterComponent;

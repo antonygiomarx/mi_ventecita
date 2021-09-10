@@ -1,31 +1,29 @@
+import { Action } from "redux";
 import { Product } from "../../models/product.model";
-import store from "../../store/main/store";
 
-const { dispatch } = store;
+interface StoreAction extends Action {
+  type: string;
+  products?: Product[];
+  product?: Product;
+}
 
-const STORE_ACTIONS = {
-  SET_PRODUCTS: (products: Product[]): void => {
-    dispatch({
-      type: "SET_PRODUCTS",
-      products,
-    });
-  },
-
-  ADD_PRODUCT: (product: Product) => {
-    dispatch({
-      type: "ADD_PRODUCT",
-      product,
-    });
-  },
-  TOGGLE_MODAL: (value: boolean) => {
-    store.dispatch({
-      type: "TOGGLE_MODAL",
-      value,
-    });
-  },
-  UPDATE_PRODUCT: (product: Product) => {
-    dispatch({ type: "UPDATE_PRODUCT", product });
-  },
+export const setProducts = (products: Product[]): StoreAction => {
+  return {
+    type: "SET_PRODUCTS",
+    products,
+  };
 };
 
-export default STORE_ACTIONS;
+export const addProduct = (product: Product): StoreAction => {
+  return {
+    type: "ADD_PRODUCT",
+    product,
+  };
+};
+
+export const updateProduct = (product: Product): StoreAction => {
+  return {
+    type: "UPDATE_PRODUCT",
+    product,
+  };
+};

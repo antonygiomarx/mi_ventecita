@@ -1,19 +1,21 @@
-import { Product } from "../../../src/models/product.model";
-import store from "../../store/main/store";
+import { Action } from "redux";
+import { Product } from "../../models/product.model";
 
-const { dispatch } = store;
+interface ShopAction extends Action {
+  type: string;
+  product: Product;
+}
 
-const SHOP_ACTIONS = {
-  ADD_PRODUCT_TO_CART: (product: Product) => {
-    dispatch({
-      type: "ADD_PRODUCT_TO_CART",
-      product,
-    });
-  },
-
-  UPDATE_PRODUCT: (product: Product) => {
-    dispatch({ type: "UPDATE_PRODUCT", product });
-  },
+export const addProductToCart = (product: Product): ShopAction => {
+  return {
+    type: "ADD_PRODUCT_TO_CART",
+    product,
+  };
 };
 
-export default SHOP_ACTIONS;
+export const updateProductCart = (product: Product): ShopAction => {
+  return {
+    type: "UPDATE_PRODUCT",
+    product,
+  };
+};

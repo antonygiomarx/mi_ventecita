@@ -1,24 +1,20 @@
-import store from "../../store/main/store";
+import { Action } from "redux";
 
-const { dispatch } = store;
+export interface AuthAction extends Action {
+  type: string;
+  logged: boolean;
+}
 
-const AUTH_ACTIONS = {
-  LOGGED: (logged: boolean) =>
-    dispatch({
-      type: "LOGGED",
-      logged,
-    }),
-  SET_USER: (username: string) =>
-    dispatch({
-      type: "INPUT_USERNAME",
-      username,
-    }),
-  SET_PASSWORD: (password: string) => {
-    dispatch({
-      type: "INPUT_PASSWORD",
-      password,
-    });
-  },
+export const setLoggedIn = (): AuthAction => {
+  return {
+    type: "LOGGED",
+    logged: true,
+  };
 };
 
-export default AUTH_ACTIONS;
+export const setLoggedOut = (): AuthAction => {
+  return {
+    type: "LOGGED",
+    logged: false,
+  };
+};

@@ -1,13 +1,11 @@
 .card {
   margin: 10px;
   padding: 10px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
+  display: grid;
+  place-items: center;
   border-radius: 30px;
   width: 270px;
-  height: 360px;
+  height: 400px;
 }
 
 .card-header {
@@ -18,4 +16,11 @@
 .card-header .title {
   flex-direction: column-reverse;
   white-space: pre-line;
+}
+
+.card-image {
+  display: grid;
+  max-width: fit-content;
+  max-height: fit-content;
+  place-items: center;
 }

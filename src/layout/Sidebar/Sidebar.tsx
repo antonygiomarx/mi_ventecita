@@ -1,14 +1,27 @@
 import { Menu } from "antd";
 import Sider from "antd/lib/layout/Sider";
+import {
+  DashboardTwoTone,
+  ShoppingTwoTone,
+  ShopTwoTone,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { v4 as uuid } from "uuid";
 
 import "./Sidebar.css";
-import routes from "../../routes/default.routes";
 
-const SidebarComponent = () => {
+export const SidebarComponent = (): JSX.Element => {
   return (
-    <Sider className="sidebar" width="55" theme="dark">
+    <Sider
+      style={{
+        height: "100vh",
+        position: "fixed",
+        display: "grid",
+        placeItems: "center",
+      }}
+      className="sidebar"
+      width="65"
+      theme="dark"
+    >
       <Menu
         style={{
           display: "flex",
@@ -20,23 +33,17 @@ const SidebarComponent = () => {
         }}
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["0"]}
       >
-        {routes.map(({ route, hidden, icon: Icon }) => {
-          return (
-            <Menu.Item
-              icon={<Icon />}
-              className="sidebar-item"
-              key={uuid()}
-              hidden={hidden}
-            >
-              <Link key={uuid()} to={`${route}`} />
-            </Menu.Item>
-          );
-        })}
+        <Menu.Item icon={<DashboardTwoTone />} className="sidebar-item">
+          <Link to="/dashboard" />
+        </Menu.Item>
+        <Menu.Item icon={<ShoppingTwoTone />} className="sidebar-item">
+          <Link to="/shop" />
+        </Menu.Item>
+        <Menu.Item icon={<ShopTwoTone />} className="sidebar-item">
+          <Link to="/store" />
+        </Menu.Item>
       </Menu>
     </Sider>
   );
 };
-
-export default SidebarComponent;

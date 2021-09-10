@@ -1,88 +1,72 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { useState } from "react";
-import { Button, Checkbox, Input, message } from "antd";
-import { Redirect } from "react-router-dom";
+import { useRef } from "react";
+import { Button, Checkbox, Input, Form } from "antd";
 
 import "./LoginForm.css";
-import AUTH_ACTIONS from "../../redux/actions/auth.actions";
-import { FirebaseService } from "../../firebase/firebase";
-import { setSessionToLocalStorage } from "../../utils/utils";
+import { Auth, signInWithEmailAndPassword } from "firebase/auth";
+import { useAuth } from "reactfire";
 
-const Form = () => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
+interface EmailAndPasswordSignIn {
+  auth: Auth;
+  email: string;
+  password: string;
+}
 
-  const [user, setUser] = useState({});
+const signIn = async ({ auth, email, password }: EmailAndPasswordSignIn) => {
+  console.log(email, password);
 
-  const login = async () => {
-    try {
-      const { username, password } = credentials;
+  try {
+    const user = await signInWithEmailAndPassword(auth, email, password);
 
-      await FirebaseService.getAuth()().setPersistence(
-        FirebaseService.getAuth().Auth.Persistence.SESSION,
-      );
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-      const { user: authUser } =
-        await FirebaseService.getAuth()().signInWithEmailAndPassword(
-          username,
-          password,
-        );
+export const LoginForm = (): JSX.Element => {
+  const passRef = useRef<Input>(null);
+  const emailRef = useRef<Input>(null);
 
-      setUser({ authUser });
-    } catch (error) {
-      switch (error.code) {
-        case "auth/user-not-found":
-          message.error("Usuario no existe");
-          break;
-        case "auth/wrong-password":
-          message.error("Correo o contraseña incorrectos");
-          break;
-        default:
-          message.error("Error al iniciar sesion");
-          break;
-      }
-    }
-    if (user) {
-      AUTH_ACTIONS.LOGGED(true);
-      setSessionToLocalStorage("true");
-      <Redirect to="/" />;
-    }
-  };
+  const auth = useAuth();
 
   return (
-    <form className="form">
-      <label htmlFor="user">Nombre de Usuario</label>
-      <Input
-        placeholder="Nombre de Usuario"
-        name="usuario"
-        type="text"
-        id="user"
-        className="input"
-        onChange={({ target }) => {
-          setCredentials({
-            ...credentials,
-            username: target.value,
-          });
-        }}
-      />
-
-      <label htmlFor="pass-form">Contraseña</label>
-      <Input.Password
-        placeholder="Contraseña"
+    <Form className="form" name="login" autoComplete="on">
+      <Form.Item
+        label="Correo"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: "Por favor ingrese su correo",
+          },
+        ]}
+      >
+        <Input ref={emailRef} placeholder="Correo" name="email" type="email" />
+      </Form.Item>
+      <Form.Item
+        label="Contraseña"
         name="contraseña"
-        type="password"
-        id="pass-form"
-        className="input"
-        onChange={({ target }) => {
-          setCredentials({
-            ...credentials,
-            password: target.value,
-          });
-        }}
-        onPressEnter={login}
-      />
+        rules={[
+          {
+            required: true,
+            message: "Por favor ingrese su contraseña",
+          },
+        ]}
+      >
+        <Input.Password
+          placeholder="Contraseña"
+          name="contraseña"
+          type="password"
+          ref={passRef}
+          onPressEnter={() =>
+            signIn({
+              auth,
+              email: emailRef.current?.state?.value,
+              password: passRef.current?.state?.value,
+            })
+          }
+        />
+      </Form.Item>
 
       <Checkbox>Recuerdame</Checkbox>
 
@@ -93,14 +77,16 @@ const Form = () => {
       <Button
         type="primary"
         className="button"
-        onClick={() => {
-          login();
-        }}
+        onClick={() =>
+          signIn({
+            auth,
+            email: emailRef.current?.state?.value,
+            password: passRef.current?.state?.value,
+          })
+        }
       >
         Iniciar sesión
       </Button>
-    </form>
+    </Form>
   );
 };
-
-export default Form;

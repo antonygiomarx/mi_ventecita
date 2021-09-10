@@ -1,7 +1,5 @@
-import StoreComponent from "../Store/Store";
+import { StoreComponent } from "../Store/Store";
 
-const ShopComponent = () => {
+export const ShopComponent = (): JSX.Element => {
   return <StoreComponent isSelectable />;
 };
-
-export default ShopComponent;

@@ -2,7 +2,7 @@ import { Card, Avatar } from "antd";
 
 const { Meta } = Card;
 
-const LoadingCard = () => {
+export const LoadingCard = (): JSX.Element => {
   return (
     <>
       <Card style={{ width: 270, marginTop: 16 }} loading>
@@ -17,4 +17,3 @@ const LoadingCard = () => {
     </>
   );
 };
-export default LoadingCard;

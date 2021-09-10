@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import STORE_ACTIONS from "../../redux/actions/store.action";
 
 import "./FAB.css";
 
-import AddProductModalComponent from "../Modal/AddProduct/AddProductModal";
+import { AddProductModalComponent } from "../Modal/AddProduct/AddProductModal";
 
 const { Container, Button } = require("react-floating-action-button");
 
-const FloatingActionButtonComponent = () => {
+export const FloatingActionButtonComponent = (): JSX.Element => {
   return (
     <>
       <Container className="fab-container">
@@ -15,7 +14,7 @@ const FloatingActionButtonComponent = () => {
           tooltip="Agregar producto"
           className="fab-button"
           onClick={() => {
-            STORE_ACTIONS.TOGGLE_MODAL(true);
+            console.log("prueba");
           }}
         >
           <span className="text-button">+</span>
@@ -25,5 +24,3 @@ const FloatingActionButtonComponent = () => {
     </>
   );
 };
-
-export default FloatingActionButtonComponent;

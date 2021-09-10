@@ -1,18 +1,15 @@
 import Search from "antd/es/input/Search";
+
 import "./Searchbar.css";
 
-const SearchbarComponent = ({ searchableProduct }: any) => {
+export const SearchbarComponent = (): JSX.Element => {
   // TODO connect search to algolia
 
   return (
-    <div>
-      <Search
-        placeholder="Buscar Producto"
-        className="searchbar"
-        onChange={searchableProduct}
-      />
-    </div>
+    <Search
+      style={{ width: "70%" }}
+      placeholder="Buscar Producto"
+      className="searchbar"
+    />
   );
 };
-
-export default SearchbarComponent;

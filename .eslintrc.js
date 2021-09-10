@@ -12,11 +12,12 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "airbnb-typescript-prettier",
+    "plugin:react-hooks/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     sourceType: "module",
-    project: ["./tsconfig.eslint.json"],
+    project: ["./tsconfig.json"],
     createDefaultProgram: true,
   },
   plugins: ["@typescript-eslint", "react", "prettier", "react-hooks"],
@@ -36,6 +37,7 @@ module.exports = {
     "prettier/prettier": "error",
     "jsx-a11y/href-no-hash": ["off"],
     "import/no-named-as-default-member": "off",
+    "no-explicit-any": "off",
     "max-len": [
       "warn",
       {
@@ -57,13 +59,5 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/rules-of-hooks": "error",
-  },
-  settings: {
-    "import/resolver": {
-      node: {
-        paths: ["src"],
-        extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
-      },
-    },
   },
 };
