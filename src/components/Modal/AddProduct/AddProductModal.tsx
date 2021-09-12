@@ -1,36 +1,81 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Form, Image, Input, InputNumber, message, Select, Upload } from "antd";
+import { Form, Image, Input, message, Select, Upload } from "antd";
 import Modal from "antd/lib/modal/Modal";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import getBase64 from "../../../utils/utils";
-import { ProductService } from "../../../services/product.service";
+import { useFirestore, useStorage } from "reactfire";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { RcFile } from "antd/es/upload/interface";
+import { UploadChangeParam } from "antd/lib/upload";
+import { useForm } from "antd/lib/form/Form";
+import { collection, addDoc } from "firebase/firestore";
 import { Product } from "../../../models/product.model";
-import { Config } from "../../../config/config";
+import { RootState } from "../../../redux/models/root-state.model";
+import { closeAddProductModal } from "../../../redux/actions/store.action";
 
+export interface UploadFileProps {
+  file: string | Blob | RcFile | File;
+  fileName: string;
+  route: string;
+  contentType?: string;
+}
+
+// TODO: Split logic
 export const AddProductModalComponent = (): JSX.Element => {
-  const [visible] = useState(false);
-
   const [loading, setLoading] = useState(false);
 
-  const [product, setProduct] = useState<Product>({
-    name: "",
-    category: "",
-    description: "",
-    imageUrl: "",
-    price: "",
-    provider: "",
-    id: "",
-    companyId: Config.companyId,
-    quantity: "",
-  });
+  const open = useSelector<RootState>(
+    ({ store }) => store.modalIsOpen,
+  ) as boolean;
 
-  const [componentSize, setComponentSize] = useState("default");
+  const dispatch = useDispatch();
+  const storage = useStorage();
+  const [imageUrl, setImageUrl] = useState("");
 
-  const onFormLayoutChange = ({ size }: any) => {
-    setComponentSize(size);
+  const [form] = useForm();
+
+  const firestore = useFirestore();
+
+  const productCollection = collection(
+    firestore,
+    "Companies/Bq7agxz8zsxvF8YDcq2k/Products",
+  );
+
+  const addProduct = async (product: Product) => {
+    try {
+      await addDoc(productCollection, { ...product });
+      message.success("Producto agregado");
+    } catch (error) {
+      message.error("Error agregando producto");
+      console.error(error.message);
+    }
+  };
+
+  const nameRef = useRef(null);
+  const categoryRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const priceRef = useRef(null);
+  const providerRef = useRef(null);
+
+  const upload = async ({
+    file,
+    fileName,
+    route,
+  }: UploadFileProps): Promise<void> => {
+    const storageRef = ref(storage, `${route}/${fileName}`);
+
+    const uploadTask = await uploadBytesResumable(storageRef, file as Blob);
+
+    if (uploadTask.state === "running") {
+      setLoading(true);
+    }
+    if (uploadTask.state === "success") {
+      const url = await getDownloadURL(storageRef);
+      setLoading(false);
+
+      setImageUrl(url);
+    }
   };
 
   const beforeUpload = (file: File) => {
@@ -45,88 +90,104 @@ export const AddProductModalComponent = (): JSX.Element => {
     return isJpgOrPng && isLt2M;
   };
 
-  const handleChange = (info: any) => {
+  const handleChange = (info: UploadChangeParam) => {
     if (info.file.status === "uploading") {
       setLoading(true);
       return;
     }
     if (info.file.status === "done") {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url: string) => {
-        return setProduct({
-          ...product,
-          imageUrl: url,
-        });
-      });
+
       setLoading(false);
     }
   };
 
-  // const upload = async ({ file, filename }: any) => {
-  //   // const imageRef = FirebaseService.getStorage()().ref(`demo/${filename}`);
-
-  //   const bucketImage = await imageRef.put(file);
-
-  //   if (bucketImage.state !== "success") {
-  //     console.log("Error subiendo imagen");
-  //   } else {
-  //     setProduct({
-  //       ...product,
-  //       imageUrl: await imageRef.getDownloadURL(),
-  //     });
-  //     setLoading(false);
-  //   }
-  // };
-
   const uploadButton = (
     <div>
-      {loading ? (
-        <LoadingOutlined id="prueba" />
-      ) : (
-        !product.imageUrl && <PlusOutlined />
-      )}
-      <div style={{ marginTop: 8 }}>Upload</div>
+      {loading ? <LoadingOutlined /> : !imageUrl && <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Subir</div>
     </div>
   );
 
-  const productInfo = async () => {
-    const productService = new ProductService(product);
-    const data = await productService.create();
-
-    if (!data.success) {
-      message.error("Hubo un error al crear el producto.");
-    } else {
-      message.success("Producto creado.");
-    }
+  const customRequest = async ({ file }) => {
+    const { name } = file as RcFile;
+    await upload({
+      file: file as Blob,
+      fileName: name.split(".")[0] || `${Date.now()}`,
+      route: "demo",
+    });
   };
+
+  const onOk = () => {
+    form
+      .validateFields()
+      .then(
+        ({
+          name,
+          price,
+          provider,
+          category,
+          description,
+          quantity,
+        }: Product) => {
+          addProduct({
+            name,
+            price,
+            category,
+            provider,
+            imageUrl,
+            description,
+            companyId: "Bq7agxz8zsxvF8YDcq2k",
+            quantity,
+            id: "",
+          })
+            .then(() => {
+              form.resetFields();
+              setImageUrl("");
+              dispatch(closeAddProductModal());
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        },
+      )
+      .catch((error) => console.error(error));
+  };
+
+  const onCancel = () => {
+    dispatch(closeAddProductModal());
+  };
+
   return (
     <Modal
       centered
       closable
-      onOk={() => {
-        productInfo();
-      }}
-      onCancel={() => {
-        console.log("cancelado");
-      }}
-      visible={visible}
+      onCancel={onCancel}
+      visible={open}
       title="Agregar producto"
       destroyOnClose
+      okText="Agregar"
+      cancelText="Cancelar"
+      onOk={onOk}
     >
       <Form
-        labelCol={{
-          span: 4,
-        }}
-        wrapperCol={{
-          span: 14,
-        }}
-        layout="horizontal"
-        initialValues={{
-          size: componentSize,
-        }}
-        onValuesChange={onFormLayoutChange}
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        layout="vertical"
+        form={form}
+        name="add_product_modal_form"
       >
-        <Form.Item label="Imagen">
+        <Form.Item
+          name="Image Form"
+          rules={[
+            {
+              required: true,
+              message: "Imagen es requerida",
+            },
+          ]}
+          required
+          label="Imagen"
+        >
           <Upload
             multiple={false}
             id="upload"
@@ -136,61 +197,103 @@ export const AddProductModalComponent = (): JSX.Element => {
             beforeUpload={beforeUpload}
             onChange={handleChange}
             showUploadList={false}
-            customRequest={async () => {
-              // TODO: complete upload
-              console.log("subiendo");
-            }}
+            customRequest={customRequest}
             accept="image/*"
             maxCount={1}
+            type="select"
           >
-            {!product.imageUrl ? (
+            {!imageUrl ? (
               uploadButton
             ) : (
-              <Image src={product.imageUrl} />
+              <Image preview={false} src={imageUrl} />
             )}
           </Upload>
         </Form.Item>
-        <Form.Item label="Nombre">
-          <Input
-            onChange={(e) => {
-              setProduct({ ...product, name: e.target.value });
-            }}
-          />
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: "Nombre de Producto es requerido",
+            },
+          ]}
+          required
+          label="Nombre"
+          name="name"
+        >
+          <Input type="text" ref={nameRef} name="name" required />
         </Form.Item>
-        <Form.Item label="Descripcion">
-          <Input.TextArea
-            onChange={(e) => {
-              setProduct({ ...product, description: e.target.value });
-            }}
-          />
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: "Descripción del Producto es requerido",
+            },
+          ]}
+          required
+          label="Descripcion"
+          name="description"
+        >
+          <Input.TextArea ref={descriptionRef} required name="description" />
         </Form.Item>
-        <Form.Item label="Categoría">
-          <Select
-            onSelect={(value: string) => {
-              setProduct({
-                ...product,
-                category: value,
-              });
-            }}
-          >
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: "Categoría de Producto es requerido",
+            },
+          ]}
+          label="Categoría"
+          required
+          name="category"
+        >
+          <Select ref={categoryRef}>
             <Select.Option value="Demo">Demo</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label="Precio">
-          <InputNumber
-            onChange={(number: string) => {
-              setProduct({ ...product, price: number });
-            }}
-            placeholder="C$"
-          />
+        <Form.Item
+          name="price"
+          rules={[
+            {
+              required: true,
+              message: "Precio de Producto es requerido",
+            },
+          ]}
+          required
+          label="Precio"
+          wrapperCol={{
+            sm: 7,
+          }}
+        >
+          <Input type="number" ref={priceRef} required placeholder="$" />
         </Form.Item>
-        <Form.Item label="Provider">
-          <Input
-            onChange={(e) => {
-              setProduct({ ...product, provider: e.target.value });
-            }}
-            placeholder="proveedor"
-          />
+        <Form.Item
+          name="quantity"
+          rules={[
+            {
+              required: true,
+              message: "Cantidad de Producto es requerido",
+            },
+          ]}
+          required
+          label="Cantidad"
+          wrapperCol={{
+            sm: 7,
+          }}
+        >
+          <Input type="number" ref={priceRef} required placeholder="1234" />
+        </Form.Item>
+        <Form.Item
+          name="provider"
+          rules={[
+            {
+              required: true,
+              message: "Proveedor de Producto es requerido",
+            },
+          ]}
+          required
+          label="Proveedor"
+        >
+          <Input placeholder="Proveedor" ref={providerRef} required />
         </Form.Item>
       </Form>
     </Modal>

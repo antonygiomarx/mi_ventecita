@@ -44,6 +44,7 @@ export const StoreComponent = ({
       <Content className="main-content">
         <div className="site-layout-background">
           <Row className="content-products">
+            {!isSelectable && <FloatingActionButtonComponent />}
             {products.map(
               ({
                 id,
@@ -71,7 +72,6 @@ export const StoreComponent = ({
                 />
               ),
             )}
-            {!isSelectable && <FloatingActionButtonComponent />}
           </Row>
         </div>
       </Content>

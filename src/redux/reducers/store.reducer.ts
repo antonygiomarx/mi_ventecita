@@ -4,7 +4,6 @@ import { Product } from "../../models/product.model";
 export interface StoreReducerAction {
   type: string;
   products: Product[];
-  value: boolean;
   product: Product;
   modalIsOpen: boolean;
 }
@@ -15,7 +14,7 @@ export const storeReducer = (
   },
   action: StoreReducerAction,
 ): StoreState => {
-  const { type, products, value, product } = action;
+  const { type, products, product, modalIsOpen } = action;
 
   switch (type) {
     case "ADD_PRODUCT":
@@ -33,7 +32,7 @@ export const storeReducer = (
     case "TOGGLE_MODAL":
       return {
         ...state,
-        modalIsOpen: value,
+        modalIsOpen,
       };
     case "UPDATE_PRODUCT":
       return {
