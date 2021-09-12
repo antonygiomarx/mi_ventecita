@@ -58,6 +58,7 @@ export const CardModalComponent = ({
         ...product,
       });
       message.success("Producto actualizado");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       message.error("Error al actualizar el producto");
       console.error(error.message);
