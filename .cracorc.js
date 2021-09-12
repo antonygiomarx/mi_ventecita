@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const {
   addAfterLoader,
   removeLoaders,
   loaderByName,
   getLoaders,
   throwUnexpectedConfigError,
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
 } = require("@craco/craco");
 
 const throwError = (message) =>
