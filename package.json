@@ -39,7 +39,7 @@
     "prepare": "npx husky install",
     "lint": "npx eslint --fix",
     "deploy": "firebase deploy --only hosting",
-    "npm run ci/cd": "npm i && npm run build"
+    "ci/cd": "npm i && npm run build"
   },
   "eslintConfig": {
     "extends": [
