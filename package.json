@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
-    "@craco/craco": "^6.1.2",
+    "@craco/craco": "^6.3.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -22,7 +22,7 @@
     "react-floating-action-button": "^1.0.5",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "reactfire": "^4.1.1",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
@@ -32,10 +32,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "npx craco start",
-    "build": "npx craco build",
-    "test": "npx craco test",
-    "eject": "npx craco eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "prepare": "npx husky install",
     "lint": "npx eslint --fix",
     "deploy": "firebase deploy --only hosting",
@@ -87,6 +87,7 @@
     "husky": "^6.0.0",
     "loader-utils": "^2.0.0",
     "typescript": "^4.3.2",
-    "webpack": "^5.38.1"
+    "webpack": "^4.42.1",
+    "workbox-webpack-plugin": "^6.3.0"
   }
 }
