@@ -18,7 +18,7 @@ storeController.get(
         success: true,
         companies,
       });
-    } catch (error) {
+    } catch (error: any) {
       return res.json({
         success: false,
         error: error.message,
@@ -50,7 +50,7 @@ storeController.post(
         message: "New Company Created",
         company: newCompany,
       });
-    } catch (error) {
+    } catch (error: any) {
       return res.json({
         success: false,
         error: error.message,
@@ -119,7 +119,7 @@ storeController.post(
         message: "New Product Created",
         product: newProduct,
       });
-    } catch (error) {
+    } catch (error: any) {
       return res.json({
         success: false,
         error: error.message,
@@ -153,7 +153,7 @@ storeController.get(
         message: "Products",
         products: products,
       });
-    } catch (error) {
+    } catch (error: any) {
       return res.json({
         success: false,
         error: error.message,
@@ -196,7 +196,7 @@ storeController.get(
         message: "Product",
         products: product,
       });
-    } catch (error) {
+    } catch (error: any) {
       return res.json({
         success: false,
         error: error.message,
@@ -238,7 +238,7 @@ storeController.post(
         message: "Product",
         product: product,
       });
-    } catch (error) {
+    } catch (error: any) {
       return res.json({
         success: false,
         error: error.message,

@@ -39,7 +39,23 @@ export const CardComponent = ({
       <Card
         onClick={showModal}
         className="card"
-        cover={<Image src={imageUrl} alt={name} className="card-image" />}
+        cover={
+          <Image
+            preview={false}
+            src={imageUrl}
+            alt={name}
+            className="card-image"
+          />
+        }
+        style={{
+          margin: "10px",
+          padding: "10px",
+          display: "grid",
+          placeItems: "center",
+          borderRadius: "30px",
+          width: "270px",
+          height: "400px",
+        }}
       >
         <div className="card-header">
           <div className="card-header title">
@@ -57,7 +73,6 @@ export const CardComponent = ({
         imageUrl={imageUrl}
         category={category}
         cancel={handleCancel}
-        // ok={handleCancel}
         id={id}
         quantity={quantity}
         companyId={companyId}

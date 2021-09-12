@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../../components/Logo/Logo";
 import { LoginForm } from "../../components/LoginForm/LoginForm";
-import Registerbutton from "../../components/Registration/Registerbutton";
+import { RegisterButton } from "../../components/Register/RegisterButton";
 
 import "./Login.css";
 
@@ -12,7 +12,7 @@ export const Login = (): JSX.Element => {
         <div>
           <Logo />
           <LoginForm />
-          <Registerbutton />
+          <RegisterButton />
         </div>
         <div className="rightside" />
       </div>

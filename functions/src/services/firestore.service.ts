@@ -18,7 +18,7 @@ export class CompanyService {
       const companyDocument = await companiesRepository.create(company);
 
       return companyDocument;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error.message);
     }
   }
@@ -58,7 +58,7 @@ export class ProductService {
       });
 
       return newProduct;
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error.message);
     }
   }

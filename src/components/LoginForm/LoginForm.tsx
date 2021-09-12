@@ -4,28 +4,29 @@ import { Button, Checkbox, Input, Form } from "antd";
 import "./LoginForm.css";
 import { Auth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "reactfire";
+import { useHistory } from "react-router-dom";
 
-interface EmailAndPasswordSignIn {
+export interface EmailAndPasswordAuth {
   auth: Auth;
   email: string;
   password: string;
 }
 
-const signIn = async ({ auth, email, password }: EmailAndPasswordSignIn) => {
-  console.log(email, password);
-
+const signIn = async ({ auth, email, password }: EmailAndPasswordAuth) => {
   try {
-    const user = await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password);
 
-    console.log(user);
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
 export const LoginForm = (): JSX.Element => {
   const passRef = useRef<Input>(null);
   const emailRef = useRef<Input>(null);
+  const history = useHistory();
 
   const auth = useAuth();
 
@@ -58,13 +59,19 @@ export const LoginForm = (): JSX.Element => {
           name="contraseña"
           type="password"
           ref={passRef}
-          onPressEnter={() =>
-            signIn({
-              auth,
-              email: emailRef.current?.state?.value,
-              password: passRef.current?.state?.value,
-            })
-          }
+          onPressEnter={() => {
+            (async () => {
+              const logged = await signIn({
+                auth,
+                email: emailRef.current?.state?.value,
+                password: passRef.current?.state?.value,
+              });
+
+              if (logged) {
+                history.push("/");
+              }
+            })();
+          }}
         />
       </Form.Item>
 
@@ -77,13 +84,19 @@ export const LoginForm = (): JSX.Element => {
       <Button
         type="primary"
         className="button"
-        onClick={() =>
-          signIn({
-            auth,
-            email: emailRef.current?.state?.value,
-            password: passRef.current?.state?.value,
-          })
-        }
+        onClick={() => {
+          (async () => {
+            const logged = await signIn({
+              auth,
+              email: emailRef.current?.state?.value,
+              password: passRef.current?.state?.value,
+            });
+
+            if (logged) {
+              history.push("/");
+            }
+          })();
+        }}
       >
         Iniciar sesión
       </Button>

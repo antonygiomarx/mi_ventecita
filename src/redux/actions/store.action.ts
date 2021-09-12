@@ -5,6 +5,7 @@ interface StoreAction extends Action {
   type: string;
   products?: Product[];
   product?: Product;
+  modalIsOpen?: boolean;
 }
 
 export const setProducts = (products: Product[]): StoreAction => {
@@ -25,5 +26,18 @@ export const updateProduct = (product: Product): StoreAction => {
   return {
     type: "UPDATE_PRODUCT",
     product,
+  };
+};
+
+export const closeAddProductModal = (): StoreAction => {
+  return {
+    type: "TOGGLE_MODAL",
+    modalIsOpen: false,
+  };
+};
+export const openAddProductModal = (): StoreAction => {
+  return {
+    type: "TOGGLE_MODAL",
+    modalIsOpen: true,
   };
 };

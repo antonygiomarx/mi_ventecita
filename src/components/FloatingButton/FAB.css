@@ -1,17 +1,14 @@
-.fab-container {
-  width: auto;
-}
-
 .fab-button {
-  width: 56px;
-  background-color: rgb(0, 21, 41) !important;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 999;
+  cursor: pointer;
 }
 
-.fab-icon {
-  width: 60px !important;
-  max-width: 100% !important;
-}
-
-.text-button {
-  font-size: large;
+.fab-button:hover {
+  transform: scale(1.1);
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
