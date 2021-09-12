@@ -20,6 +20,7 @@ export const storeReducer = (
     case "ADD_PRODUCT":
       return {
         ...state,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         products: [...state.products!, ...[product]],
       };
 

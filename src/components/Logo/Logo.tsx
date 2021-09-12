@@ -1,7 +1,7 @@
 import { SmileOutlined } from "@ant-design/icons";
 import "./Logo.css";
 
-const Logo = () => (
+const Logo = (): JSX.Element => (
   <div className="Logo">
     <SmileOutlined style={{ fontSize: "50px" }} />
     <h1 style={{ fontWeight: "bold" }}>Mi Ventecita</h1>
