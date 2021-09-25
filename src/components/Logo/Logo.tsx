@@ -1,5 +1,4 @@
 import { SmileOutlined } from "@ant-design/icons";
-import "./Logo.css";
 
 const Logo = (): JSX.Element => (
   <div className="Logo">

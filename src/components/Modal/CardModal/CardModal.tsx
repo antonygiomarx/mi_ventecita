@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Card, Modal, Typography, Select, Image, message } from "antd";
 import { Button } from "antd/lib/radio";
 
-import "./CardModal.css";
 import { useFirestore } from "reactfire";
 import { doc, updateDoc } from "firebase/firestore";
 import { Product } from "../../../models/product.model";

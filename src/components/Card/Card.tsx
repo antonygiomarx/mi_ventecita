@@ -4,8 +4,6 @@ import { useState } from "react";
 import { Product } from "../../models/product.model";
 import { CardModalComponent } from "../Modal/CardModal/CardModal";
 
-import "./Card.css";
-
 const { Title } = Typography;
 
 interface CardModel extends Product {

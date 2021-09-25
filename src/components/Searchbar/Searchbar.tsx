@@ -1,9 +1,9 @@
-import Search from "antd/es/input/Search";
-
-import "./Searchbar.css";
+import { Input } from "antd";
 
 export const SearchbarComponent = (): JSX.Element => {
   // TODO connect search to algolia
+
+  const { Search } = Input;
 
   return (
     <Search

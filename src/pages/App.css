@@ -1,0 +1,316 @@
+@import "../../node_modules/antd/dist/antd.css";
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+
+[data-theme="dark"] .site-layout-sub-header-background {
+  background: #141414;
+}
+
+.gutter-box {
+  padding: 8px 0;
+  background: #00a0e9;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+}
+.content-products {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-layout {
+  display: flex;
+  flex-direction: column;
+  margin: 70px 0 0 50px;
+  align-items: center;
+  justify-content: center;
+  margin: 65px 0 0 50px;
+}
+
+.card {
+  margin: 10px;
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  border-radius: 30px;
+  width: 270px;
+  height: 400px;
+}
+
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-header .title {
+  flex-direction: column-reverse;
+  white-space: pre-line;
+}
+
+.card-image {
+  display: grid;
+  max-width: fit-content;
+  max-height: fit-content;
+  place-items: center;
+}
+
+.main-content {
+  margin: 10px 0 0 0;
+  overflow: initial;
+}
+
+.site-layout-background {
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.fab-button {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.fab-button:hover {
+  transform: scale(1.1);
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.form {
+  vertical-align: middle;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-top: 20%;
+  margin: 35px;
+  justify-content: center;
+}
+.form label {
+  font-weight: bold;
+  margin: 5px 10px 5px 0;
+}
+.input {
+  border-radius: 25px;
+  background-color: #fff;
+  border: 2px solid rgb(165, 163, 163);
+  outline: none;
+  width: 100%;
+  padding: 15px 20px;
+  margin: 10px;
+}
+.form input:focus {
+  box-shadow: 0 0 1pt 0pt rgb(7, 8, 8);
+}
+.button {
+  width: 100%;
+  margin: 15px 2px;
+  border-radius: 25px;
+  font-weight: bold;
+  height: 50px;
+}
+.rightside {
+  height: auto;
+  width: 100%;
+  background-size: cover;
+  background-image: url(https://image.freepik.com/vector-gratis/papel-tapiz-azul-clasico-estilo-abstracto_23-2148437427.jpg);
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.card {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  border-radius: 30px;
+  height: 360px;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
+
+.card-header .title {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+.card-header .price {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: bold;
+  margin-right: auto;
+}
+.card-body {
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  max-height: 200px;
+}
+.card-body .description {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.inputRegister {
+  border-radius: 25px;
+  background-color: #fff;
+  border: 2px solid rgb(165, 163, 163);
+  outline: none;
+  width: 100%;
+  padding: 15px 15px;
+  margin: 10px;
+}
+.form-register {
+  vertical-align: middle;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-top: 20%;
+  margin: 30px;
+  justify-content: center;
+}
+
+.form-register label {
+  font-weight: bold;
+  margin: 5px 10px 5px 0;
+}
+.button-register {
+  width: 60%;
+  border-radius: 25px;
+  font-weight: bold;
+  height: 50px;
+  top: -25px;
+  left: -15%;
+}
+.error {
+  color: red;
+  font-size: 10px;
+}
+
+.searchbar {
+  width: 50px;
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.header {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.avatar {
+  transform: translate(30px, 0%);
+  z-index: 10;
+}
+
+.login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(90deg, #ffffff 50%, 50%);
+  height: 100vh;
+}
+
+.Logo {
+  margin: 50px;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+
+[data-theme="dark"] .site-layout-sub-header-background {
+  background: #141414;
+}
+
+.gutter-box {
+  padding: 8px 0;
+  background: #00a0e9;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+}
+.content-products {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-layout {
+  display: flex;
+  flex-direction: column;
+  margin: 70px 0 0 50px;
+  align-items: center;
+  justify-content: center;
+  margin: 65px 0 0 50px;
+}
+
+.sidebar {
+  overflow: auto;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+}
+
+.sidebar-item {
+  top: 61px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}

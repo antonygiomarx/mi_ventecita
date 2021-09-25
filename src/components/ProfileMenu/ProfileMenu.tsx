@@ -3,7 +3,6 @@ import { Dropdown, Menu } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import { UserOutlined } from "@ant-design/icons";
 
-import "./ProfileMenu.css";
 import { useLogout } from "../../hooks/useLogout";
 
 import { User } from "../../models/user.model";

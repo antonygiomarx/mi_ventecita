@@ -1,10 +1,9 @@
 import { useRef } from "react";
 import { Button, Checkbox, Input, Form } from "antd";
-
-import "./LoginForm.css";
+import { nanoid as uuid } from "nanoid";
 import { Auth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "reactfire";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 
 export interface EmailAndPasswordAuth {
   auth: Auth;
@@ -26,13 +25,14 @@ const signIn = async ({ auth, email, password }: EmailAndPasswordAuth) => {
 export const LoginForm = (): JSX.Element => {
   const passRef = useRef<Input>(null);
   const emailRef = useRef<Input>(null);
-  const history = useHistory();
+  const { push } = useRouter();
 
   const auth = useAuth();
 
   return (
-    <Form className="form" name="login" autoComplete="on">
+    <Form key={uuid()} className="form" name="login" autoComplete="on">
       <Form.Item
+        key={uuid()}
         label="Correo"
         name="email"
         rules={[
@@ -42,9 +42,16 @@ export const LoginForm = (): JSX.Element => {
           },
         ]}
       >
-        <Input ref={emailRef} placeholder="Correo" name="email" type="email" />
+        <Input
+          key={uuid()}
+          ref={emailRef}
+          placeholder="Correo"
+          name="email"
+          type="email"
+        />
       </Form.Item>
       <Form.Item
+        key={uuid()}
         label="Contraseña"
         name="contraseña"
         rules={[
@@ -55,6 +62,7 @@ export const LoginForm = (): JSX.Element => {
         ]}
       >
         <Input.Password
+          key={uuid()}
           placeholder="Contraseña"
           name="contraseña"
           type="password"
@@ -68,20 +76,21 @@ export const LoginForm = (): JSX.Element => {
               });
 
               if (logged) {
-                history.push("/");
+                push("/");
               }
             })();
           }}
         />
       </Form.Item>
 
-      <Checkbox>Recuerdame</Checkbox>
+      <Checkbox key={uuid()}>Recuerdame</Checkbox>
 
-      <Button type="link" className="linkButton">
+      <Button key={uuid()} type="link" className="linkButton">
         ¿Olvidaste tu contraseña?
       </Button>
 
       <Button
+        key={uuid()}
         type="primary"
         className="button"
         onClick={() => {
@@ -93,7 +102,7 @@ export const LoginForm = (): JSX.Element => {
             });
 
             if (logged) {
-              history.push("/");
+              push("/");
             }
           })();
         }}

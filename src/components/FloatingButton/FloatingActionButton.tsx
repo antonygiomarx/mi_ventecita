@@ -5,8 +5,6 @@ import { useDispatch } from "react-redux";
 import { AddProductModalComponent } from "../Modal/AddProduct/AddProductModal";
 import { openAddProductModal } from "../../redux/actions/store.action";
 
-import "./FAB.css";
-
 export const FloatingActionButtonComponent = (): JSX.Element => {
   const dispatch = useDispatch();
 
