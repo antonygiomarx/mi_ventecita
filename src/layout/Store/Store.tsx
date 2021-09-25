@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { Content } from "antd/lib/layout/layout";
-import { v4 as uuid } from "uuid";
+import { nanoid as uuid } from "nanoid";
 
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
 import { collection, query } from "firebase/firestore";
@@ -9,15 +9,13 @@ import { LoadingCard } from "../../components/Card/Loading";
 import { SearchbarComponent } from "../../components/Searchbar/Searchbar";
 import { FloatingActionButtonComponent } from "../../components/FloatingButton/FloatingActionButton";
 
-import "./Store.css";
-
 const loading = (
   <Col key={uuid()}>
     <LoadingCard />
   </Col>
 );
 
-export const StoreComponent = ({
+export const Store = ({
   isSelectable,
 }: {
   isSelectable: boolean | undefined;

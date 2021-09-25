@@ -1,9 +1,8 @@
 import { Button } from "antd";
-import { useHistory, Route } from "react-router-dom";
-import { Register } from "./Register";
+import { useRouter } from "next/router";
 
 export const RegisterButton = (): JSX.Element => {
-  const history = useHistory();
+  const { push } = useRouter();
   return (
     <div>
       <h4 style={{ fontWeight: "bold", marginTop: "-15px" }}>
@@ -14,10 +13,7 @@ export const RegisterButton = (): JSX.Element => {
         className="button"
         style={{ width: "50%", left: "25%", textAlign: "center" }}
         onClick={() => {
-          <Route path="/register">
-            <Register />
-          </Route>;
-          history.push("/register");
+          push("/register");
         }}
       >
         Regístrate

@@ -1,15 +1,17 @@
-import { Menu } from "antd";
-import Sider from "antd/lib/layout/Sider";
+import { Menu, Layout } from "antd";
 import {
   DashboardTwoTone,
   ShoppingTwoTone,
   ShopTwoTone,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-
-import "./Sidebar.css";
+import { nanoid as uuid } from "nanoid";
+import { useRouter } from "next/router";
 
 export const SidebarComponent = (): JSX.Element => {
+  const { push } = useRouter();
+
+  const { Sider } = Layout;
+
   return (
     <Sider
       style={{
@@ -34,15 +36,27 @@ export const SidebarComponent = (): JSX.Element => {
         theme="dark"
         mode="inline"
       >
-        <Menu.Item icon={<DashboardTwoTone />} className="sidebar-item">
-          <Link to="/dashboard" />
+        <Menu.Item
+          onClick={() => push("/dashboard")}
+          key={uuid()}
+          className="sidebar-item"
+        >
+          <DashboardTwoTone />
         </Menu.Item>
-        <Menu.Item icon={<ShoppingTwoTone />} className="sidebar-item">
-          <Link to="/shop" />
-        </Menu.Item>
-        <Menu.Item icon={<ShopTwoTone />} className="sidebar-item">
-          <Link to="/store" />
-        </Menu.Item>
+
+        <Menu.Item
+          onClick={() => push("/shop")}
+          key={uuid()}
+          icon={<ShoppingTwoTone />}
+          className="sidebar-item"
+        />
+
+        <Menu.Item
+          onClick={() => push("/store")}
+          key={uuid()}
+          icon={<ShopTwoTone />}
+          className="sidebar-item"
+        />
       </Menu>
     </Sider>
   );

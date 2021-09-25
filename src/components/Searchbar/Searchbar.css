@@ -1,9 +1,0 @@
-.searchbar {
-  width: 50px;
-  position: sticky;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 10px;
-}

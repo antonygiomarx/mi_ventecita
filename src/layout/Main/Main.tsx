@@ -1,21 +1,17 @@
 import { Layout } from "antd";
-import { Route, useHistory } from "react-router-dom";
-
+import { useRouter } from "next/router";
 import { useSigninCheck } from "reactfire";
 import { HeaderComponent } from "../Header/Header";
-import { DashboardComponent } from "../Dashboard/Dashboard";
 import { SidebarComponent } from "../Sidebar/Sidebar";
-import { ShopComponent } from "../Shop/Shop";
-import { StoreComponent } from "../Store/Store";
 import { FooterComponent } from "../Footer/Footer";
-import { Login } from "../Login/Login";
 import { Spinner } from "../../components/Spinner/Spinner";
-import { Register } from "../../components/Register/Register";
 
-import "./Main.css";
+interface Children {
+  children: JSX.Element;
+}
 
-export const Main = (): JSX.Element => {
-  const history = useHistory();
+export const Main = ({ children }: Children): JSX.Element => {
+  const { push } = useRouter();
   const { data: signInCheckResult, status } = useSigninCheck();
 
   if (status === "loading") {
@@ -23,35 +19,17 @@ export const Main = (): JSX.Element => {
   }
 
   if (!signInCheckResult.signedIn) {
-    history.push("/login");
-    return (
-      <>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-      </>
-    );
+    push("/login");
   }
 
   return (
-    <Route path="/">
+    <>
       <SidebarComponent />
       <HeaderComponent />
       <Layout className="site-layout">
-        <Route path={["/", "/dashboard"]} exact>
-          <DashboardComponent />
-        </Route>
-        <Route path={["/shop"]} exact>
-          <ShopComponent />
-        </Route>
-        <Route path={["/store"]} exact>
-          <StoreComponent isSelectable={false} />
-        </Route>
+        {children}
         <FooterComponent />
       </Layout>
-    </Route>
+    </>
   );
 };
