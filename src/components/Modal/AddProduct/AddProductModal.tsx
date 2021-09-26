@@ -205,7 +205,11 @@ export const AddProductModalComponent = (): JSX.Element => {
             {!imageUrl ? (
               uploadButton
             ) : (
-              <Image preview={false} src={imageUrl} />
+              <Image
+                alt={nameRef.current?.value}
+                preview={false}
+                src={imageUrl}
+              />
             )}
           </Upload>
         </Form.Item>

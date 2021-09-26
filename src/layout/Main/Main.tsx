@@ -32,13 +32,13 @@ export const Main = ({ children }: Children): JSX.Element => {
   }
 
   return (
-    <>
+    <Layout>
       <SidebarComponent />
       <HeaderComponent />
       <Layout className="site-layout">
         {children}
         <FooterComponent />
       </Layout>
-    </>
+    </Layout>
   );
 };
