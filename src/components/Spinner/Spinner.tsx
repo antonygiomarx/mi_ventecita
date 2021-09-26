@@ -1,12 +1,11 @@
 import { Spin } from "antd";
+import { CSSProperties } from "react";
 
-export const Spinner = (): JSX.Element => (
-  <Spin
-    style={{
-      display: "grid",
-      placeItems: "center",
-      marginTop: "50%",
-      background: "white",
-    }}
-  />
-);
+const spinStyles = {
+  display: "grid",
+  placeItems: "center",
+  marginTop: "50%",
+  background: "white",
+} as CSSProperties;
+
+export const Spinner = (): JSX.Element => <Spin style={spinStyles} />;
