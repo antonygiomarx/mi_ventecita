@@ -16,7 +16,7 @@ const ShopCard = ({
   companyId,
   provider,
   quantity,
-}: Product) => {
+}: Product): JSX.Element => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [checked, setChecked] = useState(false);
 

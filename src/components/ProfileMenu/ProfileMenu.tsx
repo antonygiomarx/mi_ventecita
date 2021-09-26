@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dropdown, Menu } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import { UserOutlined } from "@ant-design/icons";
+import { nanoid as uuid } from "nanoid";
 
 import { useLogout } from "../../hooks/useLogout";
 
@@ -14,20 +15,26 @@ export const ProfileMenu = (): JSX.Element => {
   const { ItemGroup, Item } = Menu;
 
   const menu = (
-    <Menu>
+    <Menu key={uuid()}>
       <ItemGroup
+        key={uuid()}
         title={`Hola ${username?.displayName || "Guest"}`}
         className="menu-item"
       >
-        <Item className="menu-item" onClick={logout}>
+        <Item key={uuid()} className="menu-item" onClick={logout}>
           Cerrar Sesión
         </Item>
       </ItemGroup>
     </Menu>
   );
   return (
-    <Dropdown overlay={menu} trigger={["click"]}>
-      <Avatar icon={<UserOutlined />} className="avatar" size="large" />
+    <Dropdown key={uuid()} overlay={menu} trigger={["click"]}>
+      <Avatar
+        key={uuid()}
+        icon={<UserOutlined />}
+        className="avatar"
+        size="large"
+      />
     </Dropdown>
   );
 };

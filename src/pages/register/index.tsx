@@ -14,15 +14,9 @@ const registerUser = async ({
   password,
 }: EmailAndPasswordAuth) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
-
-    console.log(userCredential);
+    await createUserWithEmailAndPassword(auth, email, password);
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     if (error.message === "Firebase: Error (auth/email-already-in-use).") {
       console.error("Correo ya existe");
     }
