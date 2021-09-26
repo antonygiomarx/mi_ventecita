@@ -16,7 +16,7 @@ const ShopModalComponent = ({
   cancel,
   price,
   description,
-}: ShopModal) => {
+}: ShopModal): JSX.Element => {
   console.log(cancel);
 
   return (
