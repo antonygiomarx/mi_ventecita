@@ -1,15 +1,13 @@
+import { Spinner } from "@components/Spinner/Spinner";
+import { SidebarProvider } from "@context/sidebar/sidebar.context";
 import { Layout } from "antd";
 import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { useSigninCheck } from "reactfire";
-import { useEffect } from "react";
-import { HeaderComponent } from "../Header/Header";
-import { SidebarComponent } from "../Sidebar/Sidebar";
+import { Children } from "src/interfaces/children";
 import { FooterComponent } from "../Footer/Footer";
-import { Spinner } from "../../components/Spinner/Spinner";
-
-interface Children {
-  children: JSX.Element;
-}
+import { HeaderComponent } from "../Header/Header";
+import { Sidebar } from "../Sidebar/Sidebar";
 
 export const Main = ({ children }: Children): JSX.Element => {
   const { push } = useRouter();
@@ -32,13 +30,19 @@ export const Main = ({ children }: Children): JSX.Element => {
   }
 
   return (
-    <>
-      <SidebarComponent />
+    <Layout
+      style={{
+        minHeight: "100vh",
+      }}
+    >
+      <SidebarProvider>
+        <Sidebar />
+      </SidebarProvider>
       <HeaderComponent />
       <Layout className="site-layout">
         {children}
         <FooterComponent />
       </Layout>
-    </>
+    </Layout>
   );
 };

@@ -6,57 +6,70 @@ import {
 } from "@ant-design/icons";
 import { nanoid as uuid } from "nanoid";
 import { useRouter } from "next/router";
+import { CSSProperties } from "react";
+import { useSidebarContext } from "@context/sidebar/sidebar.context";
 
-export const SidebarComponent = (): JSX.Element => {
+export const Sidebar = (): JSX.Element => {
+  const { collapsed, setCollapsed } = useSidebarContext();
+
   const { push } = useRouter();
 
   const { Sider } = Layout;
 
+  const handleCollapse = (collapsedValue: boolean) => {
+    setCollapsed(collapsedValue);
+  };
+
+  const siderStyles = {
+    overflow: "auto",
+    height: "100vh",
+    position: "fixed",
+    left: 0,
+    zIndex: 999,
+  } as CSSProperties;
+
+  const menuStyles = {
+    marginTop: "62px",
+  } as CSSProperties;
+
   return (
     <Sider
-      style={{
-        height: "100vh",
-        position: "fixed",
-        display: "grid",
-        placeItems: "center",
-      }}
-      className="sidebar"
-      width="65"
+      collapsible
+      collapsed={collapsed}
+      onCollapse={handleCollapse}
       theme="dark"
+      style={siderStyles}
     >
       <Menu
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          top: "61px",
-        }}
+        defaultSelectedKeys={["1"]}
         theme="dark"
-        mode="inline"
+        mode="vertical"
+        key={uuid()}
+        style={menuStyles}
       >
         <Menu.Item
           onClick={() => push("/dashboard")}
           key={uuid()}
-          className="sidebar-item"
+          icon={<DashboardTwoTone />}
         >
-          <DashboardTwoTone />
+          Dashboard
         </Menu.Item>
 
         <Menu.Item
           onClick={() => push("/shop")}
           key={uuid()}
           icon={<ShoppingTwoTone />}
-          className="sidebar-item"
-        />
+        >
+          Tienda
+        </Menu.Item>
 
         <Menu.Item
           onClick={() => push("/store")}
           key={uuid()}
           icon={<ShopTwoTone />}
-          className="sidebar-item"
-        />
+        >
+          Inventario
+        </Menu.Item>
       </Menu>
     </Sider>
   );

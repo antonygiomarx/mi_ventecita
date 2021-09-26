@@ -24,7 +24,11 @@
           "@layout": "./src/layout",
           "@firebase": "./src/firebase",
           "@config": "./src/config",
-          "@redux": "./src/redux"
+          "@redux": "./src/redux",
+          "@interfaces": "./src/interfaces",
+          "@*": "./src/*",
+          "@*/*": "./src/*/*",
+          "@**/**": "./src/**/**"
         }
       }
     ]
