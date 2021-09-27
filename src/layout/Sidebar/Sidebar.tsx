@@ -1,12 +1,13 @@
-import { Menu, Layout } from "antd";
+import { Layout, Menu } from "antd";
+import { nanoid as uuid } from "nanoid";
+import { useRouter } from "next/router";
+import { CSSProperties } from "react";
 import {
   DashboardTwoTone,
   ShoppingTwoTone,
   ShopTwoTone,
 } from "@ant-design/icons";
-import { nanoid as uuid } from "nanoid";
-import { useRouter } from "next/router";
-import { CSSProperties } from "react";
+
 import { useSidebarContext } from "@context/sidebar/sidebar.context";
 
 export const Sidebar = (): JSX.Element => {

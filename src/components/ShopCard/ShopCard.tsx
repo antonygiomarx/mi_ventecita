@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { Card, Typography, Checkbox } from "antd";
 import { useState } from "react";
-import { Product } from "../../models/product.model";
-import ShopModalComponent from "../Modal/ShopModal/ShopModal";
+
+import { Product } from "@models/product.model";
+import { ShopModalComponent } from "@components/Modal/ShopModal/ShopModal";
 
 const { Title } = Typography;
 

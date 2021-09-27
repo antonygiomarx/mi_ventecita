@@ -1,11 +1,18 @@
-import { Main } from "../layout/Main/Main";
+import Head from "next/head";
+
+import { Main } from "@layout/Main/Main";
 
 import { DashboardComponent } from "../layout/Dashboard/Dashboard";
 
 const Index = (): JSX.Element => (
-  <Main>
-    <DashboardComponent />
-  </Main>
+  <>
+    <Head>
+      <title>Inicio - Mi Ventecita</title>
+    </Head>
+    <Main>
+      <DashboardComponent />
+    </Main>
+  </>
 );
 
 export default Index;

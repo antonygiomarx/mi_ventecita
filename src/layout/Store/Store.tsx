@@ -1,13 +1,13 @@
 import { Col, Row } from "antd";
 import { Content } from "antd/lib/layout/layout";
-import { nanoid as uuid } from "nanoid";
-
-import { useFirestore, useFirestoreCollectionData } from "reactfire";
 import { collection, query } from "firebase/firestore";
-import { CardComponent } from "../../components/Card/Card";
-import { LoadingCard } from "../../components/Card/Loading";
-import { SearchbarComponent } from "../../components/Searchbar/Searchbar";
-import { FloatingActionButtonComponent } from "../../components/FloatingButton/FloatingActionButton";
+import { nanoid as uuid } from "nanoid";
+import { useFirestore, useFirestoreCollectionData } from "reactfire";
+
+import { CardComponent } from "@components/Card/Card";
+import { LoadingCard } from "@components/Card/Loading";
+import { FloatingActionButtonComponent } from "@components/FloatingButton/FloatingActionButton";
+import { SearchbarComponent } from "@components/Searchbar/Searchbar";
 
 const loading = (
   <Col key={uuid()}>

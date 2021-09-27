@@ -1,6 +1,5 @@
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Form, Image, Input, message, Select, Upload } from "antd";
-import Modal from "antd/lib/modal/Modal";
+import { Form, Image, Input, message, Select, Upload, Modal } from "antd";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,11 +7,11 @@ import { useFirestore, useStorage } from "reactfire";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { RcFile } from "antd/es/upload/interface";
 import { UploadChangeParam } from "antd/lib/upload";
-import { useForm } from "antd/lib/form/Form";
 import { collection, addDoc } from "firebase/firestore";
-import { Product } from "../../../models/product.model";
-import { RootState } from "../../../redux/models/root-state.model";
-import { closeAddProductModal } from "../../../redux/actions/store.action";
+
+import { Product } from "@models/product.model";
+import { RootState } from "@redux/models/root-state.model";
+import { closeAddProductModal } from "@redux/actions/store.action";
 
 export interface UploadFileProps {
   file: string | Blob | RcFile | File;
@@ -32,6 +31,8 @@ export const AddProductModalComponent = (): JSX.Element => {
   const dispatch = useDispatch();
   const storage = useStorage();
   const [imageUrl, setImageUrl] = useState("");
+
+  const { useForm } = Form;
 
   const [form] = useForm();
 

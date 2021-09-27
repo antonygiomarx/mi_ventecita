@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useSigninCheck } from "reactfire";
-import { setLoggedIn } from "../redux/actions/auth.actions";
-import { RootState } from "../redux/models/root-state.model";
+import { setLoggedIn } from "@redux/actions/auth.actions";
+import { RootState } from "@redux/models/root-state.model";
 
 export const useLogged = (): boolean => {
   const dispatch = useDispatch();

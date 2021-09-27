@@ -1,23 +1,23 @@
+import { getApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import { AppProps } from "next/app";
+import { Provider } from "react-redux";
 import {
   AuthProvider,
   FirebaseAppProvider,
   FirestoreProvider,
   StorageProvider,
 } from "reactfire";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
-
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { Provider } from "react-redux";
-import { getApp } from "firebase/app";
-import { authReducer } from "../redux/reducers/auth.reducer";
-import { shopReducer } from "../redux/reducers/shop.reducer";
-import { storeReducer } from "../redux/reducers/store.reducer";
-import { firebaseConfig } from "../firebase/firebase";
+
+import { firebaseConfig } from "@firebase/firebase";
+import { authReducer } from "@redux/reducers/auth.reducer";
+import { shopReducer } from "@redux/reducers/shop.reducer";
+import { storeReducer } from "@redux/reducers/store.reducer";
 
 import "./App.css";
 

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Card, Modal, Typography, Select, Image, message } from "antd";
 import { Button } from "antd/lib/radio";
-
 import { useFirestore } from "reactfire";
 import { doc, updateDoc } from "firebase/firestore";
-import { Product } from "../../../models/product.model";
-import { addProductToCart } from "../../../redux/actions/shop.actions";
+
+import { Product } from "@models/product.model";
+import { addProductToCart } from "@redux/actions/shop.actions";
 
 const { Title, Text } = Typography;
 

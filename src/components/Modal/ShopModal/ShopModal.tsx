@@ -1,14 +1,16 @@
 import { Card, Modal, Select } from "antd";
 import Text from "antd/lib/typography/Text";
 import Title from "antd/lib/typography/Title";
-import { Product } from "../../../models/product.model";
+import Image from "next/image";
+
+import { Product } from "@models/product.model";
 
 interface ShopModal extends Product {
   visible: boolean;
   cancel: void;
 }
 
-const ShopModalComponent = ({
+export const ShopModalComponent = ({
   name,
   imageUrl,
   category,
@@ -31,21 +33,7 @@ const ShopModalComponent = ({
       title={name}
       footer={null}
     >
-      <Card
-        bordered={false}
-        cover={
-          <img
-            src={imageUrl}
-            alt={name}
-            style={{
-              width: "30%",
-              display: "block",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          />
-        }
-      >
+      <Card bordered={false} cover={<Image src={imageUrl} alt={name} />}>
         <div className="card-header">
           <div className="card-header title">
             <Title level={3}>{name}</Title>
@@ -64,4 +52,3 @@ const ShopModalComponent = ({
     </Modal>
   );
 };
-export default ShopModalComponent;

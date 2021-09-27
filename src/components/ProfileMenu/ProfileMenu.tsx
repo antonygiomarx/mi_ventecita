@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { Dropdown, Menu } from "antd";
-import Avatar from "antd/lib/avatar/avatar";
+import { Dropdown, Menu, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { nanoid as uuid } from "nanoid";
 
-import { useLogout } from "../../hooks/useLogout";
-
-import { User } from "../../models/user.model";
+import { useLogout } from "@hooks/useLogout";
+import { User } from "@models/user.model";
 
 export const ProfileMenu = (): JSX.Element => {
   const [username] = useState<User>();

@@ -1,8 +1,8 @@
 import { Typography, Card, Image } from "antd";
 import { useState } from "react";
 
-import { Product } from "../../models/product.model";
-import { CardModalComponent } from "../Modal/CardModal/CardModal";
+import { Product } from "@models/product.model";
+import { CardModalComponent } from "@components/Modal/CardModal/CardModal";
 
 const { Title } = Typography;
 

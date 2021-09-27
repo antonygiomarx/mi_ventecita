@@ -4,10 +4,11 @@ import { Layout } from "antd";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useSigninCheck } from "reactfire";
-import { Children } from "src/interfaces/children";
-import { FooterComponent } from "../Footer/Footer";
-import { HeaderComponent } from "../Header/Header";
-import { Sidebar } from "../Sidebar/Sidebar";
+
+import { Children } from "@interfaces/children";
+import { Sidebar } from "@layout/Sidebar/Sidebar";
+import { HeaderComponent } from "@layout/Header/Header";
+import { FooterComponent } from "@layout/Footer/Footer";
 
 export const Main = ({ children }: Children): JSX.Element => {
   const { push } = useRouter();
