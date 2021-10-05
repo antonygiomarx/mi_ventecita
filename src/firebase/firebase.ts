@@ -1,8 +1,7 @@
-import * as auth from "firebase/auth";
-import * as storage from "firebase/storage";
 import { initializeApp } from "firebase/app";
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyC_0lzxM9ndDYeAddTImhfoU2Sh9ygru9U",
   authDomain: "miventecita-6be84.firebaseapp.com",
   projectId: "miventecita-6be84",
@@ -13,17 +12,3 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
-
-class FirebaseService {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  static getAuth() {
-    return auth;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  static getStorage() {
-    return storage;
-  }
-}
-
-export { FirebaseService, firebaseConfig };

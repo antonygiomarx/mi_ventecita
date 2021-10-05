@@ -63,7 +63,6 @@ export const Store = ({
                   key={uuid()}
                   description={description}
                   id={id}
-                  isSelectable={isSelectable}
                   companyId={companyId}
                   provider={provider}
                   quantity={quantity}

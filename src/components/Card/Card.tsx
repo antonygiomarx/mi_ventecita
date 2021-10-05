@@ -1,81 +1,67 @@
-import { Typography, Card, Image } from "antd";
-import { useState } from "react";
+import { Card } from "antd";
+import { CSSProperties } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { nanoid as uuid } from "nanoid";
 
 import { Product } from "@models/product.model";
-import { CardModalComponent } from "@components/Modal/CardModal/CardModal";
 
-const { Title } = Typography;
+const imageStyles = {
+  width: "270px",
+  height: "300px",
+};
 
-interface CardModel extends Product {
-  isSelectable?: boolean;
-}
+const cardStyles = {
+  margin: "10px",
+  padding: "10px",
+  borderRadius: "30px",
+  width: "270px",
+  height: "400px",
+  overflow: "hidden",
+  objectFit: "cover",
+} as CSSProperties;
+
+const metaCardStyles = {
+  width: "100%",
+} as CSSProperties;
 
 export const CardComponent = ({
   name,
   imageUrl,
-  description,
-  category,
   price,
   id,
-  isSelectable,
-  quantity,
-  companyId,
-  provider,
-}: CardModel): JSX.Element => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+}: Product): JSX.Element => {
+  const { push } = useRouter();
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
+  const { Meta } = Card;
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
+  const handleClick = () => {
+    push(`store/products/${id}`);
   };
 
   return (
     <>
       <Card
-        onClick={showModal}
-        className="card"
+        onClick={handleClick}
         cover={
           <Image
-            preview={false}
+            width={imageStyles.width}
+            height={imageStyles.height}
+            key={uuid()}
             src={imageUrl}
             alt={name}
-            className="card-image"
+            loading="lazy"
           />
         }
-        style={{
-          margin: "10px",
-          padding: "10px",
-          display: "grid",
-          placeItems: "center",
-          borderRadius: "30px",
-          width: "270px",
-          height: "400px",
-        }}
+        style={cardStyles}
       >
-        <div className="card-header">
-          <div className="card-header title">
-            <Title level={5}>{name}</Title>
-            <span className="price">C${price}</span>
-          </div>
-        </div>
+        <Meta
+          key={uuid()}
+          title={name}
+          description={`C$${price}`}
+          style={metaCardStyles}
+        />
       </Card>
-      <CardModalComponent
-        isShop={isSelectable}
-        visible={isModalVisible}
-        name={name}
-        price={price}
-        description={description}
-        imageUrl={imageUrl}
-        category={category}
-        cancel={handleCancel}
-        id={id}
-        quantity={quantity}
-        companyId={companyId}
-        provider={provider}
-      />
     </>
   );
 };

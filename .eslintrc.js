@@ -44,6 +44,10 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "import/prefer-default-export": "off",
     "no-console": "off",
+    "import/no-anonymous-default-export": "off",
+    "explicit-module-boundary-types": "off",
+    "no-underscore-dangle": "off",
+    "no-useless-constructor": "off",
   },
   settings: {
     "import/resolver": {

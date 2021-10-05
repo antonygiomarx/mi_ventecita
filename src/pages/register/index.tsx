@@ -50,6 +50,7 @@ const Register = (): JSX.Element => {
       <div className="login">
         <div>
           <Logo />
+          <div>Mi Ventecita</div>
           <Form className="form-register">
             <Item key={uuid()} name="Nombre completo" htmlFor="input-name">
               <Input

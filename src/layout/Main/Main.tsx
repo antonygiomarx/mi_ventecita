@@ -2,13 +2,25 @@ import { Spinner } from "@components/Spinner/Spinner";
 import { SidebarProvider } from "@context/sidebar/sidebar.context";
 import { Layout } from "antd";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { CSSProperties, useEffect } from "react";
 import { useSigninCheck } from "reactfire";
 
 import { Children } from "@interfaces/children";
 import { Sidebar } from "@layout/Sidebar/Sidebar";
 import { HeaderComponent } from "@layout/Header/Header";
 import { FooterComponent } from "@layout/Footer/Footer";
+
+const containerLayoutStyles = {
+  minHeight: "100vh",
+} as CSSProperties;
+
+const mainLayoutStyles = {
+  display: "flex",
+  flexDirection: "column",
+  margin: "64px 0 70px 80px",
+  alignItems: "center",
+  justifyContent: "center",
+} as CSSProperties;
 
 export const Main = ({ children }: Children): JSX.Element => {
   const { push } = useRouter();
@@ -31,16 +43,12 @@ export const Main = ({ children }: Children): JSX.Element => {
   }
 
   return (
-    <Layout
-      style={{
-        minHeight: "100vh",
-      }}
-    >
+    <Layout style={containerLayoutStyles}>
       <SidebarProvider>
         <Sidebar />
       </SidebarProvider>
       <HeaderComponent />
-      <Layout className="site-layout">
+      <Layout style={mainLayoutStyles}>
         {children}
         <FooterComponent />
       </Layout>
