@@ -1,9 +1,27 @@
 import { Button } from "antd";
-import { PlusCircleTwoTone } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 
-import { AddProductModalComponent } from "../Modal/AddProduct/AddProductModal";
-import { openAddProductModal } from "../../redux/actions/store.action";
+import { CSSProperties } from "react";
+import { AddProductModalComponent } from "@components/Modal/AddProduct/AddProductModal";
+import { openAddProductModal } from "@redux/actions/store.action";
+
+const mainColor = "#001529";
+
+const fabStyles = {
+  position: "fixed",
+  display: "grid",
+  placeItems: "center",
+  bottom: "50px",
+  right: "50px",
+  zIndex: 999,
+  cursor: "pointer",
+  background: mainColor,
+  color: "#ccc",
+  width: "50px",
+  height: "50px",
+  boxShadow: "inset 0 -3em 3em rgba(0,0,0,0.1)",
+  border: mainColor,
+} as CSSProperties;
 
 export const FloatingActionButtonComponent = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -15,19 +33,13 @@ export const FloatingActionButtonComponent = (): JSX.Element => {
         size="large"
         type="primary"
         title="Agregar Producto"
-        icon={<PlusCircleTwoTone />}
-        className="fab-button"
         onClick={() => {
           dispatch(openAddProductModal());
         }}
-        style={{
-          position: "fixed",
-          bottom: "50px",
-          right: "50px",
-          zIndex: 999,
-          cursor: "pointer",
-        }}
-      />
+        style={fabStyles}
+      >
+        +
+      </Button>
       <AddProductModalComponent />
     </>
   );

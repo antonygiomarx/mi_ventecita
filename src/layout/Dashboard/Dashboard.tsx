@@ -1,3 +1,12 @@
+import { Layout } from "antd";
+
 export const DashboardComponent = (): JSX.Element => {
-  return <h1>hola</h1>;
+  const { Content } = Layout;
+  return (
+    <Layout>
+      <Content>
+        <h1>Ventas del mes</h1>
+      </Content>
+    </Layout>
+  );
 };

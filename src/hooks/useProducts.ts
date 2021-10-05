@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import { GetProductsResponse } from "../services/product.service";
-import { Config } from "../config/config";
-import { Product } from "../models/product.model";
+import { GetProductsResponse } from "@services/product.service";
+import { Config } from "@config/config";
+import { Product } from "@models/product.model";
 
 export const useProducts = (): Product[] => {
   const [products, setProducts] = useState<Product[]>([]);

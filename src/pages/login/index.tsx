@@ -1,7 +1,9 @@
-import { useRouter } from "next/router";
 import { Button } from "antd";
-import Logo from "../../components/Logo/Logo";
-import { LoginForm } from "../../components/LoginForm/LoginForm";
+import Head from "next/head";
+import { useRouter } from "next/router";
+
+import { LoginForm } from "@components/LoginForm/LoginForm";
+import Logo from "@components/Logo/Logo";
 
 const RegisterButton = (): JSX.Element => {
   const { push } = useRouter();
@@ -25,14 +27,19 @@ const RegisterButton = (): JSX.Element => {
 };
 
 const Login = (): JSX.Element => (
-  <div className="login">
-    <div>
-      <Logo />
-      <LoginForm />
-      <RegisterButton />
+  <>
+    <Head>
+      <title>Inicio de sesión - Mi Ventecita</title>
+    </Head>
+    <div className="login">
+      <div>
+        <Logo />
+        <LoginForm />
+        <RegisterButton />
+      </div>
+      <div className="rightside" />
     </div>
-    <div className="rightside" />
-  </div>
+  </>
 );
 
 export default Login;

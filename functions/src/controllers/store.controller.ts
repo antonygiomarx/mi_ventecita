@@ -167,7 +167,7 @@ storeController.get(
   authMiddleware,
   async (req: Request, res: Response) => {
     try {
-      const { id: companyId } = req.body as Company;
+      const { id: companyId } = req.query as unknown as Company;
       const { id: productId } = req.params;
 
       if (!companyId) {
@@ -191,10 +191,16 @@ storeController.get(
 
       const product = await productService.get({ companyId, productId });
 
+      if (!product) {
+        return res.json({
+          success: false,
+          message: "Product doesn't exists!",
+        });
+      }
       return res.json({
         success: true,
         message: "Product",
-        products: product,
+        product,
       });
     } catch (error: any) {
       return res.json({

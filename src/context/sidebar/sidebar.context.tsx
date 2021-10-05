@@ -5,7 +5,8 @@ import {
   useContext,
   useState,
 } from "react";
-import { Children } from "../../interfaces/children";
+
+import { Children } from "@interfaces/children";
 
 interface SidebarContextModel {
   collapsed: boolean;

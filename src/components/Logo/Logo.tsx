@@ -1,10 +1,18 @@
-import { SmileOutlined } from "@ant-design/icons";
+import { ShopOutlined } from "@ant-design/icons";
+import { CSSProperties } from "react";
+
+const logoStyles = {
+  display: "flex",
+  width: "50px",
+  height: "50px",
+  justifyContent: "center",
+  alignItems: "center",
+} as CSSProperties;
 
 const Logo = (): JSX.Element => (
-  <div className="Logo">
-    <SmileOutlined style={{ fontSize: "50px" }} />
-    <h1 style={{ fontWeight: "bold" }}>Mi Ventecita</h1>
-  </div>
+  <span style={logoStyles}>
+    <ShopOutlined width="50px" height="50px" />
+  </span>
 );
 
 export default Logo;
