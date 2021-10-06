@@ -64,18 +64,23 @@ export const AddProductModalComponent = (): JSX.Element => {
     fileName,
     route,
   }: UploadFileProps): Promise<void> => {
-    const storageRef = ref(storage, `${route}/${fileName}`);
+    try {
+      const storageRef = ref(storage, `${route}/${fileName}`);
 
-    const uploadTask = await uploadBytesResumable(storageRef, file as Blob);
+      const uploadTask = await uploadBytesResumable(storageRef, file as Blob);
 
-    if (uploadTask.state === "running") {
-      setLoading(true);
-    }
-    if (uploadTask.state === "success") {
-      const url = await getDownloadURL(storageRef);
-      setLoading(false);
+      if (uploadTask.state === "running") {
+        setLoading(true);
+      }
+      if (uploadTask.state === "success") {
+        const url = await getDownloadURL(storageRef);
+        setLoading(false);
 
-      setImageUrl(url);
+        setImageUrl(url);
+      }
+    } catch (error) {
+      console.log(error);
+      message.error("Error subiendo imagen");
     }
   };
 
@@ -112,11 +117,16 @@ export const AddProductModalComponent = (): JSX.Element => {
 
   const customRequest = async ({ file }) => {
     const { name } = file as RcFile;
-    await upload({
-      file: file as Blob,
-      fileName: name.split(".")[0] || `${Date.now()}`,
-      route: "demo",
-    });
+    try {
+      await upload({
+        file: file as Blob,
+        fileName: name.split(".")[0] || `${Date.now()}`,
+        route: "demo",
+      });
+    } catch (error) {
+      console.error(error);
+      message.error("Error subiendo imagen");
+    }
   };
 
   const onOk = () => {
