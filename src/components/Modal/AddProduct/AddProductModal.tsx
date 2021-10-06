@@ -75,7 +75,6 @@ export const AddProductModalComponent = (): JSX.Element => {
       if (uploadTask.state === "success") {
         const url = await getDownloadURL(storageRef);
         setLoading(false);
-
         setImageUrl(url);
       }
     } catch (error) {
@@ -108,13 +107,6 @@ export const AddProductModalComponent = (): JSX.Element => {
     }
   };
 
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : !imageUrl && <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Subir</div>
-    </div>
-  );
-
   const customRequest = async ({ file }) => {
     const { name } = file as RcFile;
     try {
@@ -128,6 +120,13 @@ export const AddProductModalComponent = (): JSX.Element => {
       message.error("Error subiendo imagen");
     }
   };
+
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : !imageUrl && <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Subir</div>
+    </div>
+  );
 
   const onOk = () => {
     form
