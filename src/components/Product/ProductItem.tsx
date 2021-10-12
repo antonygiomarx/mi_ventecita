@@ -10,7 +10,7 @@ const productItemStyles = {
   display: "flex",
   width: "100%",
   flexDirection: "column-reverse",
-  margin: "5px",
+  margin: "0 5px 5px 5px",
   justifyContent: "center",
   cursor: "pointer",
   borderTop: "1px solid rgba(0, 0, 0, 0.1)",
