@@ -18,7 +18,7 @@
     "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
     "fireorm": "^0.21.0",
