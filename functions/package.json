@@ -22,7 +22,7 @@
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
     "fireorm": "^0.21.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
     "uuid": "^8.3.2"
